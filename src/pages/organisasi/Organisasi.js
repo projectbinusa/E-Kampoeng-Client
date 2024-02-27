@@ -96,7 +96,7 @@ function Organisasi() {
   }, []);
 
   return (
-    <div className="bg-gray-300 h-full pb-5">
+    <div className="bg-gray-300 h-full min-h-screen pb-5">
       <Navbar />
 
       <div className="bg-white m-5 p-5 rounded-xl space-y-5">
@@ -114,21 +114,27 @@ function Organisasi() {
           </div>
           <hr className="border border-black" />
           <div className="flex flex-col justify-between sm:flex-row items-center">
-            <div className="relative inline-flex my-3">
-              <select className="appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-3 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 font-normal">
-                <option value="1">Show 1 Entry</option>
-                <option value="10">Show 10 Entries</option>
-                <option value="100">Show 100 Entries</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9 11l3-3 3 3m-3 3v-6" />
-                </svg>
+            <div className="flex items-center">
+              <p className="">Show</p>
+              <div className="relative inline-flex my-3 mx-2">
+                <select className="appearance-none bg-white border border-gray-300 text-gray-700 p-2 pr-8 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 font-normal">
+                  <option value="1">1</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9 11l3-3 3 3m-3 3v-6" />
+                  </svg>
+                </div>
               </div>
+              <p className="mr-2">entries</p>
             </div>
             <div className="flex items-center">
               <input
@@ -144,14 +150,14 @@ function Organisasi() {
         <div className="overflow-x-auto rounded-lg border border-gray-200">
           <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
             <thead className="ltr:text-left rtl:text-right">
-              <tr>
+              <tr className="text-left">
                 <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                   No
                 </th>
                 <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                   Nama Organisasi
                 </th>
-                <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                   Aksi
                 </th>
               </tr>
@@ -159,7 +165,7 @@ function Organisasi() {
             <tbody className="divide-y divide-gray-200">
               {datas.map((organisasi, idx) => {
                 return (
-                  <tr className="odd:bg-gray-50 text-center" key={idx}>
+                  <tr className="odd:bg-gray-50 text-left" key={idx}>
                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                       {idx + 1}
                     </td>
