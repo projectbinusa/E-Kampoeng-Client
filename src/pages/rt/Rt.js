@@ -2,17 +2,19 @@ import React from "react";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
 
-function WargaPendatang() {
-  const data = [
-    {
-      nama_warga: "niken putri saparina",
-      status_penduduk: "Kontrak Keluarga",
-    },
-    {
-      nama_warga: "davina mutiara stani",
-      status_penduduk: "Kos",
-    },
-  ];
+function Rt() {
+    const data = [
+        {
+          nama_rt: "Jamali Ahmad",
+          warga_id: "Anika Maulina",
+          createAt: "03-05-2023",
+        },
+        {
+          nama_rt: "Syakira Mahidev ",
+          warga_id: "Ibnu Sabil",
+          createAt: "03-05-2023",
+        },
+      ];
   return (
     <div className="bg-gray-300 h-screen">
       <Navbar />
@@ -21,7 +23,7 @@ function WargaPendatang() {
         <span className="space-y-3">
           <div className="flex md:flex-row md:justify-between flex-col items-center space-y-3 mx-5 page-header">
             <h1 className="text-xl text-center font-semibold play">
-              Data Warga Pendatang
+              Data Rt
             </h1>
             <nav aria-label="Breadcrumb" className="flex items-center ubuntu">
               <ol class="flex items-center gap-1 text-sm text-gray-600">
@@ -63,10 +65,10 @@ function WargaPendatang() {
 
                 <li>
                   <Link
-                    to={"/warga-pendatang"}
+                    to={"/warga-organisasi"}
                     class="block transition hover:text-gray-700"
                   >
-                    Warga Pendatang
+                    RT
                   </Link>
                 </li>
               </ol>
@@ -83,7 +85,10 @@ function WargaPendatang() {
                   Nama Warga
                 </th>
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                  Status Penduduk
+                  Nama Organisasi
+                </th>
+                <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  CreateAt
                 </th>
              
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
@@ -97,16 +102,19 @@ function WargaPendatang() {
                 return (
                   <tr class="odd:bg-gray-50 text-center" key={idx}>
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                      {warga.nama_warga}
+                      {warga.nama_rt}
                     </td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                      {warga.status_penduduk}
+                      {warga.warga_id}
+                    </td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {warga.createAt}
                     </td>
                    
                   
                     <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
-                      <Link
-                        to={`/edit-warga-pendatang`}
+                    <Link
+                        to={`/edit-rt`}
                         className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                         title="Detail"
                       >
@@ -150,4 +158,4 @@ function WargaPendatang() {
   );
 }
 
-export default WargaPendatang;
+export default Rt;
