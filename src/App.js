@@ -12,6 +12,14 @@ import TambahWargaPendatang from "./pages/wargaPendatang/Tambah";
 import Soerat from "./pages/soerat/Soerat";
 import EditSoerat from "./pages/soerat/Edit";
 import TambahSoerat from "./pages/soerat/Tambah";
+import WargaOrganisasi from "./pages/wargaOrganisasi/WargaOrganisasi";
+import RT from "./pages/rt/Rt";
+import TambahRT from "./pages/rt/Tambah";
+import EditRT from "./pages/rt/Edit";
+import Kk from "./pages/kk/Kk";
+import TambahKk from "./pages/kk/Tambah";
+import EditKk from "./pages/kk/Edit";
+
 
 function App() {
   return (
@@ -36,6 +44,13 @@ function App() {
           <Route path="/soerat" element={<Soerat />} />
           <Route path="/edit-soerat" element={<EditSoerat />} />
           <Route path="/tambah-soerat" element={<TambahSoerat />} />
+          <Route path="/warga-organisasi" element={<WargaOrganisasi />} />
+          <Route path="/rt" element={<RT />} />
+          <Route path="/tambah-rt" element={<TambahRT />} />
+          <Route path="/edit-rt" element={<EditRT />} />
+          <Route path="/kk" element={<Kk />} />
+          <Route path="/tambah-kk" element={<TambahKk />} />
+          <Route path="/edit-kk" element={<EditKk />} />
         </Routes>
       </BrowserRouter>
     </>

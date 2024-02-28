@@ -2,17 +2,19 @@ import React from "react";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
 
-function WargaPendatang() {
-  const data = [
-    {
-      nama_warga: "niken putri saparina",
-      status_penduduk: "Kontrak Keluarga",
-    },
-    {
-      nama_warga: "davina mutiara stani",
-      status_penduduk: "Kos",
-    },
-  ];
+function WargaOrganisasi() {
+    const data = [
+        {
+          warga_id: "niken putri saparina",
+          organisasi_id: "Bootcamp Forum",
+          createAt: "03-05-2023",
+        },
+        {
+          warga_id: "davina mutiara stani",
+          organisasi_id: "Bootcamp Forum",
+          createAt: "05-02-2024",
+        },
+      ];
   return (
     <div className="bg-gray-300 h-screen">
       <Navbar />
@@ -21,7 +23,7 @@ function WargaPendatang() {
         <span className="space-y-3">
           <div className="flex md:flex-row md:justify-between flex-col items-center space-y-3 mx-5 page-header">
             <h1 className="text-xl text-center font-semibold play">
-              Data Warga Pendatang
+              Data Warga Organisasi
             </h1>
             <nav aria-label="Breadcrumb" className="flex items-center ubuntu">
               <ol class="flex items-center gap-1 text-sm text-gray-600">
@@ -63,10 +65,10 @@ function WargaPendatang() {
 
                 <li>
                   <Link
-                    to={"/warga-pendatang"}
+                    to={"/warga-organisasi"}
                     class="block transition hover:text-gray-700"
                   >
-                    Warga Pendatang
+                    Warga Organisasi
                   </Link>
                 </li>
               </ol>
@@ -83,7 +85,10 @@ function WargaPendatang() {
                   Nama Warga
                 </th>
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                  Status Penduduk
+                  Nama Organisasi
+                </th>
+                <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  CreateAt
                 </th>
              
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
@@ -97,31 +102,18 @@ function WargaPendatang() {
                 return (
                   <tr class="odd:bg-gray-50 text-center" key={idx}>
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                      {warga.nama_warga}
+                      {warga.warga_id}
                     </td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                      {warga.status_penduduk}
+                      {warga.organisasi_id}
+                    </td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {warga.createAt}
                     </td>
                    
                   
                     <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
-                      <Link
-                        to={`/edit-warga-pendatang`}
-                        className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
-                        title="Detail"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="18"
-                          height="18"
-                          fill="inherit"
-                          class="bi bi-info-circle"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                          <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                        </svg>
-                      </Link>
+                    
                       <button
                         className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                         title="Hapus"
@@ -150,4 +142,4 @@ function WargaPendatang() {
   );
 }
 
-export default WargaPendatang;
+export default WargaOrganisasi;
