@@ -23,56 +23,37 @@ function WargaPendatang() {
             <h1 className="text-xl text-center font-semibold play">
               Data Warga Pendatang
             </h1>
-            <nav aria-label="Breadcrumb" className="flex items-center ubuntu">
-              <ol class="flex items-center gap-1 text-sm text-gray-600">
-                <li>
-                  <Link to={"/"} class="block transition hover:text-gray-700">
-                    <span class="sr-only">Home</span>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-
-                <li class="rtl:rotate-180">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </li>
-
-                <li>
-                  <Link
-                    to={"/warga-pendatang"}
-                    class="block transition hover:text-gray-700"
-                  >
-                    Warga Pendatang
-                  </Link>
-                </li>
-              </ol>
-            </nav>
+            <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+              <a href="tambah-warga-pendatang"> Tambah</a>
+            </button>
           </div>
           <hr className="border border-black" />
+          <div className="flex flex-col justify-between sm:flex-row items-center">
+            <div className="relative inline-flex my-3">
+              <select className="appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-3 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 font-normal">
+                <option value="1">Show 1 Entry</option>
+                <option value="10">Show 10 Entries</option>
+                <option value="100">Show 100 Entries</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9 11l3-3 3 3m-3 3v-6" />
+                </svg>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <input
+                className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                id="inline-search"
+                type="text"
+                placeholder="Search"
+              />
+            </div>
+          </div>
         </span>
 
         <div class="overflow-x-auto rounded-lg border border-gray-200">
@@ -85,7 +66,7 @@ function WargaPendatang() {
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                   Status Penduduk
                 </th>
-             
+
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                   Aksi
                 </th>
@@ -102,24 +83,22 @@ function WargaPendatang() {
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                       {warga.status_penduduk}
                     </td>
-                   
-                  
+
                     <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                       <Link
                         to={`/edit-warga-pendatang`}
                         className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
-                        title="Detail"
+                        title="Edit"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
+                          id="Outline"
+                          viewBox="0 0 24 24"
                           width="18"
                           height="18"
-                          fill="inherit"
-                          class="bi bi-info-circle"
-                          viewBox="0 0 16 16"
                         >
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                          <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                          <path d="M18.656.93,6.464,13.122A4.966,4.966,0,0,0,5,16.657V18a1,1,0,0,0,1,1H7.343a4.966,4.966,0,0,0,3.535-1.464L23.07,5.344a3.125,3.125,0,0,0,0-4.414A3.194,3.194,0,0,0,18.656.93Zm3,3L9.464,16.122A3.02,3.02,0,0,1,7.343,17H7v-.343a3.02,3.02,0,0,1,.878-2.121L20.07,2.344a1.148,1.148,0,0,1,1.586,0A1.123,1.123,0,0,1,21.656,3.93Z" />
+                          <path d="M23,8.979a1,1,0,0,0-1,1V15H18a3,3,0,0,0-3,3v4H5a3,3,0,0,1-3-3V5A3,3,0,0,1,5,2h9.042a1,1,0,0,0,0-2H5A5.006,5.006,0,0,0,0,5V19a5.006,5.006,0,0,0,5,5H16.343a4.968,4.968,0,0,0,3.536-1.464l2.656-2.658A4.968,4.968,0,0,0,24,16.343V9.979A1,1,0,0,0,23,8.979ZM18.465,21.122a2.975,2.975,0,0,1-1.465.8V18a1,1,0,0,1,1-1h3.925a3.016,3.016,0,0,1-.8,1.464Z" />
                         </svg>
                       </Link>
                       <button
@@ -145,6 +124,80 @@ function WargaPendatang() {
             </tbody>
           </table>
         </div>
+        <ol className="flex justify-center gap-1 text-xs font-medium">
+          <li>
+            <a
+              href="#"
+              className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+            >
+              <span className="sr-only">Prev Page</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-3 w-3"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
+            >
+              1
+            </a>
+          </li>
+
+          <li className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900">
+            2
+          </li>
+
+          <li>
+            <a
+              href="#"
+              className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
+            >
+              3
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
+            >
+              4
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+            >
+              <span className="sr-only">Next Page</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-3 w-3"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+          </li>
+        </ol>
       </div>
     </div>
   );
