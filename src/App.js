@@ -19,7 +19,10 @@ import EditRT from "./pages/rt/Edit";
 import Kk from "./pages/kk/Kk";
 import TambahKk from "./pages/kk/Tambah";
 import EditKk from "./pages/kk/Edit";
-
+import TagBerita from "./pages/tagBerita/Tag";
+import RW from "./pages/rw/Rw";
+import WilRT from "./pages/wilayahRT/Wilayah";
+import WilRW from "./pages/wilayahRW/Wilayah";
 
 function App() {
   return (
@@ -51,6 +54,10 @@ function App() {
           <Route path="/kk" element={<Kk />} />
           <Route path="/tambah-kk" element={<TambahKk />} />
           <Route path="/edit-kk" element={<EditKk />} />
+          <Route path="/tag-berita" element={<TagBerita />} />
+          <Route path="/rw" element={<RW />} />
+          <Route path="/wilayah-rt" element={<WilRT />} />
+          <Route path="/wilayah-rw" element={<WilRW />} />
         </Routes>
       </BrowserRouter>
     </>
