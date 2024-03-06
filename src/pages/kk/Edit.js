@@ -1,9 +1,15 @@
 import React from "react";
+import Sidebar from "../../component/Sidebar";
+import Navbar from "../../component/Navbar";
+import Footer from "../../component/Footer";
 
 function Edit() {
   return (
-    <div>
-      <section className="bg-gray-100">
+    <div className="flex">
+      <Sidebar />
+      <div className="block w-full">
+        <section className="bg-gray-300 h-screen w-full">
+          <Navbar />
         <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
           <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
             <h1 className="text-xl text-center font-semibold mb-4">
@@ -13,7 +19,7 @@ function Edit() {
 
             <div>
               <form>
-           
+
                 <div className="col-span-6 sm:col-span-3 mt-4">
                   <label
                     for="Username"
@@ -42,6 +48,8 @@ function Edit() {
           </div>
         </div>
       </section>
+      <Footer/>
+    </div>
     </div>
   );
 }

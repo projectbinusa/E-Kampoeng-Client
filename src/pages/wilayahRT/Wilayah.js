@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../component/Navbar";
+import Sidebar from "../../component/Sidebar";
+import Footer from "../../component/Footer";
 
 function Wilayah() {
   return (
+    <div className="flex">
+      <Sidebar/>
+      <div className="block w-full">
     <div className="bg-gray-300 h-full min-h-screen pb-5">
       <Navbar />
 
@@ -196,6 +201,9 @@ function Wilayah() {
           </li>
         </ol>
       </div>
+    </div>
+    <Footer/>
+    </div>
     </div>
   );
 }
