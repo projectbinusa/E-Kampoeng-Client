@@ -13,7 +13,7 @@ function Edit() {
         <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
           <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
             <h1 className="text-xl text-center font-semibold mb-4">
-              {" "}
+            
               Edit Data RT
             </h1>
 
