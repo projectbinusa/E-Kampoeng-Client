@@ -12,6 +12,7 @@ function Rw() {
   };
   return (
     <div className="flex">
+      {""}
       <Sidebar isOpen={isSidebarOpen}/>
       <div className="block w-full">
         <div className="bg-gray-300 h-screen pb-5">
