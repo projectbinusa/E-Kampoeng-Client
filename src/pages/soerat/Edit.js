@@ -12,7 +12,7 @@ function Edit() {
             </h1>
 
             <div>
-              <form>
+            <form>
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     for="Username"
@@ -21,14 +21,20 @@ function Edit() {
                     Jenis Surat
                   </label>
 
-                  <input
-                    autoComplete="off"
-                    type="text"
+                  <select
                     id="jenis"
                     name="jenis"
-                    placeholder="jenis surat"
                     className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                  />
+                  >
+                    <option value="">Pilih Jenis Surat</option>
+                    <option value="pengantar"> Pengantar</option>
+                    <option value="nikah"> Nikah</option>
+                    <option value="kematian"> Kematian</option>
+                    <option value="pembuatan akte"> Pembuatan Akte</option>
+                    <option value="pembuatan Ktp"> Pembuatan Ktp</option>
+                    <option value="pembuatan KK baru"> Pembuatan KK baru</option>
+                    <option value="bantuan">Bantuan</option>
+                  </select>
                 </div>
                 <div className="col-span-6 sm:col-span-3 mt-4">
                   <label
@@ -38,14 +44,17 @@ function Edit() {
                     Jenis Bantuan
                   </label>
 
-                  <input
-                    autoComplete="off"
-                    type="text"
+                  <select
                     id="jenis"
                     name="jenis"
-                    placeholder="jenis bantuan"
                     className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                  />
+                  >
+                    <option value="">Pilih Jenis Bantuan</option>
+                    <option value="KIP"> KIP</option>
+                    <option value="Kis"> Kis</option>
+                    <option value="Surat domisili"> Surat domisili</option>
+                   
+                  </select>
                 </div>
 
                 <div className="sm:flex sm:items-center sm:gap-4 mt-7">

@@ -76,17 +76,17 @@ function Rt() {
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-              {data.map((rt, idx) => {
+              {data.map((data_rt, idx) => {
                 return (
                   <tr class="odd:bg-gray-50 text-center" key={idx}>
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                      {rt.nama_rt}
+                      {data_rt.nama_rt}
                     </td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                      {rt.warga_id}
+                      {data_rt.warga_id}
                     </td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                      {rt.createAt}
+                      {data_rt.createAt}
                     </td>
 
                     <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">

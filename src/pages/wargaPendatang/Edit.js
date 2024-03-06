@@ -38,14 +38,16 @@ function Edit() {
                     Status Penduduk
                   </label>
 
-                  <input
-                    autoComplete="off"
-                    type="text"
+                  <select
                     id="status"
                     name="status"
-                    placeholder="status penduduk"
                     className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                  />
+                  >
+                    <option value="">Pilih Status Penduduk</option>
+                    <option value="Kos">Kos</option>
+                    <option value="Kontrak Keluarga">Kontrak Keluarga</option>
+                    <option value="Kontrak Kelompok">Kontrak Kelompok</option>
+                  </select>
                 </div>
 
                 <div className="sm:flex sm:items-center sm:gap-4 mt-7">
