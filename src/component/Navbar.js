@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
-function Navbar() {
+function Navbar({ toggleSidebar }) {
   const navigate = useNavigate();
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
   const token = localStorage.getItem("token");
   const logout = () => {
     localStorage.clear();
     navigate("/");
-  }
+  };
 
   return (
     <header className="bg-gray-100">
@@ -20,13 +25,11 @@ function Navbar() {
             height="40"
             className=""
             viewBox="0 0 184.000000 183.000000"
-            preserveAspectRatio="xMidYMid meet"
-          >
+            preserveAspectRatio="xMidYMid meet">
             <g
               transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)"
               fill="#776b5d"
-              stroke="none"
-            >
+              stroke="none">
               <path
                 d="M477 1684 c-4 -4 -7 -16 -7 -26 0 -13 7 -18 26 -18 21 0 25 4 22 22
 -3 23 -27 35 -41 22z"
@@ -104,30 +107,29 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
               <div className="sm:flex sm:gap-4">
                 <a
                   className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]"
-                  href="/sign-in"
-                >
+                  href="/sign-in">
                   Login
                 </a>
 
                 <a
                   className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#776b5d] transition-all duration-200 hover:bg-[#776b5d] hover:shadow-md hover:text-white active:bg-gray-100 border border-transparent active:border-[#776b5d] active:text-[#776b5d] sm:block"
-                  href="/sign-up"
-                >
+                  href="/sign-up">
                   Register
                 </a>
               </div>
             ) : (
               <div className="sm:flex sm:gap-4">
                 <button
-                onClick={logout}
-                  className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]"
-                >
+                  onClick={logout}
+                  className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]">
                   Logout
                 </button>
               </div>
             )}
 
-            <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+            <button
+              className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
+              onClick={toggleSidebar}>
               <span className="sr-only">Toggle menu</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,8 +137,7 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth="2"
-              >
+                strokeWidth="2">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
