@@ -11,6 +11,7 @@ const authConfig = {
 }
 
 const Index = () => {
+  const role = localStorage.getItem("role");
   const [wargas, setWargas] = useState([]);
 
   const getAllWarga = async () => {
@@ -107,6 +108,12 @@ const Index = () => {
                   Status Kependudukan
                 </th>
                 <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                 No RT
+                </th>
+                <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                 NO RW
+                </th>
+                <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                   Aksi
                 </th>
               </tr>
@@ -131,6 +138,16 @@ const Index = () => {
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                       {warga.status_kependudukan == 'penduduk_tetap' ? 'Penduduk Tetap' : 'Penduduk Sementara'}
                     </td>
+                    {role === "admin" && (
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {warga.no_rt}
+                    </td> 
+                    )}
+                    {role === "admin" && (
+                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {warga.no_rw}
+                    </td>
+                     )}
                     <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                       <Link
                         to={`/detail-warga/${warga.id}`}
