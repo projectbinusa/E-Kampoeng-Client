@@ -1,6 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { api_soerat } from "../../utils/api";
+import Sidebar from "../../component/Sidebar";
+import Navbar from "../../component/Navbar";
+import Footer from "../../component/Footer";
+import axios from "axios";
+// import api_soerat from "../../utils/api"
 
 function Tambah() {
   const authConfig = {
@@ -19,15 +22,18 @@ function Tambah() {
       jenis_bantuan: jenis_bantuan,
     };
     try {
-      await axios.post(`${api_soerat}/add`, req, authConfig);
+      await axios.post(`http://localhost:8000/e-kampoeng/api/e-soerat/add`, req, authConfig);
       window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div>
-      <section className="bg-gray-100">
+    <div className="flex">
+    <Sidebar />
+    <div className="block w-full">
+      <section className="bg-gray-300 h-screen w-full">
+        <Navbar />
         <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
           <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
             <h1 className="text-xl text-center font-semibold mb-4">
@@ -97,6 +103,8 @@ function Tambah() {
           </div>
         </div>
       </section>
+      <Footer/>
+    </div>
     </div>
   );
 }
