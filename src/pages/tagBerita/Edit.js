@@ -1,9 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
+import axios from "axios";
+import { api_tag } from "../../utils/api";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
 function Edit() {
+  const navigate = useNavigate();
+  const param = useParams();
+  const [tags, setTags] = useState("");
+
+  // const Put = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const newData = { tags };
+  //     await axios.put(
+  //       "http://localhost:8000/e-kampoeng/api/tags-berita/put/" + param.id,
+  //       newData,
+  //       authConfig
+  //     );
+  //     Swal.fire({
+  //       icon: "success",
+  //       title: "Berhasil Mengedit data",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //     setTimeout(() => {
+  //       navigate("/tag-berita");
+  //       window.location.reload();
+  //     }, 1500);
+  //   } catch (error) {
+  //     console.error("Terjadi kesalahan:", error);
+  //     Swal.fire("Gagal!", "Terjadi kesalahan saat mengedit data.", "error");
+  //   }
+  // };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -17,7 +56,7 @@ function Edit() {
               </h1>
 
               <div>
-                <form>
+                <form >
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="Tag"
@@ -31,6 +70,8 @@ function Edit() {
                       type="text"
                       id="tag"
                       name="tag"
+                      // value={tags}
+                      onChange={(e) => setTags(e.target.value)}
                       placeholder="tag berita"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />

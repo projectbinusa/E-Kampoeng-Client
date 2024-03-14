@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
+import axios from "axios";
+import { api_tag } from "../../utils/api";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
 
 function Tambah() {
+  const navigate = useNavigate();
+
+  const [tag, setTag] = useState("");
+
+  // const add = async (e) => {
+  //   e.preventDefault();
+
+  //   const fromData = new FormData();
+  //   fromData.append("tags", tag);
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8000/e-kampoeng/api/tags-berita/add",
+  //       fromData, authConfig
+      
+  //     );
+  //     navigate("/tag-berita");
+  //     if (response.status == 200) {
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Sukses Menambahkan",
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 1500);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -17,11 +60,12 @@ function Tambah() {
               </h1>
 
               <div>
-                <form>
+                <form >
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="Username"
-                      className="block text-sm font-medium text-black">
+                      className="block text-sm font-medium text-black"
+                    >
                       Tag Berita
                     </label>
 
@@ -30,11 +74,12 @@ function Tambah() {
                       type="text"
                       id="tag"
                       name="tag"
+                      onChange={(e) => setTag(e.target.value)}
+                      value={tag}
                       placeholder="tag berita"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
-               
 
                   <div className="sm:flex sm:items-center sm:gap-4 mt-7">
                     <button className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">

@@ -5,3 +5,4 @@ export const api_register = `${base_api}/register`;
 export const api_warga = `${base_api_ekampoeng}/warga`;
 export const api_organisasi = `${base_api_ekampoeng}/organisasi`;
 export const api_soerat = `${base_api_ekampoeng}/e-soerat`;
+export const api_tag= `${base_api_ekampoeng}/tags-berita/`;
