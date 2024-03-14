@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Warga from "./pages/warga/Index";
+import TambahWarga from "./pages/warga/Tambah";
 import DetailWarga from "./pages/warga/DetailWarga";
 import Organisasi from "./pages/organisasi/Organisasi";
 import WargaPendatang from "./pages/wargaPendatang/WargaPendatang";
@@ -20,9 +21,9 @@ import Kk from "./pages/kk/Kk";
 import TambahKk from "./pages/kk/Tambah";
 import EditKk from "./pages/kk/Edit";
 import TagBerita from "./pages/tagBerita/Tag";
-import RW from "./pages/rw/Rw";
-import WilRT from "./pages/wilayahRT/Wilayah";
-import WilRW from "./pages/wilayahRW/Wilayah";
+import TambahTagBerita from "./pages/tagBerita/Tambah";
+import EditTagBerita from "./pages/tagBerita/Edit";
+
 
 function App() {
   return (
@@ -31,8 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/r+3+g+i+5+t+3+r" element={<SignUp />} />
           <Route path="/warga" element={<Warga />} />
+          <Route path="/tambah-warga" element={<TambahWarga />} />
           <Route path="/detail-warga/:id" element={<DetailWarga />} />
           <Route path="/organisasi" element={<Organisasi />} />
           <Route path="/warga-pendatang" element={<WargaPendatang />} />
@@ -55,9 +57,8 @@ function App() {
           <Route path="/tambah-kk" element={<TambahKk />} />
           <Route path="/edit-kk" element={<EditKk />} />
           <Route path="/tag-berita" element={<TagBerita />} />
-          <Route path="/rw" element={<RW />} />
-          <Route path="/wilayah-rt" element={<WilRT />} />
-          <Route path="/wilayah-rw" element={<WilRW />} />
+          <Route path="/tambah-tag-berita" element={<TambahTagBerita />} />
+          <Route path="/edit-tag-berita/:id" element={<EditTagBerita />} />
         </Routes>
       </BrowserRouter>
     </>

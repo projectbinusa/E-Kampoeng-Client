@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { api_login } from "../utils/api";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const [passType, setPassType] = useState("password");
@@ -23,17 +24,27 @@ const SignIn = () => {
       email: email,
       password: password,
     };
-
+  
     try {
       const response = await axios.post(`${api_login}`, data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.userData.role);
-      navigate("/")
+      navigate("/");
       console.log("success login");
+  
+      // Tambahkan SweetAlert berhasil login di sini
+      Swal.fire({
+        icon: "success",
+        title: "Login Berhasil",
+        text: "Selamat datang!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   return (
     <>
@@ -342,13 +353,7 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                     Sign In
                   </button>
 
-                  <p className="mt-4 text-sm text-gray-700 sm:mt-0">
-                    Don't have an account yet?{" "}
-                    <a href="/sign-up" className="text-[#776b5d] underline">
-                      Sign Up
-                    </a>
-                    .
-                  </p>
+                
                 </div>
               </form>
             </div>
