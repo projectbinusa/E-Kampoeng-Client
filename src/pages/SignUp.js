@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import "../css/SignUp.css";
+import { base_api } from "../utils/api";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("admin");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [show, setShow] = useState(false);
   const [passType, setPassType] = useState("password");
   const [confirmType, setConfirmType] = useState("password");
 
@@ -20,6 +29,45 @@ const SignUp = () => {
       setConfirmType("password");
     }
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${base_api}/register`, {
+        username,
+        email,
+        password,
+        role,
+      });
+
+      if (response.data === "Username already taken") {
+        Swal.fire({
+          icon: "error",
+          title: "Username sudah terdaftar. Pilih username lain.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        setShow(false);
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil Register",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {}, 1500);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      setShow(false);
+      Swal.fire({
+        icon: "error",
+        title: "Terjadi kesalahan saat mendaftar. Coba lagi nanti.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
   return (
     <>
       <section className="bg-gray-200">
@@ -225,24 +273,11 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                 <h2>Sign Up</h2>
                 <hr className="border border-black" />
               </div>
-              <form action="#" className="mt-8 grid grid-cols-6 gap-5">
-                <div className="col-span-6">
-                  <label
-                    for="ImageProfile"
-                    className="block text-sm font-medium text-black"
-                  >
-                    Image
-                  </label>
-
-                  <input
-                    autoComplete="off"
-                    type="file"
-                    id="ImageProfile"
-                    name="last_name"
-                    className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                  />
-                </div>
-
+              <form
+                onSubmit={handleSubmit}
+                action="#"
+                className="mt-8 grid grid-cols-6 gap-5"
+              >
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     for="Username"
@@ -257,6 +292,8 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                     id="Username"
                     name="username"
                     placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                   />
                 </div>
@@ -276,6 +313,8 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                       id="Email"
                       name="email"
                       placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                     <span className="absolute inset-y-0 end-0 top-3 grid place-content-center px-3 my-0.5 h-fit">
@@ -306,6 +345,8 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                       id="Password"
                       name="password"
                       placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                     <span
@@ -398,7 +439,10 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                 </div>
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4 mt-2">
-                  <button className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
+                  <button
+                    type="submit"
+                    className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
+                  >
                     Sign Up
                   </button>
 
