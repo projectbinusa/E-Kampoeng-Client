@@ -23,6 +23,9 @@ import EditKk from "./pages/kk/Edit";
 import TagBerita from "./pages/tagBerita/Tag";
 import TambahTagBerita from "./pages/tagBerita/Tambah";
 import EditTagBerita from "./pages/tagBerita/Edit";
+import CategoryBerita from "./pages/categoryBerita/CategoryBerita";
+import TambahCategoryBerita from "./pages/categoryBerita/Tambah";
+import EditCategoryBerita from "./pages/categoryBerita/Edit";
 
 
 function App() {
@@ -32,7 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/r+3+g+i+5+t+3+r" element={<SignUp />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/warga" element={<Warga />} />
           <Route path="/tambah-warga" element={<TambahWarga />} />
           <Route path="/detail-warga/:id" element={<DetailWarga />} />
@@ -59,6 +62,9 @@ function App() {
           <Route path="/tag-berita" element={<TagBerita />} />
           <Route path="/tambah-tag-berita" element={<TambahTagBerita />} />
           <Route path="/edit-tag-berita/:id" element={<EditTagBerita />} />
+          <Route path="/category-berita" element={<CategoryBerita />} />
+          <Route path="/tambah-category-berita" element={<TambahCategoryBerita />} />
+          <Route path="/edit-category-berita" element={<EditCategoryBerita />} />
         </Routes>
       </BrowserRouter>
     </>

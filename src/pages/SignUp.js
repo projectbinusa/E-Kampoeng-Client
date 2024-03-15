@@ -264,22 +264,7 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                 <hr className="border border-black" />
               </div>
               <form action="#" className="mt-8 grid grid-cols-6 gap-5">
-                <div className="col-span-6">
-                  <label
-                    for="ImageProfile"
-                    className="block text-sm font-medium text-black"
-                  >
-                    Image
-                  </label>
-
-                  <input
-                    autoComplete="off"
-                    type="file"
-                    id="ImageProfile"
-                    name="last_name"
-                    className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                  />
-                </div>
+              
 
                 <div className="col-span-6 sm:col-span-3">
                   <label
