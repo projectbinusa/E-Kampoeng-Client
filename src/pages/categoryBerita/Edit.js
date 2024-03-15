@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
 function Edit() {
+ 
+
   return (
     <div className="flex">
       <Sidebar />
@@ -13,41 +20,27 @@ function Edit() {
           <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
-                {" "}
-                Edit E Soerat
+                Edit Category Berita
               </h1>
 
               <div>
-                <form>
+                <form >
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="Username"
-                      className="block text-sm font-medium text-black">
-                      Jenis Surat
+                      for="Tag"
+                      className="block text-sm font-medium text-black"
+                    >
+                      Category berita
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis surat"
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3 mt-4">
-                    <label
-                      for="Username"
-                      className="block text-sm font-medium text-black">
-                      Jenis Bantuan
-                    </label>
-
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis bantuan"
+                      id="tag"
+                      name="tag"
+                      // value={category}
+                    //   onChange={(e) => setCategory(e.target.value)}
+                      placeholder="category berita"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>

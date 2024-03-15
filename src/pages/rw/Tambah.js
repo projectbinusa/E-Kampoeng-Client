@@ -3,7 +3,7 @@ import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 
-function Edit() {
+function Tambah() {
   return (
     <div className="flex">
       <Sidebar />
@@ -13,8 +13,7 @@ function Edit() {
           <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
-                {" "}
-                Edit E Soerat
+                Tambah Data RW
               </h1>
 
               <div>
@@ -23,15 +22,15 @@ function Edit() {
                     <label
                       for="Username"
                       className="block text-sm font-medium text-black">
-                      Jenis Surat
+                      Nama RT
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis surat"
+                      id="rt"
+                      name="rt"
+                      placeholder="nama RT"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
@@ -39,15 +38,15 @@ function Edit() {
                     <label
                       for="Username"
                       className="block text-sm font-medium text-black">
-                      Jenis Bantuan
+                      Warga Id
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis bantuan"
+                      id="warga"
+                      name="warga"
+                      placeholder="nama warga"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
@@ -68,4 +67,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default Tambah;

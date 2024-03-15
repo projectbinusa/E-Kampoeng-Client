@@ -3,7 +3,7 @@ import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 
-function Edit() {
+function Tambah() {
   return (
     <div className="flex">
       <Sidebar />
@@ -14,42 +14,45 @@ function Edit() {
             <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
                 {" "}
-                Edit E Soerat
+                Tambah Warga Organisasi
               </h1>
 
               <div>
                 <form>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="Username"
+                      for="nama"
                       className="block text-sm font-medium text-black">
-                      Jenis Surat
+                      Nama Warga
                     </label>
 
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis surat"
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
+                    <select
+                      id="nama"
+                      name="nama"
+                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md">
+                      <option value="">Pilih Nama Warga</option>
+                      <option value="warga1">Warga 1</option>
+                      <option value="warga2">Warga 2</option>
+                      <option value="warga3">Warga 3</option>
+                    </select>
                   </div>
+
                   <div className="col-span-6 sm:col-span-3 mt-4">
                     <label
                       for="Username"
                       className="block text-sm font-medium text-black">
-                      Jenis Bantuan
+                      Nama Organisasi
                     </label>
 
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis bantuan"
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
+                    <select
+                      id="nama"
+                      name="nama"
+                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md">
+                      <option value="">Pilih Nama Organisasi</option>
+                      <option value="organisasi1">Organisasi 1</option>
+                      <option value="organisasi2">Organisasi 2</option>
+                      <option value="organisasi3">Organisasi 3</option>
+                    </select>
                   </div>
 
                   <div className="sm:flex sm:items-center sm:gap-4 mt-7">
@@ -68,4 +71,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default Tambah;

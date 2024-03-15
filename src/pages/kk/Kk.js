@@ -1,30 +1,23 @@
 import React from "react";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
-import Footer from "../../component/Footer";
 import Sidebar from "../../component/Sidebar";
+import Footer from "../../component/Footer";
 
-function Soerat() {
+function Kk() {
   const data = [
     {
-      jenis_surat: "pengantar",
-      jenis_bantuan: "KIP",
-      create: "28-04-2023",
+      warga_id: "Anika Maulina",
+      createAt: "03-05-2023",
     },
     {
-      jenis_surat: "Nikah",
-      jenis_bantuan: "surat_domisili",
-      create: "28-04-2023",
-    },
-    {
-      jenis_surat: "bantuan",
-      jenis_bantuan: "KIS",
-      create: "28-04-2023",
+      warga_id: "Ibnu Sabil",
+      createAt: "03-05-2023",
     },
   ];
   return (
     <div className="flex">
-      <Sidebar/>
+      <Sidebar />
       <div className="block w-full">
         <div className="bg-gray-300 h-screen">
           <Navbar />
@@ -33,10 +26,10 @@ function Soerat() {
             <span className="space-y-3">
               <div className="flex md:flex-row md:justify-between flex-col items-center space-y-3 mx-5 page-header">
                 <h1 className="text-xl text-center font-semibold play">
-                  Data E Soerat
+                  Data KK
                 </h1>
                 <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
-                  <a href="tambah-soerat"> Tambah</a>
+                  <a href="tambah-kk"> Tambah</a>
                 </button>
               </div>
               <hr className="border border-black" />
@@ -72,13 +65,10 @@ function Soerat() {
                 <thead class="ltr:text-left rtl:text-right">
                   <tr>
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Jenis Surat
+                      Nama Warga
                     </th>
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Jenis Bantuan
-                    </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Create At
+                      Status Penduduk
                     </th>
 
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
@@ -88,22 +78,19 @@ function Soerat() {
                 </thead>
 
                 <tbody class="divide-y divide-gray-200">
-                  {data.map((soerat, idx) => {
+                  {data.map((kk, idx) => {
                     return (
                       <tr class="odd:bg-gray-50 text-center" key={idx}>
                         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                          {soerat.jenis_surat}
+                          {kk.warga_id}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {soerat.jenis_bantuan}
-                        </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {soerat.create}
+                          {kk.createAt}
                         </td>
 
                         <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                            to={`/edit-soerat`}
+                            to={`/edit-kk`}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit">
                             <svg
@@ -212,4 +199,4 @@ function Soerat() {
   );
 }
 
-export default Soerat;
+export default Kk;

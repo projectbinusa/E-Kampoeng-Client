@@ -1,30 +1,25 @@
 import React from "react";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
-import Footer from "../../component/Footer";
 import Sidebar from "../../component/Sidebar";
+import Footer from "../../component/Footer";
 
-function Soerat() {
+function WargaOrganisasi() {
   const data = [
     {
-      jenis_surat: "pengantar",
-      jenis_bantuan: "KIP",
-      create: "28-04-2023",
+      warga_id: "niken putri saparina",
+      organisasi_id: "Bootcamp Forum",
+      createAt: "03-05-2023",
     },
     {
-      jenis_surat: "Nikah",
-      jenis_bantuan: "surat_domisili",
-      create: "28-04-2023",
-    },
-    {
-      jenis_surat: "bantuan",
-      jenis_bantuan: "KIS",
-      create: "28-04-2023",
+      warga_id: "davina mutiara stani",
+      organisasi_id: "Bootcamp Forum",
+      createAt: "05-02-2024",
     },
   ];
   return (
     <div className="flex">
-      <Sidebar/>
+      <Sidebar />
       <div className="block w-full">
         <div className="bg-gray-300 h-screen">
           <Navbar />
@@ -33,10 +28,10 @@ function Soerat() {
             <span className="space-y-3">
               <div className="flex md:flex-row md:justify-between flex-col items-center space-y-3 mx-5 page-header">
                 <h1 className="text-xl text-center font-semibold play">
-                  Data E Soerat
+                  Data Warga Organisasi
                 </h1>
                 <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
-                  <a href="tambah-soerat"> Tambah</a>
+                  <a href="tambah-warga-organisasi"> Tambah</a>
                 </button>
               </div>
               <hr className="border border-black" />
@@ -72,13 +67,10 @@ function Soerat() {
                 <thead class="ltr:text-left rtl:text-right">
                   <tr>
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Jenis Surat
+                      Nama Warga
                     </th>
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Jenis Bantuan
-                    </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Create At
+                      Nama Organisasi
                     </th>
 
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
@@ -88,34 +80,20 @@ function Soerat() {
                 </thead>
 
                 <tbody class="divide-y divide-gray-200">
-                  {data.map((soerat, idx) => {
+                  {data.map((warga, idx) => {
                     return (
                       <tr class="odd:bg-gray-50 text-center" key={idx}>
                         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                          {soerat.jenis_surat}
+                          {warga.warga_id}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {soerat.jenis_bantuan}
+                          {warga.organisasi_id}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {soerat.create}
+                          {warga.createAt}
                         </td>
 
                         <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
-                          <Link
-                            to={`/edit-soerat`}
-                            className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
-                            title="Edit">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              id="Outline"
-                              viewBox="0 0 24 24"
-                              width="18"
-                              height="18">
-                              <path d="M18.656.93,6.464,13.122A4.966,4.966,0,0,0,5,16.657V18a1,1,0,0,0,1,1H7.343a4.966,4.966,0,0,0,3.535-1.464L23.07,5.344a3.125,3.125,0,0,0,0-4.414A3.194,3.194,0,0,0,18.656.93Zm3,3L9.464,16.122A3.02,3.02,0,0,1,7.343,17H7v-.343a3.02,3.02,0,0,1,.878-2.121L20.07,2.344a1.148,1.148,0,0,1,1.586,0A1.123,1.123,0,0,1,21.656,3.93Z" />
-                              <path d="M23,8.979a1,1,0,0,0-1,1V15H18a3,3,0,0,0-3,3v4H5a3,3,0,0,1-3-3V5A3,3,0,0,1,5,2h9.042a1,1,0,0,0,0-2H5A5.006,5.006,0,0,0,0,5V19a5.006,5.006,0,0,0,5,5H16.343a4.968,4.968,0,0,0,3.536-1.464l2.656-2.658A4.968,4.968,0,0,0,24,16.343V9.979A1,1,0,0,0,23,8.979ZM18.465,21.122a2.975,2.975,0,0,1-1.465.8V18a1,1,0,0,1,1-1h3.925a3.016,3.016,0,0,1-.8,1.464Z" />
-                            </svg>
-                          </Link>
                           <button
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus">
@@ -206,10 +184,10 @@ function Soerat() {
             </ol>
           </div>
         </div>
-        <Footer />
+          <Footer/>
       </div>
     </div>
   );
 }
 
-export default Soerat;
+export default WargaOrganisasi;

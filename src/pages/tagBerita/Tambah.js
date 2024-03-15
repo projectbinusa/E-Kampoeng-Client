@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
+import axios from "axios";
+import { api_tag } from "../../utils/api";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-function Edit() {
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
+
+function Tambah() {
+  const navigate = useNavigate();
+
+  const [tag, setTag] = useState("");
+
+  // const add = async (e) => {
+  //   e.preventDefault();
+
+  //   const fromData = new FormData();
+  //   fromData.append("tags", tag);
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8000/e-kampoeng/api/tags-berita/add",
+  //       fromData, authConfig
+      
+  //     );
+  //     navigate("/tag-berita");
+  //     if (response.status == 200) {
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Sukses Menambahkan",
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 1500);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -13,41 +56,27 @@ function Edit() {
           <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
-                {" "}
-                Edit E Soerat
+                Tambah Tag Berita
               </h1>
 
               <div>
-                <form>
+                <form >
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="Username"
-                      className="block text-sm font-medium text-black">
-                      Jenis Surat
+                      className="block text-sm font-medium text-black"
+                    >
+                      Tag Berita
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis surat"
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3 mt-4">
-                    <label
-                      for="Username"
-                      className="block text-sm font-medium text-black">
-                      Jenis Bantuan
-                    </label>
-
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      id="jenis"
-                      name="jenis"
-                      placeholder="jenis bantuan"
+                      id="tag"
+                      name="tag"
+                      onChange={(e) => setTag(e.target.value)}
+                      value={tag}
+                      placeholder="tag berita"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
@@ -68,4 +97,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default Tambah;
