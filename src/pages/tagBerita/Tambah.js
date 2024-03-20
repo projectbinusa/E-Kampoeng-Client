@@ -14,38 +14,35 @@ const authConfig = {
 };
 
 function Tambah() {
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const [tags, setTags] = useState("");
 
-  const [tag, setTag] = useState("");
+  const Add = async (e) => {
+    e.preventDefault();
+    e.persist();
 
-  // const add = async (e) => {
-  //   e.preventDefault();
+    const req = {
+      tags: tags,
+    };
+    try {
+      await axios.post(api_tag + "add", req, authConfig);
+      setShow(false);
+      Swal.fire({
+        icon: "success",
+        title: "Sukses Menambahkan",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      setTimeout(() => {
+        navigate("/tag-berita");
+        window.location.reload();
+      }, 2500);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   const fromData = new FormData();
-  //   fromData.append("tags", tag);
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8000/e-kampoeng/api/tags-berita/add",
-  //       fromData, authConfig
-      
-  //     );
-  //     navigate("/tag-berita");
-  //     if (response.status == 200) {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Sukses Menambahkan",
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //       });
-  //       setTimeout(() => {
-  //         window.location.reload();
-  //       }, 1500);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   return (
     <div className="flex">
@@ -60,7 +57,7 @@ function Tambah() {
               </h1>
 
               <div>
-                <form >
+                <form onSubmit={Add}>
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="Username"
@@ -73,9 +70,9 @@ function Tambah() {
                       autoComplete="off"
                       type="text"
                       id="tag"
-                      name="tag"
-                      onChange={(e) => setTag(e.target.value)}
-                      value={tag}
+                      name="tags"
+                      onChange={(e) => setTags(e.target.value)}
+                      value={tags}
                       placeholder="tag berita"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
