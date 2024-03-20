@@ -50,7 +50,7 @@ function App() {
             element={<TambahWargaPendatang />}
           />
           <Route path="/soerat" element={<Soerat />} />
-          <Route path="/edit-soerat" element={<EditSoerat />} />
+          <Route path="/edit-soerat/:id" element={<EditSoerat />} />
           <Route path="/tambah-soerat" element={<TambahSoerat />} />
           <Route path="/warga-organisasi" element={<WargaOrganisasi />} />
           <Route path="/rt" element={<RT />} />
@@ -64,7 +64,7 @@ function App() {
           <Route path="/edit-tag-berita/:id" element={<EditTagBerita />} />
           <Route path="/category-berita" element={<CategoryBerita />} />
           <Route path="/tambah-category-berita" element={<TambahCategoryBerita />} />
-          <Route path="/edit-category-berita" element={<EditCategoryBerita />} />
+          <Route path="/edit-category-berita/:id" element={<EditCategoryBerita />} />
         </Routes>
       </BrowserRouter>
     </>
