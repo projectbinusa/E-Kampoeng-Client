@@ -26,6 +26,9 @@ import EditTagBerita from "./pages/tagBerita/Edit";
 import CategoryBerita from "./pages/categoryBerita/CategoryBerita";
 import TambahCategoryBerita from "./pages/categoryBerita/Tambah";
 import EditCategoryBerita from "./pages/categoryBerita/Edit";
+import Kas from "./pages/kas/Kas";
+import TambahKas from "./pages/kas/Tambah";
+import EditKas from "./pages/kas/Edit";
 
 
 function App() {
@@ -65,6 +68,9 @@ function App() {
           <Route path="/category-berita" element={<CategoryBerita />} />
           <Route path="/tambah-category-berita" element={<TambahCategoryBerita />} />
           <Route path="/edit-category-berita/:id" element={<EditCategoryBerita />} />
+          <Route path="/e-kas" element={<Kas />} />
+          <Route path="/tambah-kas" element={<TambahKas />} />
+          <Route path="/edit-kas" element={<EditKas />} />
         </Routes>
       </BrowserRouter>
     </>
