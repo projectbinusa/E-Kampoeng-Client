@@ -24,7 +24,7 @@ function Tambah() {
                     padding: "5px",
                   }}
                 >
-                  <div class="grid grid-cols-6 gap-4">
+                  <div className="grid grid-cols-6 gap-4">
                     <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         htmlFor="nama"
@@ -125,11 +125,11 @@ function Tambah() {
                     </div>
                   </div>
 
-                  <div class="grid grid-cols-6 gap-4">
-                    <div class="col-span-6 sm:col-span-3 mt-4">
+                  <div className="grid grid-cols-6 gap-4">
+                    <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
-                        class="block text-sm font-medium text-black"
+                        className="block text-sm font-medium text-black"
                       >
                         Agama
                       </label>
@@ -137,7 +137,7 @@ function Tambah() {
                       <div>
                         <label
                           for="HeadlineAct"
-                          class="block text-sm font-medium text-gray-900"
+                          className="block text-sm font-medium text-gray-900"
                         >
                           {" "}
                           Headliner{" "}
@@ -146,7 +146,7 @@ function Tambah() {
                         <select
                           name="HeadlineAct"
                           id="HeadlineAct"
-                          class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                          className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                         >
                           <option value="">Please select</option>
                           <option value="JM">John Mayer</option>
@@ -162,7 +162,7 @@ function Tambah() {
                       <select
                         id="agama"
                         name="agama"
-                        class="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                        className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       >
                         <option value="">Pilih Agama</option>
                         <option value="Islam">Islam</option>
@@ -173,10 +173,10 @@ function Tambah() {
                       </select>
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3 mt-4">
+                    <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
-                        class="block text-sm font-medium text-black"
+                        className="block text-sm font-medium text-black"
                       >
                         No Anak
                       </label>
@@ -186,14 +186,14 @@ function Tambah() {
                         id="no_anak"
                         name="no_anak"
                         placeholder="no anak"
-                        class="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                        className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3 mt-4">
+                    <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
-                        class="block text-sm font-medium text-black"
+                        className="block text-sm font-medium text-black"
                       >
                         No BPJS
                       </label>
@@ -203,14 +203,14 @@ function Tambah() {
                         id="no_bpjs"
                         name="no_bpjs"
                         placeholder="no bpjs"
-                        class="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                        className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3 mt-4">
+                    <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
-                        class="block text-sm font-medium text-black"
+                        className="block text-sm font-medium text-black"
                       >
                         No Passport
                       </label>
@@ -220,14 +220,14 @@ function Tambah() {
                         id="no_passport"
                         name="no_passport"
                         placeholder="no passport"
-                        class="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                        className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3 mt-4">
+                    <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
-                        class="block text-sm font-medium text-black"
+                        className="block text-sm font-medium text-black"
                       >
                         No Telepon
                       </label>
@@ -237,14 +237,14 @@ function Tambah() {
                         id="no_telepon"
                         name="no_telepon"
                         placeholder="no telepon"
-                        class="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                        className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3 mt-4">
+                    <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
-                        class="block text-sm font-medium text-black"
+                        className="block text-sm font-medium text-black"
                       >
                         Tanggal Lahir
                       </label>
@@ -254,12 +254,12 @@ function Tambah() {
                         id="tanggal_lahir"
                         name="tanggal_lahir"
                         placeholder="tanggal lahir"
-                        class="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                        className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
                     </div>
                   </div>
 
-                  <div class="grid grid-cols-6 gap-4">
+                  <div className="grid grid-cols-6 gap-4">
                     <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
@@ -370,7 +370,7 @@ function Tambah() {
                     </div>
                   </div>
 
-                  <div class="grid grid-cols-6 gap-4">
+                  <div className="grid grid-cols-6 gap-4">
                     <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"
@@ -493,7 +493,7 @@ function Tambah() {
                     </div>
                   </div>
 
-                  <div class="grid grid-cols-6 gap-4">
+                  <div className="grid grid-cols-6 gap-4">
                     <div className="col-span-6 sm:col-span-3 mt-4">
                       <label
                         for="Username"

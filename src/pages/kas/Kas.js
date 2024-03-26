@@ -145,59 +145,59 @@ const kas = [
             </div>
           </span>
 
-          <div class="overflow-x-auto rounded-lg border border-gray-200">
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-              <thead class="ltr:text-left rtl:text-right">
+          <div className="overflow-x-auto rounded-lg border border-gray-200">
+            <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+              <thead className="ltr:text-left rtl:text-right">
                 <tr>
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                     Pemasukkan
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                     Pengeluaran
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                     Sisa kas bulan lalu
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                     Sisa kas bulan ini
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                     Keterangan pemasukkan
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                    Keterangan pengeluaran
                   </th>
 
-                  <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                  <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                     Aksi
                   </th>
                 </tr>
               </thead>
 
-              <tbody class="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200">
                 {kas.map((row, idx) => {
                   return (
-                    <tr class="odd:bg-gray-50 text-center" key={idx}>
-                      <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    <tr className="odd:bg-gray-50 text-center" key={idx}>
+                      <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                         {row.pemasukkan}
                       </td>
-                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                         {row.pengeluaran}
                       </td>
-                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                         {row.sisa_kas_bulan_lalu}
                       </td>
-                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                         {row.sisa_kas_bulan_ini}
                       </td>
-                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                         {row.keterangan_pemasukkan}
                       </td>
-                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                         {row.keterangan_pengeluaran}
                       </td>
 
-                      <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
+                      <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                         <Link
                            to={`/edit-kas/`}
                           className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
@@ -224,7 +224,7 @@ const kas = [
                             width="18"
                             height="18"
                             fill="inherit"
-                            class="bi bi-trash"
+                            className="bi bi-trash"
                             viewBox="0 0 16 16"
                           >
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
