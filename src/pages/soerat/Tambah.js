@@ -22,7 +22,7 @@ function Tambah() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/e-kampoeng/api/e-soerat?jenis_bantuan=${jenis_bantuan}&jenis_surat=${jenis_surat}`,
+        `http://localhost:2001/e-kampoeng/api/e-soerat?jenis_bantuan=${jenis_bantuan}&jenis_surat=${jenis_surat}`,
         null,
         authConfig
       );

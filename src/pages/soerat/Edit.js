@@ -51,7 +51,7 @@ function Edit() {
       };
 
       await axios.put(
-        `http://localhost:8000/e-kampoeng/api/e-soerat/` + param.id,
+        `http://localhost:2001/e-kampoeng/api/e-soerat/` + param.id,
         req,
         authConfig
       );
