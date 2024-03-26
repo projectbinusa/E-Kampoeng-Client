@@ -47,16 +47,16 @@ const DetailWarga = () => {
                 <nav
                   aria-label="Breadcrumb"
                   className="flex items-center ubuntu">
-                  <ol class="flex items-center gap-1 text-sm text-gray-600">
+                  <ol className="flex items-center gap-1 text-sm text-gray-600">
                     <li>
                       <Link
                         to={"/"}
-                        class="block transition hover:text-gray-700">
-                        <span class="sr-only">Home</span>
+                        className="block transition hover:text-gray-700">
+                        <span className="sr-only">Home</span>
 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="h-4 w-4"
+                          className="h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor">
@@ -70,10 +70,10 @@ const DetailWarga = () => {
                       </Link>
                     </li>
 
-                    <li class="rtl:rotate-180">
+                    <li className="rtl:rotate-180">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
+                        className="h-4 w-4"
                         viewBox="0 0 20 20"
                         fill="currentColor">
                         <path
@@ -87,15 +87,15 @@ const DetailWarga = () => {
                     <li>
                       <Link
                         to={"/warga"}
-                        class="block transition hover:text-gray-700">
+                        className="block transition hover:text-gray-700">
                         Warga
                       </Link>
                     </li>
 
-                    <li class="rtl:rotate-180">
+                    <li className="rtl:rotate-180">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
+                        className="h-4 w-4"
                         viewBox="0 0 20 20"
                         fill="currentColor">
                         <path
@@ -109,7 +109,7 @@ const DetailWarga = () => {
                     <li>
                       <Link
                         to={"/detail-warga/1"}
-                        class="block transition hover:text-gray-700">
+                        className="block transition hover:text-gray-700">
                         Detail Warga
                       </Link>
                     </li>
@@ -138,12 +138,12 @@ const DetailWarga = () => {
                 </p>
               </div>
             </span>
-            <div class="overflow-x-auto">
-              <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm text-left border-collapse border border-red-500 rounded-full">
-                <tbody class="divide-y divide-gray-200">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm text-left border-collapse border border-red-500 rounded-full">
+                <tbody className="divide-y divide-gray-200">
                   {/* Data Diri START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -151,82 +151,82 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Status Dasar
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       HIDUP{/* {warga.status_dasar} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nama Lengkap
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.nama}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nomor Kartu Keluarga
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.no_kk}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Hubungan Dalam Keluarga
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.status_dalam_keluarga == "kepala_keluarga"
                         ? "KEPALA KELUARGA"
                         : "ANGGOTA"}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Jenis Kelamin
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.jenis_kelamin}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Agama
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.agama}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Status Kependudukan
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.status_kependudukan == "penduduk_tetap"
                         ? "TETAP"
                         : "PENDATANG"}
@@ -236,7 +236,7 @@ const DetailWarga = () => {
 
                   {/* Data Kelahiran START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -244,36 +244,36 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Tempat / Tanggal Lahir
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.tempat_lahir} / {warga.tanggal_lahir}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Berat Lahir
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       3500 Gram{/* {warga.berat_lahir} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Panjang Lahir
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       45 Cm{/* {warga.panjang_lahir} */}
                     </td>
                   </tr>
@@ -281,7 +281,7 @@ const DetailWarga = () => {
 
                   {/* Data Pendidikan Dan Pekerjaan START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -289,36 +289,36 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Pendidikan Yang Sedang Ditempuh
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       - {/* {warga.pendidikan_ditempuh} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Pendidikan Terakhir
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       S2 {/* {warga.pendidikan_terakhir} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Pekerjaan
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.pekerjaan}
                     </td>
                   </tr>
@@ -326,7 +326,7 @@ const DetailWarga = () => {
 
                   {/* Data Kewarganegaraan START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -334,14 +334,14 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Warga Kewarganegaraan
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       WNI {/* {warga.kewarganegaraan} */}
                     </td>
                   </tr>
@@ -349,7 +349,7 @@ const DetailWarga = () => {
 
                   {/* Data Orang Tua START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -357,47 +357,47 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       NIK Ayah
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       245753546789 {/* {warga.nik_ayah} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nama Ayah
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       Ahmad {/* {warga.nama_ayah} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       NIK Ibu
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       245753546788 {/* {warga.nik_ibu} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nama Ibu
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       Sulis {/* {warga.nama_ibu} */}
                     </td>
                   </tr>
@@ -405,7 +405,7 @@ const DetailWarga = () => {
 
                   {/* Data Alamat START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -413,58 +413,58 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Alamat
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       Desa Ringinsari {/* {warga.alamat} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Alamat Sebelumnya
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       Desa Ringinwok {/* {warga.alamat_sebelumnya} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       RT / RW
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       01 / 16 {/* {warga.rt} / {warga.rw} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nomor Telepon
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       0895622189242 {/* {warga.no_telp} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Email
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       example@gmail.com {/* {warga.email} */}
                     </td>
                   </tr>
@@ -472,7 +472,7 @@ const DetailWarga = () => {
 
                   {/* Data Perkawinan START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -480,25 +480,25 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Status Kawin
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       KAWIN TERCATAT {/* {warga.status_perkawinan} */}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Tanggal Perkawinan
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       23-08-1992 {/* {warga.tanggal_perkawinan} */}
                     </td>
                   </tr>
@@ -506,7 +506,7 @@ const DetailWarga = () => {
 
                   {/* Data Kesehatan START */}
                   {/* SEPARATOR START */}
-                  <tr class="odd:bg-gray-50">
+                  <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
                       className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
@@ -514,25 +514,25 @@ const DetailWarga = () => {
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Golongan Darah
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       {warga.golongan_darah}
                     </td>
                   </tr>
-                  <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
+                  <tr className="odd:bg-gray-50">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Akseptor KB
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
                       :
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
                       23-08-1992 {/* {warga.tanggal_perkawinan} */}
                     </td>
                   </tr>
