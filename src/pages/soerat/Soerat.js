@@ -21,7 +21,7 @@ function Soerat() {
   const getAll = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/e-kampoeng/api/e-soerat?page=${page}&size=${size}`,
+        `http://localhost:2001/e-kampoeng/api/e-soerat?page=${page}&size=${size}`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -158,7 +158,7 @@ function Soerat() {
 
                         <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                             to={`/edit-soerat/` + soerat.id}
+                            to={`/edit-soerat/` + soerat.id}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit"
                           >
