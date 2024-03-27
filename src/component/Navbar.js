@@ -36,7 +36,7 @@ function Navbar({ toggleSidebar }) {
   };
 
   return (
-    <header className="bg-gray-100">
+    <header className="bg-gray-100 w-full">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
         <a className="flex flex-col items-center text-[#776b5d]" href="#">
           <svg

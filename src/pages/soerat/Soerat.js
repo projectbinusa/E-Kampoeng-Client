@@ -21,7 +21,7 @@ function Soerat() {
   const getAll = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/e-kampoeng/api/e-soerat?page=${page}&size=${size}`,
+        `http://localhost:2001/e-kampoeng/api/e-soerat?page=${page}&size=${size}`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -122,43 +122,43 @@ function Soerat() {
               </div>
             </span>
 
-            <div class="overflow-x-auto rounded-lg border border-gray-200">
-              <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                <thead class="ltr:text-left rtl:text-right">
+            <div className="overflow-x-auto rounded-lg border border-gray-200">
+              <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <thead className="ltr:text-left rtl:text-right">
                   <tr>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Jenis Surat
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Jenis Bantuan
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Create At
                     </th>
 
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Aksi
                     </th>
                   </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-200">
                   {soerat.map((soerat, idx) => {
                     return (
-                      <tr class="odd:bg-gray-50 text-center" key={idx}>
-                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      <tr className="odd:bg-gray-50 text-center" key={idx}>
+                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                           {soerat.jenis_surat}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {soerat.jenis_bantuan}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {soerat.create_at}
                         </td>
 
-                        <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
+                        <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                             to={`/edit-soerat/` + soerat.id}
+                            to={`/edit-soerat/` + soerat.id}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit"
                           >
@@ -183,7 +183,7 @@ function Soerat() {
                               width="18"
                               height="18"
                               fill="inherit"
-                              class="bi bi-trash"
+                              className="bi bi-trash"
                               viewBox="0 0 16 16"
                             >
                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />

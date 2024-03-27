@@ -16,24 +16,24 @@ const Sidebar = () => {
       <div
         className={`flex h-screen ${
           isOpen ? "w-72 md:relative absolute h-screen" : "w-16"
-        } flex-col justify-between md:bg-white/75 h-screen bg-white border-r z-20 transition duration-300`}
+        } flex-col justify-between md:bg-white/75 h-screen bg-white border-r z-20 transition-all duration-300`}
       >
         <div>
           <div
             onClick={toggleSidebar}
-            class="cursor-pointer inline-flex size-16 items-center justify-center"
+            className="cursor-pointer inline-flex size-16 items-center justify-center"
           >
-            <span class="grid size-10 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+            <span className="grid size-10 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
               L
             </span>
           </div>
 
-          <div class="border-t border-gray-100">
-            <div class="px-2">
-              <div class="py-4">
+          <div className="border-t border-gray-100">
+            <div className="px-2">
+              <div className="py-4">
                 <a
                   href="#"
-                  class={`t group ${
+                  className={`t group ${
                     isOpen
                       ? "px-3 py-2 gap-x-3"
                       : "relative justify-center py-2"
@@ -41,7 +41,7 @@ const Sidebar = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="size-5 opacity-75"
+                    className="size-5 opacity-75"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -61,7 +61,7 @@ const Sidebar = () => {
 
                   <a
                     href="#"
-                    class={`${
+                    className={`${
                       isOpen ? "block" : "hidden"
                     } start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
                   >
@@ -69,7 +69,7 @@ const Sidebar = () => {
                   </a>
 
                   <span
-                    class={`${
+                    className={`${
                       isOpen ? "hidden" : "block"
                     } invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible`}
                   >
@@ -78,11 +78,11 @@ const Sidebar = () => {
                 </a>
               </div>
 
-              <ul class="space-y-1 border-t border-gray-100 pt-4">
+              <ul className="space-y-1 border-t border-gray-100 pt-4">
                 <li>
                   <a
                     href="#"
-                    class={`t group ${
+                    className={`t group ${
                       isOpen
                         ? "px-3 py-2 gap-x-3"
                         : "relative justify-center py-2"
@@ -90,7 +90,7 @@ const Sidebar = () => {
                   >
                     <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="size-5 opacity-75"
+                className="size-5 opacity-75"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -105,7 +105,7 @@ const Sidebar = () => {
 
                     <a
                       href="#"
-                      class={`${
+                      className={`${
                         isOpen ? "block" : "hidden"
                       } start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
                     >
@@ -113,7 +113,7 @@ const Sidebar = () => {
                     </a>
 
                     <span
-                      class={`${
+                      className={`${
                         isOpen ? "hidden" : "block"
                       } invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible`}
                     >
@@ -125,11 +125,11 @@ const Sidebar = () => {
                 <li>
                 <a
                   href="#"
-                  class={`t group ${isOpen ? 'px-3 py-2 gap-x-3' : 'relative justify-center py-2'} flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
+                  className={`t group ${isOpen ? 'px-3 py-2 gap-x-3' : 'relative justify-center py-2'} flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
                 >
                   <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="size-5 opacity-75"
+                className="size-5 opacity-75"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -144,13 +144,13 @@ const Sidebar = () => {
 
                   <a
                     href="#"
-                    class={`${isOpen ? 'block' : 'hidden'} start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
+                    className={`${isOpen ? 'block' : 'hidden'} start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
                   >
                     Billing
                   </a>
 
                   <span
-                    class={`${
+                    className={`${
                       isOpen ? "hidden" : "block"
                     } invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible`}
                   >
@@ -162,11 +162,11 @@ const Sidebar = () => {
                 <li>
                 <a
                   href="#"
-                  class={`t group ${isOpen ? 'px-3 py-2 gap-x-3' : 'relative justify-center py-2'} flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
+                  className={`t group ${isOpen ? 'px-3 py-2 gap-x-3' : 'relative justify-center py-2'} flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
                 >
                   <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="size-5 opacity-75"
+                className="size-5 opacity-75"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -181,13 +181,13 @@ const Sidebar = () => {
 
                   <a
                     href="#"
-                    class={`${isOpen ? 'block' : 'hidden'} start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
+                    className={`${isOpen ? 'block' : 'hidden'} start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
                   >
                     Invoice
                   </a>
 
                   <span
-                    class={`${
+                    className={`${
                       isOpen ? "hidden" : "block"
                     } invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible`}
                   >
@@ -199,11 +199,11 @@ const Sidebar = () => {
                 <li>
                 <a
                   href="#"
-                  class={`t group ${isOpen ? 'px-3 py-2 gap-x-3' : 'relative justify-center py-2'} flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
+                  className={`t group ${isOpen ? 'px-3 py-2 gap-x-3' : 'relative justify-center py-2'} flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
                 >
                   <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="size-5 opacity-75"
+                className="size-5 opacity-75"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -218,13 +218,13 @@ const Sidebar = () => {
 
                   <a
                     href="#"
-                    class={`${isOpen ? 'block' : 'hidden'} start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
+                    className={`${isOpen ? 'block' : 'hidden'} start-full bottom-0 rounded-lg font-medium text-left text-sm text-inherit transition duration-300`}
                   >
                     Account
                   </a>
 
                   <span
-                    class={`${
+                    className={`${
                       isOpen ? "hidden" : "block"
                     } invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible`}
                   >
@@ -237,15 +237,15 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div class="sticky inset-x-0 bottom-0 border-t border-gray-100 bg-white p-2">
+        <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 bg-white p-2">
           <form action="#">
             <button
               type="submit"
-              class="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+              className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="size-5 opacity-75"
+                className="size-5 opacity-75"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -258,7 +258,7 @@ const Sidebar = () => {
                 />
               </svg>
 
-              <span class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
+              <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                 Logout
               </span>
             </button>

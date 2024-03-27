@@ -17,7 +17,6 @@ function Edit() {
   const navigate = useNavigate();
   const [tags, setTags] = useState("");
 
-
   // useEffect(() => {
   //   axios
   //     .get("http://localhost:8000/e-kampoeng/api/category-berita/get/" + param.id, authConfig)
@@ -34,7 +33,6 @@ function Edit() {
     try {
       e.preventDefault();
 
- 
       // if (!param.id || !tags) {
       //   console.error(
       //     "param.id, tags, tidak didefinisikan atau tidak valid."
@@ -47,7 +45,7 @@ function Edit() {
       };
 
       await axios.put(
-        `http://localhost:8000/e-kampoeng/api/tags-berita/put/` + param.id,
+        `http://localhost:2001/e-kampoeng/api/tags-berita/put/` + param.id,
         req,
         authConfig
       );

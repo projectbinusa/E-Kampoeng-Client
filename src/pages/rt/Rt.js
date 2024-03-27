@@ -68,54 +68,54 @@ function Rt() {
               </div>
             </span>
 
-            <div class="overflow-x-auto rounded-lg border border-gray-200">
-              <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                <thead class="ltr:text-left rtl:text-right">
+            <div className="overflow-x-auto rounded-lg border border-gray-200">
+              <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <thead className="ltr:text-left rtl:text-right">
                   <tr>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
 
                       No RW
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
 
 
                       Nama RT
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Nama Warga
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Create At
                     </th>
 
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Aksi
                     </th>
                   </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-200">
                   {data.map((rt, idx) => {
                     return (
-                      <tr class="odd:bg-gray-50 text-center" key={idx}>
+                      <tr className="odd:bg-gray-50 text-center" key={idx}>
 
                         {role === "admin" && (
-                          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                          <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                             {rt.rw_id}
                           </td>
                         )}
 
-                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                           {rt.nama_rt}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {rt.warga_id}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {rt.createAt}
                         </td>
 
-                        <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
+                        <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
                             to={`/edit-rt`}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
@@ -146,7 +146,7 @@ function Rt() {
                               width="18"
                               height="18"
                               fill="inherit"
-                              class="bi bi-trash"
+                              className="bi bi-trash"
 
 
                               viewBox="0 0 16 16">
