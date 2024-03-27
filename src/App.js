@@ -29,6 +29,14 @@ import EditCategoryBerita from "./pages/categoryBerita/Edit";
 import Kas from "./pages/kas/Kas";
 import TambahKas from "./pages/kas/Tambah";
 import EditKas from "./pages/kas/Edit";
+import WilRW from "./pages/wilayahRW/Wilayah";
+import TambahWilRW from "./pages/wilayahRW/Tambah";
+import EditWilRW from "./pages/wilayahRW/Edit";
+import WilRT from "./pages/wilayahRT/Wilayah";
+import TambahWilRT from "./pages/wilayahRT/Tambah";
+import EditWilRT from "./pages/wilayahRT/Edit";
+import RW from "./pages/rw/Rw";
+import TambahRW from "./pages/rw/Tambah";
 
 
 function App() {
@@ -71,6 +79,14 @@ function App() {
           <Route path="/e-kas" element={<Kas />} />
           <Route path="/tambah-kas" element={<TambahKas />} />
           <Route path="/edit-kas" element={<EditKas />} />
+          <Route path="/wilayah-rw" element={<WilRW />} />
+          <Route path="/tambah-wilayah-rw" element={<TambahWilRW />} />
+          <Route path="/edit-wilayah-rw/:id" element={<EditWilRW />} />
+          <Route path="/wilayah-rt" element={<WilRT />} />
+          <Route path="/tambah-wilayah-rt" element={<TambahWilRT />} />
+          <Route path="/edit-wilayah-rt/:id" element={<EditWilRT />} />
+          <Route path="/rw" element={<RW />} />
+          <Route path="/tambah-rw" element={<TambahRW />} />
         </Routes>
       </BrowserRouter>
     </>

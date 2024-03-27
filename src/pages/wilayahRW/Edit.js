@@ -1,9 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { api_wilRw } from "../../utils/api";
+import Swal from "sweetalert2";
 
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
 function Edit() {
+  const param = useParams();
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const [nomor_rw, setNomorRW] = useState("");
+  const [nama_dusun, setNamaDusun] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(api_wilRw + param.id, authConfig)
+      .then((response) => {
+        const data = response.data.data;
+        setNomorRW(data.nomor_rw);
+        setNamaDusun(data.nama_dusun);
+      })
+      .catch((error) => {
+        alert("Terjadi Kesalahan " + error);
+      });
+  }, [param.id]);
+
+  const Put = async (e) => {
+    try {
+      e.preventDefault();
+
+      // Pastikan param.id, jenis_surat, dan jenis_bantuan telah didefinisikan dan valid
+      if (!param.id || !nama_dusun || !nomor_rw) {
+        console.error(
+          "param.id, nama dusun, nomor rw , tidak didefinisikan atau tidak valid."
+        );
+        return;
+      }
+
+      const req = {
+        nama_dusun: nama_dusun,
+        nomor_rw: nomor_rw,
+      };
+
+      await axios.put(api_wilRw + param.id, req, authConfig);
+
+      setShow(false);
+      Swal.fire({
+        icon: "success",
+        title: "Berhasil Mengedit",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setTimeout(() => {
+        navigate("/wilayah-rw");
+        window.location.reload();
+      }, 1500);
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+    }
+  };
   return (
     <div className="flex">
       <Sidebar />
@@ -17,7 +79,7 @@ function Edit() {
               </h1>
 
               <div>
-                <form>
+                <form onSubmit={Put}>
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="Nama"
@@ -32,10 +94,12 @@ function Edit() {
                       id="nama_dusun"
                       name="nama_dusun"
                       placeholder="nama dusun"
+                      value={nama_dusun}
+                      onChange={(e) => setNamaDusun(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
-                  <div className="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3 mt-4">
                     <label
                       for="Nomor"
                       className="block text-sm font-medium text-black"
@@ -49,10 +113,11 @@ function Edit() {
                       id="nomor_rw"
                       name="nomor_rw"
                       placeholder="nomor rw"
+                      value={nomor_rw}
+                      onChange={(e) => setNomorRW(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
-              
 
                   <div className="sm:flex sm:items-center sm:gap-4 mt-7">
                     <button className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">

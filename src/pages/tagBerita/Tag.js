@@ -15,16 +15,31 @@ const authConfig = {
 
 function Tag() {
   const [tag, setTag] = useState([]);
+  const [pages, setPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const size = 2;
+
 
   const getAll = async () => {
-    await axios
-      .get(api_tag + "all", authConfig)
-      .then((res) => {
-        setTag(res.data.data);
-      })
-      .catch((error) => {
-        alert("terjadi kesalahan " + error);
-      });
+    try {
+      const response = await axios.get(
+
+       `http://localhost:8000/e-kampoeng/api/tags-berita?page=${pages}&size=${size}`,
+        authConfig
+      );
+      setPages(response.data.data.totalPages);
+      setTag(response.data.data.content);
+    } catch (error) {
+      alert("Terjadi Kesalahan: " + error);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 0 || newPage > pages) {
+      return; 
+    }
+    setCurrentPage(newPage);
+    getAll(newPage);
   };
 
   const deleteTag = async (id) => {
@@ -62,8 +77,9 @@ function Tag() {
   };
 
   useEffect(() => {
-    getAll();
-  }, []);
+    getAll(currentPage);
+  }, [currentPage]);
+
   return (
     <div className="flex">
       <Sidebar />
@@ -126,6 +142,12 @@ function Tag() {
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Tag Berita
                     </th>
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                      Create At
+                    </th>
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                      Update At
+                    </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                       Aksi
                     </th>
@@ -141,9 +163,14 @@ function Tag() {
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {row.tags}
                         </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {row.createdDate}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {row.updatedDate}
+                        </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                            // onClick={() => openModalEdit(organisasi.id)}
                             to={`/edit-tag-berita/` + row.id}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit"
@@ -183,11 +210,18 @@ function Tag() {
                 </tbody>
               </table>
             </div>
-            <ol className="flex justify-center gap-1 text-xs font-medium">
+           {/* Pagination */}
+           <ol className="flex justify-center gap-1 text-xs font-medium">
               <li>
+                {/* Menangani halaman sebelumnya */}
                 <a
                   href="#"
-                  className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180 ${
+                    currentPage === 1
+                      ? "opacity-50 cursor-not-allowed bg-gray-200"
+                      : ""
+                  }`}
                 >
                   <span className="sr-only">Prev Page</span>
                   <svg
@@ -205,41 +239,32 @@ function Tag() {
                 </a>
               </li>
 
+              {/* Menampilkan nomor halaman */}
+              {Array.from({ length: pages }, (_, i) => (
+                <li key={i}>
+                  <a
+                    href="#"
+                    onClick={() => handlePageChange(i)} // Tidak perlu menambahkan 1 karena kita sudah mulai dari 0
+                    className={`block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900 ${
+                      i === currentPage ? "bg-gray-500 text-white" : ""
+                    }`}
+                  >
+                    {i + 1}{" "}
+                    {/* Tambahkan 1 untuk menampilkan nomor halaman yang dimulai dari 1 */}
+                  </a>
+                </li>
+              ))}
+
+              {/* Menangani halaman berikutnya */}
               <li>
                 <a
                   href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  1
-                </a>
-              </li>
-
-              <li className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900">
-                2
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  3
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  4
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 ${
+                    currentPage >= pages
+                      ? "opacity-50 cursor-not-allowed bg-gray-200"
+                      : ""
+                  }`}
                 >
                   <span className="sr-only">Next Page</span>
                   <svg
