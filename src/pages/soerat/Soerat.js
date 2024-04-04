@@ -21,7 +21,7 @@ function Soerat() {
   const getAll = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/e-kampoeng/api/e-soerat?page=${page}&size=${size}`,
+        `http://localhost:2001/e-kampoeng/api/e-soerat?page=${page}&size=${size}`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -135,6 +135,9 @@ function Soerat() {
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Create At
                     </th>
+                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                      Update At
+                    </th>
 
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Aksi
@@ -153,7 +156,10 @@ function Soerat() {
                           {soerat.jenis_bantuan}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {soerat.create_at}
+                          {soerat.createdDate}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {soerat.updatedDate}
                         </td>
 
                         <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">

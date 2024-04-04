@@ -16,8 +16,8 @@ function Edit() {
   const param = useParams();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const [nomor_rw, setNomorRW] = useState("");
-  const [nama_dusun, setNamaDusun] = useState("");
+  const [nomorRw, setNomorRW] = useState("");
+  const [namaDusun, setNamaDusun] = useState("");
 
   useEffect(() => {
     axios
@@ -36,17 +36,9 @@ function Edit() {
     try {
       e.preventDefault();
 
-      // Pastikan param.id, jenis_surat, dan jenis_bantuan telah didefinisikan dan valid
-      if (!param.id || !nama_dusun || !nomor_rw) {
-        console.error(
-          "param.id, nama dusun, nomor rw , tidak didefinisikan atau tidak valid."
-        );
-        return;
-      }
-
       const req = {
-        nama_dusun: nama_dusun,
-        nomor_rw: nomor_rw,
+        nama_dusun: namaDusun,
+        nomor_rw: nomorRw,
       };
 
       await axios.put(api_wilRw + param.id, req, authConfig);
@@ -94,7 +86,7 @@ function Edit() {
                       id="nama_dusun"
                       name="nama_dusun"
                       placeholder="nama dusun"
-                      value={nama_dusun}
+                      value={namaDusun}
                       onChange={(e) => setNamaDusun(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
@@ -113,7 +105,7 @@ function Edit() {
                       id="nomor_rw"
                       name="nomor_rw"
                       placeholder="nomor rw"
-                      value={nomor_rw}
+                      value={nomorRw}
                       onChange={(e) => setNomorRW(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />

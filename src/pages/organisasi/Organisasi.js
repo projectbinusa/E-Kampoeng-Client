@@ -55,7 +55,7 @@ function Organisasi() {
   const getOrganisasi = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/e-kampoeng/api/organisasi?page=${pages}&size=${size}`,
+        `http://localhost:2001/e-kampoeng/api/organisasi?page=${pages}&size=${size}`,
         authConfig
       );
       setPages(response.data.data.totalPages);

@@ -4,7 +4,7 @@ import Navbar from "../../component/Navbar";
 import Sidebar from "../../component/Sidebar";
 import Footer from "../../component/Footer";
 import axios from "axios";
-import { api_tag } from "../../utils/api";
+import { api_category } from "../../utils/api";
 import Swal from "sweetalert2";
 
 const authConfig = {
@@ -14,17 +14,17 @@ const authConfig = {
 };
 
 function Tag() {
+
   const [tag, setTag] = useState([]);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const size = 2;
+  const size =5;
 
-
-  const getAll = async () => {
+  const getAll = async (page) => {
     try {
       const response = await axios.get(
 
-       `http://localhost:8000/e-kampoeng/api/tags-berita?page=${pages}&size=${size}`,
+       `http://localhost:2001/e-kampoeng/api/tags-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -36,13 +36,13 @@ function Tag() {
 
   const handlePageChange = (newPage) => {
     if (newPage < 0 || newPage > pages) {
-      return; 
+      return; // Jangan lakukan apa pun jika halaman baru di luar rentang yang valid
     }
     setCurrentPage(newPage);
     getAll(newPage);
   };
 
-  const deleteTag = async (id) => {
+  const Delete = async (id) => {
     Swal.fire({
       title: "Menghapus?",
       text: "Anda mengklik tombol!",
@@ -54,7 +54,7 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(api_tag + "delete/" + id, authConfig);
+          await axios.delete( "http://localhost:2001/e-kampoeng/api/tags-berita/" + id, authConfig);
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
@@ -143,10 +143,10 @@ function Tag() {
                       Tag Berita
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Create At
+                     Create At
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Update At
+                     Update At
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                       Aksi
@@ -158,16 +158,16 @@ function Tag() {
                     return (
                       <tr className="odd:bg-gray-50 text-left">
                         <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                          {idx + 1}
+                         {idx + 1} 
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.tags}
+                         {row.tags} 
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.createdDate}
+                         {row.createdDate} 
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.updatedDate}
+                         {row.updatedDate} 
                         </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
@@ -187,7 +187,7 @@ function Tag() {
                             </svg>
                           </Link>
                           <Link
-                            onClick={() => deleteTag(row.id)}
+                             onClick={() => Delete(row.id)}
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus"
                           >
@@ -205,13 +205,13 @@ function Tag() {
                           </Link>
                         </td>
                       </tr>
-                    );
-                  })}
+                    ); 
+                   })} 
                 </tbody>
               </table>
             </div>
-           {/* Pagination */}
-           <ol className="flex justify-center gap-1 text-xs font-medium">
+             {/* Pagination */}
+             <ol className="flex justify-center gap-1 text-xs font-medium">
               <li>
                 {/* Menangani halaman sebelumnya */}
                 <a

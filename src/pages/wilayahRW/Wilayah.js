@@ -21,11 +21,11 @@ function Wilayah() {
   const getAll = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/e-kampoeng/api/wilayah-rw?page=${page}&size=${size}`,
+        `http://localhost:2001/e-kampoeng/api/wilayah-rw?page=${page}&size=${size}`,
         authConfig
       );
       setPages(response.data.totalPages);
-      setWilRw(response.data.content);
+      setWilRw(response.data.data.content);
     } catch (error) {
       alert("Terjadi Kesalahan: " + error);
     }

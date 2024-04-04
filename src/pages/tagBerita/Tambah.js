@@ -26,7 +26,7 @@ function Tambah() {
       tags: tags,
     };
     try {
-      await axios.post(api_tag + "add", req, authConfig);
+      await axios.post(api_tag, req, authConfig);
       setShow(false);
       Swal.fire({
         icon: "success",

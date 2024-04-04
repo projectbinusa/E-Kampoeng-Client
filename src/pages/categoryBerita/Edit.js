@@ -20,7 +20,7 @@ function Edit() {
 
   useEffect(() => {
     axios
-      .get(api_category + "get/" + param.id, authConfig)
+      .get(api_category + param.id, authConfig)
       .then((response) => {
         const data = response.data.data;
         setCategory(data.category);
@@ -47,7 +47,7 @@ function Edit() {
       };
 
       await axios.put(
-        `http://localhost:8000/e-kampoeng/api/category-berita/put/` + param.id,
+        api_category   + param.id,
         req,
         authConfig
       );
