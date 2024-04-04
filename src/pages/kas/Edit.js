@@ -5,7 +5,6 @@ import Footer from "../../component/Footer";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { api_kas } from "../../utils/api";
 
 const authConfig = {
   headers: {
