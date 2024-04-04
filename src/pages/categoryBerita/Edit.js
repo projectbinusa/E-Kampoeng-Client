@@ -47,7 +47,8 @@ function Edit() {
       };
 
       await axios.put(
-        api_category   + param.id,
+        `http://localhost:2001/e-kampoeng/api/category-berita/put/` + param.id,
+
         req,
         authConfig
       );

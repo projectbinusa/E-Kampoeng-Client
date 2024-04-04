@@ -14,7 +14,6 @@ const authConfig = {
 };
 
 function Tag() {
-
   const [category, setCategory] = useState([]);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -24,7 +23,7 @@ function Tag() {
     try {
       const response = await axios.get(
 
-       `http://localhost:2001/e-kampoeng/api/category-berita?direction=asc&page=${page}&size=${size}`,
+       `http://localhost:8000/e-kampoeng/api/category-berita/all?direction=asc&page=${page}&size=${size}&sort=createdDate`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -54,7 +53,7 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete( api_category + id, authConfig);
+          await axios.delete( api_category + "delete/" + id, authConfig);
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
@@ -152,10 +151,10 @@ function Tag() {
                     return (
                       <tr className="odd:bg-gray-50 text-left">
                         <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                         {idx + 1} 
+                          {idx + 1}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                         {row.category} 
+                          {row.category}
                         </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
@@ -175,7 +174,7 @@ function Tag() {
                             </svg>
                           </Link>
                           <Link
-                             onClick={() => Delete(row.id)}
+                            onClick={() => Delete(row.id)}
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus"
                           >
@@ -193,13 +192,13 @@ function Tag() {
                           </Link>
                         </td>
                       </tr>
-                    ); 
-                   })} 
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
-             {/* Pagination */}
-             <ol className="flex justify-center gap-1 text-xs font-medium">
+            {/* Pagination */}
+            <ol className="flex justify-center gap-1 text-xs font-medium">
               <li>
                 {/* Menangani halaman sebelumnya */}
                 <a

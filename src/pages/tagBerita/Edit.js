@@ -30,6 +30,7 @@ function Edit() {
       });
   }, [param.id]);
 
+
   const Put = async (e) => {
     try {
       e.preventDefault();
@@ -38,7 +39,12 @@ function Edit() {
         tags: tags,
       };
 
-      await axios.put(api_tag + param.id, req, authConfig);
+
+      await axios.put(
+        `http://localhost:2001/e-kampoeng/api/tags-berita/put/` + param.id,
+        req,
+        authConfig
+      );
 
       setShow(false);
       Swal.fire({

@@ -133,7 +133,7 @@ function Rt() {
                       </th>
                     )}
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Wilayah RT
+                      Nomor RT
                     </th>
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Nama Warga
