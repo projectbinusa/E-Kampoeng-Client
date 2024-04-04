@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate, useParams } from "react-router-dom";
 
 const authConfig = {
   headers: {
@@ -11,7 +12,7 @@ const authConfig = {
   },
 };
 function Edit() {
-
+  const param = useParams();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const [nama, setNama] = useState([]);
