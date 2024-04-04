@@ -14,7 +14,6 @@ function Edit() {
 
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  // const [nomorRt, setNomorRt] = useState("");
   const [nama, setNama] = useState([]);
   const [nomorRt, setNomorRt] = useState([]);
 
