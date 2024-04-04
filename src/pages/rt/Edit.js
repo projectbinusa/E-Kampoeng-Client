@@ -27,7 +27,12 @@ function Edit() {
         nomorRt: nomorRt,
       };
 
-      await axios.put(`http://localhost:2001/e-kampoeng/api/rt/1?nomorRT=3&wargaId=1` + param.id, req, authConfig);
+      await axios.put(
+        `http://localhost:2001/e-kampoeng/api/rt/1?nomorRT=3&wargaId=1` +
+          param.id,
+        req,
+        authConfig
+      );
 
       setShow(false);
       Swal.fire({
@@ -74,28 +79,27 @@ function Edit() {
   }, []);
   return (
     <div className="flex">
-    <Sidebar />
-    <div className="block w-full">
-      <section className="bg-gray-300 h-screen w-full">
-        <Navbar />
-        <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
-            <h1 className="text-xl text-center font-semibold mb-4">
-            
-              Edit Data RT
-            </h1>
+      <Sidebar />
+      <div className="block w-full">
+        <section className="bg-gray-300 h-screen w-full">
+          <Navbar />
+          <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
+              <h1 className="text-xl text-center font-semibold mb-4">
+                Edit Data RT
+              </h1>
 
-            <div>
-              <form onSubmit={Put}>
-                <div className="col-span-6 sm:col-span-3">
-                  <label
-                    for="Username"
-                    className="block text-sm font-medium text-black"
-                  >
-                   No RT
-                  </label>
+              <div>
+                <form onSubmit={Put}>
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      for="Username"
+                      className="block text-sm font-medium text-black"
+                    >
+                      No RT
+                    </label>
 
-                  <select
+                    <select
                       id="countries"
                       className="mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg md:float-right focus:ring-blue-500 focus:border-blue-500 block w-[100%] md:p-1.5 p-1 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                       onChange={(e) => setNomorRt(e.target.value)}
@@ -112,16 +116,16 @@ function Edit() {
                         <option disabled>Pilihan tidak tersedia</option>
                       )}
                     </select>
-                </div>
-                <div className="col-span-6 sm:col-span-3 mt-4">
-                  <label
-                    for="Username"
-                    className="block text-sm font-medium text-black"
-                  >
-                  Nama  Warga 
-                  </label>
+                  </div>
+                  <div className="col-span-6 sm:col-span-3 mt-4">
+                    <label
+                      for="Username"
+                      className="block text-sm font-medium text-black"
+                    >
+                      Nama Warga
+                    </label>
 
-                  <select
+                    <select
                       id="countries"
                       className="mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg md:float-right focus:ring-blue-500 focus:border-blue-500 block w-[100%] md:p-1.5 p-1 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                       onChange={(e) => setNama(e.target.value)}
@@ -138,20 +142,20 @@ function Edit() {
                         <option disabled>Pilihan tidak tersedia</option>
                       )}
                     </select>
-                </div>
+                  </div>
 
-                <div className="sm:flex sm:items-center sm:gap-4 mt-7">
-                  <button className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
-                    Simpan
-                  </button>
-                </div>
-              </form>
+                  <div className="sm:flex sm:items-center sm:gap-4 mt-7">
+                    <button className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
+                      Simpan
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <Footer/>
-    </div>
+        </section>
+        <Footer />
+      </div>
     </div>
   );
 }
