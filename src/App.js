@@ -78,7 +78,7 @@ function App() {
           <Route path="/edit-category-berita/:id" element={<EditCategoryBerita />} />
           <Route path="/e-kas" element={<Kas />} />
           <Route path="/tambah-kas" element={<TambahKas />} />
-          <Route path="/edit-kas" element={<EditKas />} />
+          <Route path="/edit-kas/:id" element={<EditKas />} />
           <Route path="/wilayah-rw" element={<WilRW />} />
           <Route path="/tambah-wilayah-rw" element={<TambahWilRW />} />
           <Route path="/edit-wilayah-rw/:id" element={<EditWilRW />} />

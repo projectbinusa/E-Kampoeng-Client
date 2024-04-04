@@ -5,6 +5,7 @@ import Footer from "../../component/Footer";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { api_tag } from "../../utils/api";
 
 const authConfig = {
   headers: {
@@ -17,32 +18,27 @@ function Edit() {
   const navigate = useNavigate();
   const [tags, setTags] = useState("");
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8000/e-kampoeng/api/category-berita/get/" + param.id, authConfig)
-  //     .then((response) => {
-  //       const data = response.data.data;
-  //       setCategory(data.category);
-  //     })
-  //     .catch((error) => {
-  //       alert("Terjadi Kesalahan " + error);
-  //     });
-  // }, [param.id]);
+  useEffect(() => {
+    axios
+      .get(api_tag + param.id, authConfig)
+      .then((response) => {
+        const tag = response.data.data;
+        setTags(tag.tags);
+      })
+      .catch((error) => {
+        alert("Terjadi Kesalahan " + error);
+      });
+  }, [param.id]);
+
 
   const Put = async (e) => {
     try {
       e.preventDefault();
 
-      // if (!param.id || !tags) {
-      //   console.error(
-      //     "param.id, tags, tidak didefinisikan atau tidak valid."
-      //   );
-      //   return;
-      // }
-
       const req = {
         tags: tags,
       };
+
 
       await axios.put(
         `http://localhost:2001/e-kampoeng/api/tags-berita/put/` + param.id,

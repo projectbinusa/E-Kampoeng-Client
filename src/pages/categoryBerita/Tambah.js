@@ -26,7 +26,7 @@ function Tambah() {
       category: category,
     };
     try {
-      await axios.post(api_category + "add", req, authConfig);
+      await axios.post(api_category , req, authConfig);
       setShow(false);
       Swal.fire({
         icon: "success",
