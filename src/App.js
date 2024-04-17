@@ -37,6 +37,7 @@ import TambahWilRT from "./pages/wilayahRT/Tambah";
 import EditWilRT from "./pages/wilayahRT/Edit";
 import RW from "./pages/rw/Rw";
 import TambahRW from "./pages/rw/Tambah";
+import TambahWargaOrganisasi from "./pages/wargaOrganisasi/Tambah";
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/edit-soerat/:id" element={<EditSoerat />} />
           <Route path="/tambah-soerat" element={<TambahSoerat />} />
           <Route path="/warga-organisasi" element={<WargaOrganisasi />} />
+          <Route path="/tambah-warga-organisasi" element={<TambahWargaOrganisasi />} />
           <Route path="/rt" element={<RT />} />
           <Route path="/tambah-rt" element={<TambahRT />} />
           <Route path="/edit-rt" element={<EditRT />} />
