@@ -40,18 +40,24 @@ const Sidebar = () => {
                       : "relative justify-center py-2"
                   } flex items-center rounded border border-transparent text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition duration-300`}
                 >
-                  <svg
+                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="size-5 opacity-75"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    stroke-width="2"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M3 12l9-9 9 9-2.121 2.121-1.415-1.415-4.95 4.95V4h-2v11.657l-4.95-4.95-1.415 1.415L3 12z"
+                      stroke-width="2"
+                      d="M5 12l7-7 7 7"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"
                     />
                   </svg>
 
