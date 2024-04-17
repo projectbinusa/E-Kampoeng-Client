@@ -23,7 +23,7 @@ function Tag() {
     try {
       const response = await axios.get(
 
-       `http://localhost:8000/e-kampoeng/api/category-berita/all?direction=asc&page=${page}&size=${size}&sort=createdDate`,
+       `http://localhost:2001/e-kampoeng/api/category-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -53,7 +53,7 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete( api_category + "delete/" + id, authConfig);
+          await axios.delete( api_category  + id, authConfig);
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
