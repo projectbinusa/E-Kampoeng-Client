@@ -13,6 +13,7 @@ const authConfig = {
   },
 };
 function Soerat() {
+  const role = localStorage.getItem("role");
   const [soerat, setSoerat] = useState([]);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -138,9 +139,8 @@ function Soerat() {
                     <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Update At
                     </th>
-
-                    <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Aksi
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                      {role !== "warga" && "Aksi"}
                     </th>
                   </tr>
                 </thead>
@@ -162,9 +162,10 @@ function Soerat() {
                           {soerat.updatedDate}
                         </td>
 
+                        {(role !== "warga") && (
                         <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                             to={`/edit-soerat/` + soerat.id}
+                            to={`/edit-soerat/` + soerat.id}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit"
                           >
@@ -197,6 +198,7 @@ function Soerat() {
                             </svg>
                           </button>
                         </td>
+                        )}
                       </tr>
                     );
                   })}
