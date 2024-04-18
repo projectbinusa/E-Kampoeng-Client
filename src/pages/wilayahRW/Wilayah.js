@@ -73,6 +73,38 @@ function Wilayah() {
     });
   };
 
+  const download = async () => {
+    await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, download it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios({
+          url:
+            "http://localhost:2001/e-kampoeng/api/wilayah-rw/export-excel" +
+          authConfig,
+          method: "GET",
+          responseType: "blob",
+        }).then((response) => {
+          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          var fileLink = document.createElement("a");
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute("download", "wilayah_rw_data.xlsx");
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+        });
+        Swal.fire("Download!", "Your file has been download.", "success");
+      }
+    });
+  };
+
   useEffect(() => {
     getAll(currentPage);
   }, [currentPage]);
@@ -90,9 +122,18 @@ function Wilayah() {
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
                   Table Wilayah RW
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
-                  <a href="tambah-wilayah-rw"> Tambah</a>
-                </button>
+
+                <div>
+                  <button
+                    onClick={download}
+                    className="inline-block rounded bg-[rgb(63,124,66)] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4"
+                  >
+                    Export
+                  </button>
+                  <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+                    <a href="tambah-wilayah-rw"> Tambah</a>
+                  </button>
+                </div>
               </div>
               <hr className="border border-black" />
               <div className="flex flex-col justify-between sm:flex-row items-center">

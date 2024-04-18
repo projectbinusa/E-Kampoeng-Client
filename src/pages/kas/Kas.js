@@ -79,6 +79,12 @@ function Kas() {
   }, [currentPage]);
 
   return (
+    <div>
+       {localStorage.getItem("role") === "rw" ||
+      localStorage.getItem("role") === "rt" ||
+      localStorage.getItem("role") === "admin" ? (
+        <>
+    
     <div className="flex">
       <Sidebar />
       <div className="block w-full">
@@ -293,6 +299,11 @@ function Kas() {
         </div>
         <Footer />
       </div>
+    </div>
+    </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

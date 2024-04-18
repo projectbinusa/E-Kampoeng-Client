@@ -37,10 +37,13 @@ import TambahWilRT from "./pages/wilayahRT/Tambah";
 import EditWilRT from "./pages/wilayahRT/Edit";
 import RW from "./pages/rw/Rw";
 import TambahRW from "./pages/rw/Tambah";
+import ListUser from "./pages/user/ListUser";
 import TambahWargaOrganisasi from "./pages/wargaOrganisasi/Tambah";
 
 
 function App() {
+  const role = localStorage.getItem("role");
+
   return (
     <>
       <BrowserRouter>
@@ -76,8 +79,14 @@ function App() {
           <Route path="/tambah-tag-berita" element={<TambahTagBerita />} />
           <Route path="/edit-tag-berita/:id" element={<EditTagBerita />} />
           <Route path="/category-berita" element={<CategoryBerita />} />
-          <Route path="/tambah-category-berita" element={<TambahCategoryBerita />} />
-          <Route path="/edit-category-berita/:id" element={<EditCategoryBerita />} />
+          <Route
+            path="/tambah-category-berita"
+            element={<TambahCategoryBerita />}
+          />
+          <Route
+            path="/edit-category-berita/:id"
+            element={<EditCategoryBerita />}
+          />
           <Route path="/e-kas" element={<Kas />} />
           <Route path="/tambah-kas" element={<TambahKas />} />
           <Route path="/edit-kas/:id" element={<EditKas />} />
@@ -89,6 +98,7 @@ function App() {
           <Route path="/edit-wilayah-rt/:id" element={<EditWilRT />} />
           <Route path="/rw" element={<RW />} />
           <Route path="/tambah-rw" element={<TambahRW />} />
+          <Route path="/list-user" element={<ListUser />} />
         </Routes>
       </BrowserRouter>
     </>
