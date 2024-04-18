@@ -38,6 +38,8 @@ import EditWilRT from "./pages/wilayahRT/Edit";
 import RW from "./pages/rw/Rw";
 import TambahRW from "./pages/rw/Tambah";
 import ListUser from "./pages/user/ListUser";
+import TambahWargaOrganisasi from "./pages/wargaOrganisasi/Tambah";
+
 
 function App() {
   const role = localStorage.getItem("role");
@@ -66,6 +68,7 @@ function App() {
           <Route path="/edit-soerat/:id" element={<EditSoerat />} />
           <Route path="/tambah-soerat" element={<TambahSoerat />} />
           <Route path="/warga-organisasi" element={<WargaOrganisasi />} />
+          <Route path="/tambah-warga-organisasi" element={<TambahWargaOrganisasi />} />
           <Route path="/rt" element={<RT />} />
           <Route path="/tambah-rt" element={<TambahRT />} />
           <Route path="/edit-rt" element={<EditRT />} />
