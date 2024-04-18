@@ -1,6 +1,6 @@
 // API local
 // export const base_api = "http://localhost:2001/api";
-export const base_api_ekampoeng2 = "http://localhost:2001/e-kampoeng/api";
+// export const base_api_ekampoeng2 = "http://localhost:2001/e-kampoeng/api";
 
 // export const base_api_ekampoeng = "http://localhost:2001/e-kampoeng/api";
 
