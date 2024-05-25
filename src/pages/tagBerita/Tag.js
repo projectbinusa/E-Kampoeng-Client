@@ -14,17 +14,15 @@ const authConfig = {
 };
 
 function Tag() {
-
   const [tag, setTag] = useState([]);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const size =5;
+  const size = 5;
 
   const getAll = async (page) => {
     try {
       const response = await axios.get(
-
-       `http://localhost:2001/e-kampoeng/api/tags-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
+        `http://localhost:2001/e-kampoeng/api/tags-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -54,7 +52,10 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete( "http://localhost:2001/e-kampoeng/api/tags-berita/" + id, authConfig);
+          await axios.delete(
+            "http://localhost:2001/e-kampoeng/api/tags-berita/" + id,
+            authConfig
+          );
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
@@ -93,7 +94,7 @@ function Tag() {
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
                   Table Tag Berita
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
                   <a href="tambah-tag-berita"> Tambah</a>
                 </button>
               </div>
@@ -123,7 +124,7 @@ function Tag() {
                 </div>
                 <div className="flex items-center">
                   <input
-                    className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                    className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                     id="inline-search"
                     type="text"
                     placeholder="Search"
@@ -143,10 +144,10 @@ function Tag() {
                       Tag Berita
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                     Create At
+                      Create At
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                     Update At
+                      Update At
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                       Aksi
@@ -158,16 +159,16 @@ function Tag() {
                     return (
                       <tr className="odd:bg-gray-50 text-left">
                         <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                         {idx + 1} 
+                          {idx + 1}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                         {row.tags} 
+                          {row.tags}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                         {row.createdDate} 
+                          {row.createdDate}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                         {row.updatedDate} 
+                          {row.updatedDate}
                         </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
@@ -187,7 +188,7 @@ function Tag() {
                             </svg>
                           </Link>
                           <Link
-                             onClick={() => Delete(row.id)}
+                            onClick={() => Delete(row.id)}
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus"
                           >
@@ -205,13 +206,13 @@ function Tag() {
                           </Link>
                         </td>
                       </tr>
-                    ); 
-                   })} 
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
-             {/* Pagination */}
-             <ol className="flex justify-center gap-1 text-xs font-medium">
+            {/* Pagination */}
+            <ol className="flex justify-center gap-1 text-xs font-medium">
               <li>
                 {/* Menangani halaman sebelumnya */}
                 <a

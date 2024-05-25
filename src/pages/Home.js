@@ -53,7 +53,7 @@ const Home = () => {
 
                   <a
                     href="#"
-                    className="mt-8 inline-block rounded border border-[#776b5d] bg-[#776b5d] px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-[#776b5d] focus:outline-none focus:ring active:text-[#776b5d]-500"
+                    className="mt-8 inline-block rounded border border-[#D10363] bg-[#D10363] px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-[#D10363] focus:outline-none focus:ring active:text-[#D10363]-500"
                   >
                     Lihat Lainnya
                   </a>

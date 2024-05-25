@@ -1,38 +1,30 @@
 import React, { useState } from "react";
 import "../css/SignUp.css";
-import { base_api } from "../utils/api";
+import { api_register_admin } from "../utils/api";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const [passType, setPassType] = useState("password");
+  const [confirmType, setConfirmType] = useState("password");
+  const [role, setRole] = useState("admin");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("admin");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [show, setShow] = useState(false);
-  const [passType, setPassType] = useState("password");
-  const [confirmType, setConfirmType] = useState("password");
+  const [show, setShow] = useState("");
 
   const togglePassword = () => {
-    if (passType == "password") {
-      setPassType("text");
-    } else {
-      setPassType("password");
-    }
+    setPassType((prev) => (prev === "password" ? "text" : "password"));
   };
 
   const toggleConfirm = () => {
-    if (confirmType == "password") {
-      setConfirmType("text");
-    } else {
-      setConfirmType("password");
-    }
+    setConfirmType((prev) => (prev === "password" ? "text" : "password"));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${base_api}/register`, {
+      const response = await axios.post(`${api_register_admin}`, {
         username,
         email,
         password,
@@ -54,7 +46,10 @@ const SignUp = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setTimeout(() => {}, 1500);
+        window.location.href = "/sign-in"; // Redirect to sign-in page
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -275,7 +270,6 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
               </div>
               <form
                 onSubmit={handleSubmit}
-                action="#"
                 className="mt-8 grid grid-cols-6 gap-5"
               >
                 <div className="col-span-6 sm:col-span-3">
@@ -287,13 +281,13 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                   </label>
 
                   <input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     autoComplete="off"
                     type="text"
                     id="Username"
                     name="username"
                     placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
                     className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                   />
                 </div>
@@ -308,13 +302,13 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                   </label>
                   <div className="relative">
                     <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       autoComplete="off"
                       type="email"
                       id="Email"
                       name="email"
                       placeholder="Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                     <span className="absolute inset-y-0 end-0 top-3 grid place-content-center px-3 my-0.5 h-fit">
@@ -340,13 +334,13 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
 
                   <div className="relative">
                     <input
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       autoComplete="off"
                       type={passType}
                       id="Password"
                       name="password"
                       placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                     <span
@@ -441,14 +435,14 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4 mt-2">
                   <button
                     type="submit"
-                    className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
+                    className="inline-block shrink-0 rounded-md border border-[#D10363] bg-[#D10363] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
                   >
                     Sign Up
                   </button>
 
                   <p className="mt-4 text-sm text-gray-700 sm:mt-0">
                     Already have an account?{" "}
-                    <a href="/sign-in" className="text-[#776b5d] underline">
+                    <a href="/sign-in" className="text-[#D10363] underline">
                       Sign In
                     </a>
                     .

@@ -92,7 +92,7 @@ function WargaOrganisasi() {
                 <h1 className="text-xl text-center font-semibold play">
                   Data Warga Organisasi
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
                   <a href="tambah-warga-organisasi"> Tambah</a>
                 </button>
               </div>
@@ -108,14 +108,15 @@ function WargaOrganisasi() {
                     <svg
                       className="fill-current h-4 w-4"
                       xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20">
+                      viewBox="0 0 20 20"
+                    >
                       <path d="M9 11l3-3 3 3m-3 3v-6" />
                     </svg>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <input
-                    className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                    className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                     id="inline-search"
                     type="text"
                     placeholder="Search"
@@ -157,16 +158,18 @@ function WargaOrganisasi() {
 
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <button
-                          onClick={() => Delete(warga.id)}
+                            onClick={() => Delete(warga.id)}
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
-                            title="Hapus">
+                            title="Hapus"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="18"
                               height="18"
                               fill="inherit"
                               className="bi bi-trash"
-                              viewBox="0 0 16 16">
+                              viewBox="0 0 16 16"
+                            >
                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                               <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                             </svg>
@@ -251,7 +254,7 @@ function WargaOrganisasi() {
             </ol>
           </div>
         </div>
-          <Footer/>
+        <Footer />
       </div>
     </div>
   );

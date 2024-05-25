@@ -97,11 +97,14 @@ function Wilayah() {
           <div className="bg-white m-5 p-5 rounded-xl space-y-5">
             <span className="space-y-3">
               <div className="flex flex-col justify-between sm:flex-row items-center">
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
+                  <a href="tambah-wilayah-rt"> Tambah Wilayah RT</a>
+                </button>
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
                   Table Wilayah RT
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
-                  <a href="tambah-wilayah-rt"> Tambah</a>
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
+                  <a href="tambah-kepala-rt"> Tambah Kepala RT</a>
                 </button>
               </div>
               <hr className="border border-black" />
@@ -130,7 +133,7 @@ function Wilayah() {
                 </div>
                 <div className="flex items-center">
                   <input
-                    className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                    className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                     id="inline-search"
                     type="text"
                     placeholder="Search"
@@ -150,13 +153,7 @@ function Wilayah() {
                       No RT
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Wilayah Rw
-                    </th>
-                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Create At
-                    </th>
-                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Update At
+                      Kepala RT
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                       Aksi
@@ -174,13 +171,7 @@ function Wilayah() {
                           {row.nomorRt}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.wilayahRW.namaDusun}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.wilayahRW.createdDate}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.wilayahRW.updatedDate}
+                          {row.kepalaRtNama}
                         </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link

@@ -89,7 +89,7 @@ function Kk() {
                 <h1 className="text-xl text-center font-semibold play">
                   Data KK
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
                   <a href="tambah-kk"> Tambah</a>
                 </button>
               </div>
@@ -113,7 +113,7 @@ function Kk() {
                 </div>
                 <div className="flex items-center">
                   <input
-                    className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                    className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                     id="inline-search"
                     type="text"
                     placeholder="Search"

@@ -7,30 +7,84 @@ import axios from "axios";
 import { api_warga } from "../../utils/api";
 import Sidebar from "../../component/Sidebar";
 import Footer from "../../component/Footer";
-
-const authConfig = {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-};
+import { authConfig } from "../../utils/authConfig";
 
 const DetailWarga = () => {
-  const param = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [warga, setWarga] = useState({});
-
-  const getDataWarga = async () => {
-    try {
-      const response = await axios.get(`${api_warga}/${param.id}`, authConfig);
-      setWarga(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [nama, setNama] = useState("");
+  const [tempatLahir, setTempatLahir] = useState("");
+  const [tanggalLahir, setTanggalLahir] = useState("");
+  const [jenisKelamin, setJenisKelamin] = useState("");
+  const [agama, setAgama] = useState("");
+  const [nik, setNik] = useState("");
+  const [noKk, setNoKk] = useState("");
+  const [statusDalamKeluarga, setStatusDalamKeluarga] = useState("");
+  const [statusKependudukan, setStatusKependudukan] = useState("");
+  const [noAnak, setNoAnak] = useState("");
+  const [panjangLahir, setPanjangLahir] = useState("");
+  const [beratLahir, setBeratLahir] = useState("");
+  const [noPassport, setNoPassport] = useState("");
+  const [namaAyah, setNamaAyah] = useState("");
+  const [namaIbu, setNamaIbu] = useState("");
+  const [noTelp, setNoTelp] = useState("");
+  const [email, setEmail] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [tanggalPerkawinan, setTanggalPerkawinan] = useState("");
+  const [alamatSebelumnya, setAlamatSebelumnya] = useState("");
+  const [noBpjs, setNoBpjs] = useState("");
+  const [pendidikanTempuh, setPendidikanTempuh] = useState("");
+  const [pendidikanTerakhir, setPendidikanTerakhir] = useState("");
+  const [statusPerkawinan, setStatusPerkawinan] = useState("");
+  const [golonganDarah, setGolonganDarah] = useState("");
+  const [jenisAsuransi, setJenisAsuransi] = useState("");
+  const [jenisKb, setJenisKb] = useState("");
+  const [kesesuaianTempat, setKesesuaianTempat] = useState("");
+  const [sumberAir, setSumberAir] = useState("");
+  // const [warga, setWarga] = useState({});
 
   useEffect(() => {
-    getDataWarga();
-  }, []);
+    const fetchWarga = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:2001/e-kampoeng/api/warga/${id}`,
+          authConfig
+        );
+        setNama(response.data.nama);
+        setTempatLahir(response.data.tempat_lahir);
+        setTanggalLahir(response.data.tanggal_lahir);
+        setJenisKelamin(response.data.jenis_kelamin);
+        setAgama(response.data.agama);
+        setNoKk(response.data.no_kk);
+        setStatusDalamKeluarga(response.data.status_dalam_keluarga);
+        setStatusKependudukan(response.data.status_kependudukan);
+        setNoAnak(response.data.no_anak);
+        setPanjangLahir(response.data.panjang_lahir);
+        setBeratLahir(response.data.berat_lahir);
+        setNoPassport(response.data.no_passport);
+        setNamaAyah(response.data.nama_ayah);
+        setNamaIbu(response.data.nama_ibu);
+        setNoTelp(response.data.no_telp);
+        setEmail(response.data.email);
+        setAlamat(response.data.alamat);
+        setTanggalPerkawinan(response.data.tanggal_perkawinan);
+        setAlamatSebelumnya(response.data.alamat_sebelumnya);
+        setNoBpjs(response.data.no_bpjs);
+        setPendidikanTempuh(response.data.pendidikan_tempuh);
+        setPendidikanTerakhir(response.data.pendidikan_terakhir);
+        setStatusPerkawinan(response.data.status_perkawinan);
+        setGolonganDarah(response.data.golongan_darah);
+        setJenisAsuransi(response.data.jenis_asuransi);
+        setJenisKb(response.data.jenis_kb);
+        setKesesuaianTempat(response.data.kesesuaian_tempat);
+        setSumberAir(response.data.sumber_air);
+      } catch (error) {
+        console.error("Terjadi kesalahan:", error);
+      }
+    };
+
+    fetchWarga();
+  }, [id]);
   return (
     <div className="flex">
       <Sidebar />
@@ -46,12 +100,14 @@ const DetailWarga = () => {
                 </h1>
                 <nav
                   aria-label="Breadcrumb"
-                  className="flex items-center ubuntu">
+                  className="flex items-center ubuntu"
+                >
                   <ol className="flex items-center gap-1 text-sm text-gray-600">
                     <li>
                       <Link
                         to={"/"}
-                        className="block transition hover:text-gray-700">
+                        className="block transition hover:text-gray-700"
+                      >
                         <span className="sr-only">Home</span>
 
                         <svg
@@ -59,7 +115,8 @@ const DetailWarga = () => {
                           className="h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke="currentColor">
+                          stroke="currentColor"
+                        >
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"
@@ -75,7 +132,8 @@ const DetailWarga = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-4 w-4"
                         viewBox="0 0 20 20"
-                        fill="currentColor">
+                        fill="currentColor"
+                      >
                         <path
                           fill-rule="evenodd"
                           d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -87,7 +145,8 @@ const DetailWarga = () => {
                     <li>
                       <Link
                         to={"/warga"}
-                        className="block transition hover:text-gray-700">
+                        className="block transition hover:text-gray-700"
+                      >
                         Warga
                       </Link>
                     </li>
@@ -97,7 +156,8 @@ const DetailWarga = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-4 w-4"
                         viewBox="0 0 20 20"
-                        fill="currentColor">
+                        fill="currentColor"
+                      >
                         <path
                           fill-rule="evenodd"
                           d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -109,7 +169,8 @@ const DetailWarga = () => {
                     <li>
                       <Link
                         to={"/detail-warga/1"}
-                        className="block transition hover:text-gray-700">
+                        className="block transition hover:text-gray-700"
+                      >
                         Detail Warga
                       </Link>
                     </li>
@@ -120,14 +181,12 @@ const DetailWarga = () => {
             </span>
             <span className="flex flex-col justify-center items-center avatar">
               <img
-                src={
-                  warga.jenis_kelamin == "Laki-laki" ? MaleAvatar : FemaleAvatar
-                }
+                src={jenisKelamin == "Laki-laki" ? MaleAvatar : FemaleAvatar}
                 alt="user-avatar"
                 className="h-64 w-64"
               />
               <div className="flex flex-col items-center mt-4">
-                <b className="mb-1 text-xl play">NIK: {warga.nik}</b>
+                <b className="mb-1 text-xl play"></b>
                 <p className="text-xs text-gray-400 italic ubuntu">
                   <span className="font-semibold">Terdaftar pada:</span> 26
                   Januari 2024 20:46:18
@@ -146,7 +205,8 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       DATA DIRI
                     </td>
                   </tr>
@@ -159,7 +219,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      HIDUP{/* {warga.status_dasar} */}
+                      HIDUP{/* {status_dasar} */}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -170,7 +230,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.nama}
+                      {nama}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -181,7 +241,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.no_kk}
+                      {noKk}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -192,7 +252,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.status_dalam_keluarga == "kepala_keluarga"
+                      {statusDalamKeluarga == "kepala_keluarga"
                         ? "KEPALA KELUARGA"
                         : "ANGGOTA"}
                     </td>
@@ -205,7 +265,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.jenis_kelamin}
+                      {jenisKelamin}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -216,7 +276,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.agama}
+                      {agama}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -227,7 +287,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.status_kependudukan == "penduduk_tetap"
+                      {statusKependudukan == "penduduk_tetap"
                         ? "TETAP"
                         : "PENDATANG"}
                     </td>
@@ -239,7 +299,8 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       DATA KELAHIRAN
                     </td>
                   </tr>
@@ -252,7 +313,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.tempat_lahir} / {warga.tanggal_lahir}
+                      {tempatLahir} / {tanggalLahir}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -263,7 +324,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      3500 Gram{/* {warga.berat_lahir} */}
+                      {beratLahir}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -274,7 +335,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      45 Cm{/* {warga.panjang_lahir} */}
+                      {panjangLahir}
                     </td>
                   </tr>
                   {/* Data Kelahiran END */}
@@ -284,7 +345,8 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       PENDIDIKAN DAN PEKERJAAN
                     </td>
                   </tr>
@@ -297,7 +359,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      - {/* {warga.pendidikan_ditempuh} */}
+                      {pendidikanTempuh}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -308,28 +370,17 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      S2 {/* {warga.pendidikan_terakhir} */}
+                      {pendidikanTerakhir}
                     </td>
                   </tr>
-                  <tr className="odd:bg-gray-50">
-                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
-                      Pekerjaan
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
-                      :
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.pekerjaan}
-                    </td>
-                  </tr>
-                  {/* Data Pendidikan Dan Pekerjaan END */}
 
                   {/* Data Kewarganegaraan START */}
                   {/* SEPARATOR START */}
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       DATA KEWARGANEGARAAN
                     </td>
                   </tr>
@@ -342,7 +393,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      WNI {/* {warga.kewarganegaraan} */}
+                      {kesesuaianTempat}
                     </td>
                   </tr>
                   {/* Data Kewarganegaraan END */}
@@ -352,22 +403,13 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       ORANG TUA
                     </td>
                   </tr>
                   {/* SEPARATOR END */}
-                  <tr className="odd:bg-gray-50">
-                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
-                      NIK Ayah
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
-                      :
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      245753546789 {/* {warga.nik_ayah} */}
-                    </td>
-                  </tr>
+
                   <tr className="odd:bg-gray-50">
                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nama Ayah
@@ -376,20 +418,10 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      Ahmad {/* {warga.nama_ayah} */}
+                      {namaAyah}
                     </td>
                   </tr>
-                  <tr className="odd:bg-gray-50">
-                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
-                      NIK Ibu
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-[0.5%] border border-gray-500">
-                      :
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      245753546788 {/* {warga.nik_ibu} */}
-                    </td>
-                  </tr>
+
                   <tr className="odd:bg-gray-50">
                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[40%] border border-gray-500 prop">
                       Nama Ibu
@@ -398,7 +430,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      Sulis {/* {warga.nama_ibu} */}
+                      {namaIbu}
                     </td>
                   </tr>
                   {/* Data Orang Tua END */}
@@ -408,7 +440,8 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       ALAMAT
                     </td>
                   </tr>
@@ -421,7 +454,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      Desa Ringinsari {/* {warga.alamat} */}
+                      {alamat}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -432,7 +465,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      Desa Ringinwok {/* {warga.alamat_sebelumnya} */}
+                      {alamatSebelumnya}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -443,7 +476,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      01 / 16 {/* {warga.rt} / {warga.rw} */}
+                      {/* {rt} / {rw} */}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -454,7 +487,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      0895622189242 {/* {warga.no_telp} */}
+                      {noTelp}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -465,7 +498,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      example@gmail.com {/* {warga.email} */}
+                      {email}
                     </td>
                   </tr>
                   {/* Data Alamat END */}
@@ -475,7 +508,8 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       STATUS PERKAWINAN
                     </td>
                   </tr>
@@ -488,7 +522,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      KAWIN TERCATAT {/* {warga.status_perkawinan} */}
+                      {statusPerkawinan}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -499,7 +533,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      23-08-1992 {/* {warga.tanggal_perkawinan} */}
+                      {tanggalPerkawinan}
                     </td>
                   </tr>
                   {/* Data Perkawinan END */}
@@ -509,7 +543,8 @@ const DetailWarga = () => {
                   <tr className="odd:bg-gray-50">
                     <td
                       colSpan={3}
-                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator">
+                      className="whitespace-nowrap px-4 py-2 font-medium text-white border border-gray-500 bg-gray-500/75 separator"
+                    >
                       DATA KESEHATAN
                     </td>
                   </tr>
@@ -522,7 +557,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      {warga.golongan_darah}
+                      {golonganDarah}
                     </td>
                   </tr>
                   <tr className="odd:bg-gray-50">
@@ -533,7 +568,7 @@ const DetailWarga = () => {
                       :
                     </td>
                     <td className="whitespace-nowrap px-4 py-2 text-gray-700 border border-gray-500">
-                      23-08-1992 {/* {warga.tanggal_perkawinan} */}
+                      {jenisKb}
                     </td>
                   </tr>
                   {/* Data Kesehatan END */}

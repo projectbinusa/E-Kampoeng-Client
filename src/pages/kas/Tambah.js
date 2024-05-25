@@ -23,35 +23,39 @@ function Tambah() {
   const [ket_pemasukan, setKetPemasukan] = useState("");
   const [ket_pengeluaran, setKetPengeluaran] = useState("");
 
-    const Add = async (e) => {
-      e.preventDefault();
-      e.persist();
+  const Add = async (e) => {
+    e.preventDefault();
+    e.persist();
 
-      const req = {
-        pemasukan: pemasukan,
-        pengeluaran: pengeluaran,
-        sisa_kas_bulan_lalu: sisa_kas_bulan_lalu,
-        sisa_kas_bulan_ini: sisa_kas_bulan_ini,
-        ket_pemasukan: ket_pemasukan,
-        ket_pengeluaran: ket_pengeluaran,
-      };
-      try {
-        await axios.post("http://localhost:2001/e-kampoeng/api/e-kas", req, authConfig);
-        setShow(false);
-        Swal.fire({
-          icon: "success",
-          title: "Sukses Menambahkan",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-        setTimeout(() => {
-          navigate("/e-kas");
-          window.location.reload();
-        }, 2500);
-      } catch (error) {
-        console.log(error);
-      }
+    const req = {
+      pemasukan: pemasukan,
+      pengeluaran: pengeluaran,
+      sisa_kas_bulan_lalu: sisa_kas_bulan_lalu,
+      sisa_kas_bulan_ini: sisa_kas_bulan_ini,
+      ket_pemasukan: ket_pemasukan,
+      ket_pengeluaran: ket_pengeluaran,
     };
+    try {
+      await axios.post(
+        "http://localhost:2001/e-kampoeng/api/e-kas",
+        req,
+        authConfig
+      );
+      setShow(false);
+      Swal.fire({
+        icon: "success",
+        title: "Sukses Menambahkan",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      setTimeout(() => {
+        navigate("/e-kas");
+        window.location.reload();
+      }, 2500);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex">
@@ -80,8 +84,8 @@ function Tambah() {
                         type="number"
                         id="pemasukkan"
                         name="pemasukkan"
-                          value={pemasukan}
-                          onChange={(e) => setPemasukan(e.target.value)}
+                        value={pemasukan}
+                        onChange={(e) => setPemasukan(e.target.value)}
                         placeholder="pemasukkan"
                         className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
@@ -98,8 +102,8 @@ function Tambah() {
                         type="number"
                         id="pengeluaran"
                         name="pengeluaran"
-                          value={pengeluaran}
-                          onChange={(e) => setPengeluaran(e.target.value)}
+                        value={pengeluaran}
+                        onChange={(e) => setPengeluaran(e.target.value)}
                         placeholder="pengeluaran"
                         className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
@@ -119,8 +123,8 @@ function Tambah() {
                         type="number"
                         id="sisa_kas_bulan_lalu"
                         name="sisa_kas_bulan_lalu"
-                          value={sisa_kas_bulan_lalu}
-                          onChange={(e) => setSisaKasBulanLalu(e.target.value)}
+                        value={sisa_kas_bulan_lalu}
+                        onChange={(e) => setSisaKasBulanLalu(e.target.value)}
                         placeholder="sisa kas bulan lalu"
                         className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
@@ -137,8 +141,8 @@ function Tambah() {
                         type="number"
                         id="sisa_kas_bulan_ini"
                         name="sisa_kas_bulan_ini"
-                          value={sisa_kas_bulan_ini}
-                          onChange={(e) => setSisaKasBulanIni(e.target.value)}
+                        value={sisa_kas_bulan_ini}
+                        onChange={(e) => setSisaKasBulanIni(e.target.value)}
                         placeholder="sisa kas bulan ini"
                         className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
@@ -159,8 +163,8 @@ function Tambah() {
                         type="text"
                         id="keterangan_pemasukan"
                         name="keterangan_pemasukan"
-                          value={ket_pemasukan}
-                          onChange={(e) => setKetPemasukan(e.target.value)}
+                        value={ket_pemasukan}
+                        onChange={(e) => setKetPemasukan(e.target.value)}
                         placeholder="keterangan pemasukan"
                         className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
@@ -178,8 +182,8 @@ function Tambah() {
                         type="textArea"
                         id="keterangan_pengeluaran"
                         name="keterangan_pengeluaran"
-                          value={ket_pengeluaran}
-                          onChange={(e) => setKetPengeluaran(e.target.value)}
+                        value={ket_pengeluaran}
+                        onChange={(e) => setKetPengeluaran(e.target.value)}
                         placeholder="keterangan pengeluaran"
                         className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                       />
@@ -187,7 +191,7 @@ function Tambah() {
                   </div>
 
                   <div className="sm:flex sm:items-center sm:gap-4 mt-7">
-                    <button className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
+                    <button className="inline-block shrink-0 rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
                       Simpan
                     </button>
                   </div>

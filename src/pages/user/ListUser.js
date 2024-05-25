@@ -62,7 +62,7 @@ function ListUser() {
                       </div>
                       <div className="flex items-center">
                         <input
-                          className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                          className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                           id="inline-search"
                           type="text"
                           placeholder="Search"

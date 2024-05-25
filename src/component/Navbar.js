@@ -38,7 +38,7 @@ function Navbar({ toggleSidebar }) {
   return (
     <header className="bg-gray-100 w-full">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <a className="flex flex-col items-center text-[#776b5d]" href="#">
+        <a className="flex flex-col items-center text-[#D10363]" href="#">
           <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ function Navbar({ toggleSidebar }) {
           >
             <g
               transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)"
-              fill="#776b5d"
+              fill="#D10363"
               stroke="none"
             >
               <path
@@ -129,14 +129,14 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
             {token === null ? (
               <div className="sm:flex sm:gap-4">
                 <a
-                  className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]"
+                  className="block rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363]"
                   href="/sign-in"
                 >
                   Login
                 </a>
 
                 <a
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#776b5d] transition-all duration-200 hover:bg-[#776b5d] hover:shadow-md hover:text-white active:bg-gray-100 border border-transparent active:border-[#776b5d] active:text-[#776b5d] sm:block"
+                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#D10363] transition-all duration-200 hover:bg-[#D10363] hover:shadow-md hover:text-white active:bg-gray-100 border border-transparent active:border-[#D10363] active:text-[#D10363] sm:block"
                   href="/sign-up"
                 >
                   Register
@@ -146,7 +146,7 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
               <div className="sm:flex sm:gap-4">
                 <button
                   onClick={logout}
-                  className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]"
+                  className="block rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363]"
                 >
                   Logout
                 </button>

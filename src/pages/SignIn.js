@@ -344,7 +344,7 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                   </label>
                   <p className="mt-4 text-sm text-gray-700 sm:mt-0">
                     Don't have an account yet?{" "}
-                    <a href="/sign-up" className="text-[#776b5d] underline">
+                    <a href="/sign-up" className="text-[#D10363] underline">
                       Sign Up
                     </a>
                     .
@@ -353,7 +353,7 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4 mt-2">
                   <button
-                    className="inline-block shrink-0 rounded-md border border-[#776B5D] bg-[#776B5D] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#776B5D] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
+                    className="inline-block shrink-0 rounded-md border border-[#D10363] bg-[#D10363] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
                     onClick={login}
                   >
                     Sign In
