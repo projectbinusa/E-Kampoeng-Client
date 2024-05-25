@@ -22,7 +22,7 @@ function Tag() {
   const getAll = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:2001/e-kampoeng/api/category-berita/all?direction=asc&page=${page}&size=${size}&sort=createdDate`,
+        `http://localhost:2001/e-kampoeng/api/category-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
         authConfig
       );
       setPages(response.data.data.totalPages);
@@ -52,7 +52,7 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(api_category + "delete/" + id, authConfig);
+          await axios.delete(api_category + id, authConfig);
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
@@ -89,9 +89,9 @@ function Tag() {
             <span className="space-y-3">
               <div className="flex flex-col justify-between sm:flex-row items-center">
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
-                  Table Tag Berita
+                  Table Category Berita
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
                   <a href="tambah-category-berita"> Tambah</a>
                 </button>
               </div>
@@ -121,7 +121,7 @@ function Tag() {
                 </div>
                 <div className="flex items-center">
                   <input
-                    className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                    className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                     id="inline-search"
                     type="text"
                     placeholder="Search"
@@ -138,7 +138,7 @@ function Tag() {
                       No
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
-                      Tag Berita
+                      Category Berita
                     </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                       Aksi

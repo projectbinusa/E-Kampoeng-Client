@@ -4,7 +4,7 @@ import Navbar from "../../component/Navbar";
 import Sidebar from "../../component/Sidebar";
 import Footer from "../../component/Footer";
 import axios from "axios";
-import { api_tag } from "../../utils/api";
+import { api_category } from "../../utils/api";
 import Swal from "sweetalert2";
 
 const authConfig = {
@@ -15,19 +15,32 @@ const authConfig = {
 
 function Tag() {
   const [tag, setTag] = useState([]);
+  const [pages, setPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const size = 5;
 
-  const getAll = async () => {
-    await axios
-      .get(api_tag + "all", authConfig)
-      .then((res) => {
-        setTag(res.data.data);
-      })
-      .catch((error) => {
-        alert("terjadi kesalahan " + error);
-      });
+  const getAll = async (page) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2001/e-kampoeng/api/tags-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
+        authConfig
+      );
+      setPages(response.data.data.totalPages);
+      setTag(response.data.data.content);
+    } catch (error) {
+      alert("Terjadi Kesalahan: " + error);
+    }
   };
 
-  const deleteTag = async (id) => {
+  const handlePageChange = (newPage) => {
+    if (newPage < 0 || newPage > pages) {
+      return; // Jangan lakukan apa pun jika halaman baru di luar rentang yang valid
+    }
+    setCurrentPage(newPage);
+    getAll(newPage);
+  };
+
+  const Delete = async (id) => {
     Swal.fire({
       title: "Menghapus?",
       text: "Anda mengklik tombol!",
@@ -39,7 +52,10 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(api_tag + "delete/" + id, authConfig);
+          await axios.delete(
+            "http://localhost:2001/e-kampoeng/api/tags-berita/" + id,
+            authConfig
+          );
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
@@ -62,8 +78,9 @@ function Tag() {
   };
 
   useEffect(() => {
-    getAll();
-  }, []);
+    getAll(currentPage);
+  }, [currentPage]);
+
   return (
     <div className="flex">
       <Sidebar />
@@ -77,7 +94,7 @@ function Tag() {
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
                   Table Tag Berita
                 </h1>
-                <button className="inline-block rounded bg-[#776b5d] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#776b5d] ml-0 sm:ml-4">
+                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
                   <a href="tambah-tag-berita"> Tambah</a>
                 </button>
               </div>
@@ -107,7 +124,7 @@ function Tag() {
                 </div>
                 <div className="flex items-center">
                   <input
-                    className="bg-gray-50 appearance-none border-2 border-[#776b5d] rounded w-full py-2 px-4 text-[#776b5d] leading-tight focus:outline-none focus:bg-white focus:border-[#776b5d]"
+                    className="bg-gray-50 appearance-none border-2 border-[#D10363] rounded w-full py-2 px-4 text-[#D10363] leading-tight focus:outline-none focus:bg-white focus:border-[#D10363]"
                     id="inline-search"
                     type="text"
                     placeholder="Search"
@@ -126,6 +143,12 @@ function Tag() {
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                       Tag Berita
                     </th>
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                      Create At
+                    </th>
+                    <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                      Update At
+                    </th>
                     <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                       Aksi
                     </th>
@@ -141,9 +164,14 @@ function Tag() {
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {row.tags}
                         </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {row.createdDate}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {row.updatedDate}
+                        </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                            // onClick={() => openModalEdit(organisasi.id)}
                             to={`/edit-tag-berita/` + row.id}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit"
@@ -160,7 +188,7 @@ function Tag() {
                             </svg>
                           </Link>
                           <Link
-                            onClick={() => deleteTag(row.id)}
+                            onClick={() => Delete(row.id)}
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus"
                           >
@@ -183,11 +211,18 @@ function Tag() {
                 </tbody>
               </table>
             </div>
+            {/* Pagination */}
             <ol className="flex justify-center gap-1 text-xs font-medium">
               <li>
+                {/* Menangani halaman sebelumnya */}
                 <a
                   href="#"
-                  className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180 ${
+                    currentPage === 1
+                      ? "opacity-50 cursor-not-allowed bg-gray-200"
+                      : ""
+                  }`}
                 >
                   <span className="sr-only">Prev Page</span>
                   <svg
@@ -205,41 +240,32 @@ function Tag() {
                 </a>
               </li>
 
+              {/* Menampilkan nomor halaman */}
+              {Array.from({ length: pages }, (_, i) => (
+                <li key={i}>
+                  <a
+                    href="#"
+                    onClick={() => handlePageChange(i)} // Tidak perlu menambahkan 1 karena kita sudah mulai dari 0
+                    className={`block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900 ${
+                      i === currentPage ? "bg-gray-500 text-white" : ""
+                    }`}
+                  >
+                    {i + 1}{" "}
+                    {/* Tambahkan 1 untuk menampilkan nomor halaman yang dimulai dari 1 */}
+                  </a>
+                </li>
+              ))}
+
+              {/* Menangani halaman berikutnya */}
               <li>
                 <a
                   href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  1
-                </a>
-              </li>
-
-              <li className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900">
-                2
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  3
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  4
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 ${
+                    currentPage >= pages
+                      ? "opacity-50 cursor-not-allowed bg-gray-200"
+                      : ""
+                  }`}
                 >
                   <span className="sr-only">Next Page</span>
                   <svg

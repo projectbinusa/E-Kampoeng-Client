@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Warga from "./pages/warga/Index";
-import TambahWarga from "./pages/warga/Tambah";
+import TambahWarga from "./pages/warga/TambahWarga";
 import DetailWarga from "./pages/warga/DetailWarga";
 import Organisasi from "./pages/organisasi/Organisasi";
 import WargaPendatang from "./pages/wargaPendatang/WargaPendatang";
@@ -29,9 +29,27 @@ import EditCategoryBerita from "./pages/categoryBerita/Edit";
 import Kas from "./pages/kas/Kas";
 import TambahKas from "./pages/kas/Tambah";
 import EditKas from "./pages/kas/Edit";
-
+import WilRT from "./pages/wilayahRT/Wilayah";
+import TambahWilRT from "./pages/wilayahRT/Tambah";
+import EditWilRT from "./pages/wilayahRT/Edit";
+import RW from "./pages/rw/Rw";
+import TambahRW from "./pages/rw/Tambah";
+import ListUser from "./pages/user/ListUser";
+import TambahWargaOrganisasi from "./pages/wargaOrganisasi/Tambah";
+import TambahKepalaRT from "./pages/wilayahRT/TambahKepalaRT";
+import ApproveSoerat from "./pages/soerat/ApproveSoerat";
+import SoeratRejected from "./pages/soerat/SoeratRejected";
+import SoeratDiSetujui from "./pages/soerat/SoeratDiSetujui";
+import SoeratAll from "./pages/soerat/SoeratAll";
+import Anggota from "./pages/organisasi/Anggota";
+import Pemasukan from "./pages/kas/Pemasukan";
+import Pengeluaran from "./pages/kas/Pengeluaran";
+import DetailPemasukan from "./pages/kas/DetailPemasukan";
+import DetailPengeluaran from "./pages/kas/DetailPengeluaran";
 
 function App() {
+  const role = localStorage.getItem("role");
+
   return (
     <>
       <BrowserRouter>
@@ -43,6 +61,21 @@ function App() {
           <Route path="/tambah-warga" element={<TambahWarga />} />
           <Route path="/detail-warga/:id" element={<DetailWarga />} />
           <Route path="/organisasi" element={<Organisasi />} />
+          <Route path="/e-kas" element={<Kas />} />
+          <Route path="/e-kas/pemasukan" element={<Pemasukan />} />
+          <Route path="/e-kas/pengeluaran" element={<Pengeluaran />} />
+          <Route
+            path="/e-kas/detail-pemasukan/:id"
+            element={<DetailPemasukan />}
+          />
+          <Route
+            path="/e-kas/detail-pengeluaran/:id"
+            element={<DetailPengeluaran />}
+          />
+          <Route
+            path="/anggota-organisasi/:organisasiId"
+            element={<Anggota />}
+          />
           <Route path="/warga-pendatang" element={<WargaPendatang />} />
           <Route
             path="/edit-warga-pendatang"
@@ -53,9 +86,17 @@ function App() {
             element={<TambahWargaPendatang />}
           />
           <Route path="/soerat" element={<Soerat />} />
+          <Route path="/approve-soerat" element={<ApproveSoerat />} />
+          <Route path="/soerat-approved" element={<SoeratDiSetujui />} />
+          <Route path="/rejected-soerat" element={<SoeratRejected />} />
+          <Route path="/all-soerat" element={<SoeratAll />} />
           <Route path="/edit-soerat/:id" element={<EditSoerat />} />
           <Route path="/tambah-soerat" element={<TambahSoerat />} />
           <Route path="/warga-organisasi" element={<WargaOrganisasi />} />
+          <Route
+            path="/tambah-warga-organisasi"
+            element={<TambahWargaOrganisasi />}
+          />
           <Route path="/rt" element={<RT />} />
           <Route path="/tambah-rt" element={<TambahRT />} />
           <Route path="/edit-rt" element={<EditRT />} />
@@ -66,11 +107,22 @@ function App() {
           <Route path="/tambah-tag-berita" element={<TambahTagBerita />} />
           <Route path="/edit-tag-berita/:id" element={<EditTagBerita />} />
           <Route path="/category-berita" element={<CategoryBerita />} />
-          <Route path="/tambah-category-berita" element={<TambahCategoryBerita />} />
-          <Route path="/edit-category-berita/:id" element={<EditCategoryBerita />} />
+          <Route
+            path="/tambah-category-berita"
+            element={<TambahCategoryBerita />}
+          />
+          <Route
+            path="/edit-category-berita/:id"
+            element={<EditCategoryBerita />}
+          />
           <Route path="/e-kas" element={<Kas />} />
           <Route path="/tambah-kas" element={<TambahKas />} />
-          <Route path="/edit-kas" element={<EditKas />} />
+          <Route path="/edit-kas/:id" element={<EditKas />} />
+          <Route path="/wilayah-rt" element={<WilRT />} />
+          <Route path="/tambah-wilayah-rt" element={<TambahWilRT />} />
+          <Route path="/edit-wilayah-rt/:id" element={<EditWilRT />} />
+          <Route path="/tambah-kepala-rt" element={<TambahKepalaRT />} />
+          <Route path="/list-user" element={<ListUser />} />
         </Routes>
       </BrowserRouter>
     </>
