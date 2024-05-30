@@ -20,9 +20,6 @@ import EditRT from "./pages/rt/Edit";
 import Kk from "./pages/kk/Kk";
 import TambahKk from "./pages/kk/Tambah";
 import EditKk from "./pages/kk/Edit";
-import TagBerita from "./pages/tagBerita/Tag";
-import TambahTagBerita from "./pages/tagBerita/Tambah";
-import EditTagBerita from "./pages/tagBerita/Edit";
 import CategoryBerita from "./pages/categoryBerita/CategoryBerita";
 import TambahCategoryBerita from "./pages/categoryBerita/Tambah";
 import EditCategoryBerita from "./pages/categoryBerita/Edit";
@@ -32,8 +29,6 @@ import EditKas from "./pages/kas/Edit";
 import WilRT from "./pages/wilayahRT/Wilayah";
 import TambahWilRT from "./pages/wilayahRT/Tambah";
 import EditWilRT from "./pages/wilayahRT/Edit";
-import RW from "./pages/rw/Rw";
-import TambahRW from "./pages/rw/Tambah";
 import ListUser from "./pages/user/ListUser";
 import TambahWargaOrganisasi from "./pages/wargaOrganisasi/Tambah";
 import TambahKepalaRT from "./pages/wilayahRT/TambahKepalaRT";
@@ -46,6 +41,12 @@ import Pemasukan from "./pages/kas/Pemasukan";
 import Pengeluaran from "./pages/kas/Pengeluaran";
 import DetailPemasukan from "./pages/kas/DetailPemasukan";
 import DetailPengeluaran from "./pages/kas/DetailPengeluaran";
+import Profile from "./pages/profile/Profile";
+import Berita from "./pages/berita/Berita";
+import DetailBerita from "./pages/berita/DetailBerita";
+import BeritaByCategory from "./pages/categoryBerita/BeritaByCategory";
+import SemuaBerita from "./pages/berita/SemuaBerita";
+import EditBerita from "./pages/berita/EditBerita";
 
 function App() {
   const role = localStorage.getItem("role");
@@ -57,6 +58,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/berita-terbaru" element={<Berita />} />
+          <Route path="/edit-berita/:id" element={<EditBerita />} />
           <Route path="/warga" element={<Warga />} />
           <Route path="/tambah-warga" element={<TambahWarga />} />
           <Route path="/detail-warga/:id" element={<DetailWarga />} />
@@ -68,6 +72,7 @@ function App() {
             path="/e-kas/detail-pemasukan/:id"
             element={<DetailPemasukan />}
           />
+          <Route path="/detail-berita/:id" element={<DetailBerita />} />
           <Route
             path="/e-kas/detail-pengeluaran/:id"
             element={<DetailPengeluaran />}
@@ -103,10 +108,12 @@ function App() {
           <Route path="/kk" element={<Kk />} />
           <Route path="/tambah-kk" element={<TambahKk />} />
           <Route path="/edit-kk" element={<EditKk />} />
-          <Route path="/tag-berita" element={<TagBerita />} />
-          <Route path="/tambah-tag-berita" element={<TambahTagBerita />} />
-          <Route path="/edit-tag-berita/:id" element={<EditTagBerita />} />
           <Route path="/category-berita" element={<CategoryBerita />} />
+          <Route path="/semua-berita" element={<SemuaBerita />} />
+          <Route
+            path="/category-berita/berita/:id"
+            element={<BeritaByCategory />}
+          />
           <Route
             path="/tambah-category-berita"
             element={<TambahCategoryBerita />}

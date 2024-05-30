@@ -40,9 +40,11 @@ const Index = () => {
           <div className="bg-white m-5 p-5 rounded-xl space-y-5">
             <span className="space-y-3">
               <div className="flex md:flex-row md:justify-between flex-col items-center space-y-3 mx-5 page-header">
-                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
-                  <a href="tambah-warga"> Tambah Warga</a>
-                </button>
+                {role === "ROLE_RT" && (
+                  <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
+                    <a href="tambah-warga"> Tambah Warga</a>
+                  </button>
+                )}
                 <h1 className="text-xl text-center font-semibold play">
                   Data Warga
                 </h1>

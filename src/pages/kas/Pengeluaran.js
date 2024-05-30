@@ -8,6 +8,7 @@ import { authConfig } from "../../utils/authConfig";
 import Swal from "sweetalert2";
 
 function Pengeluaran() {
+  const role = localStorage.getItem("role");
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const [pengeluaran, setPengeluaran] = useState([]);
@@ -222,32 +223,36 @@ function Pengeluaran() {
                             Rp. {pengeluaran.anggaranKeluar}
                           </td>
                           <td className="whitespace-nowrap px-4 py-2 text-gray-800 text-center">
-                            <button
-                              onClick={() =>
-                                handleCancelSubmission(pengeluaran.id)
-                              }
-                              className="inline-block rounded bg-[#FF0000] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                            >
-                              Hapus
-                            </button>
+                            {role === "ROLE_RT" && (
+                              <button
+                                onClick={() =>
+                                  handleCancelSubmission(pengeluaran.id)
+                                }
+                                className="inline-block rounded bg-[#FF0000] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                              >
+                                Hapus
+                              </button>
+                            )}
                             <Link
                               to={`/e-kas/detail-pengeluaran/${pengeluaran.id}`}
                               className="inline-block rounded bg-[#003285] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
                             >
                               Detail
                             </Link>
-                            <button
-                              onClick={() =>
-                                openModal(
-                                  pengeluaran.id,
-                                  pengeluaran.nama,
-                                  pengeluaran.pengeluaran
-                                )
-                              }
-                              className="inline-block rounded bg-[#FFA62F] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                            >
-                              Ubah
-                            </button>
+                            {role === "ROLE_RT" && (
+                              <button
+                                onClick={() =>
+                                  openModal(
+                                    pengeluaran.id,
+                                    pengeluaran.nama,
+                                    pengeluaran.pengeluaran
+                                  )
+                                }
+                                className="inline-block rounded bg-[#FFA62F] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                              >
+                                Ubah
+                              </button>
+                            )}
                           </td>
                         </tr>
                       ))}

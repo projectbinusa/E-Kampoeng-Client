@@ -93,7 +93,7 @@ function SoeratRejected() {
                           Semua Soerat
                         </Link>
                         <Link
-                          to="/approved-soerat"
+                          to="/approve-soerat"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           role="menuitem"
                         >

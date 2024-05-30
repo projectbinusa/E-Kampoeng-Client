@@ -4,43 +4,37 @@ import Navbar from "../../component/Navbar";
 import Sidebar from "../../component/Sidebar";
 import Footer from "../../component/Footer";
 import axios from "axios";
-import { api_category } from "../../utils/api";
 import Swal from "sweetalert2";
+import { authConfig } from "../../utils/authConfig";
 
-const authConfig = {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-};
+function CategoryBerita() {
+  const [categories, setCategories] = useState([]);
+  const role = localStorage.getItem("role");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [newCategory, setNewCategory] = useState("");
 
-function Tag() {
-  const [category, setCategory] = useState([]);
-  const [pages, setPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const size = 5;
+  const openModal = () => {
+    setModalOpen(true);
+  };
 
-  const getAll = async (page) => {
+  const closeModal = () => {
+    setModalOpen(false);
+    setNewCategory("");
+  };
+
+  const getAll = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:2001/e-kampoeng/api/category-berita?direction=asc&page=${page}&size=${size}&sort=createdDate`,
+        `http://localhost:2001/e-kampoeng/api/category-berita/all`,
         authConfig
       );
-      setPages(response.data.data.totalPages);
-      setCategory(response.data.data.content);
+      setCategories(response.data.data.content);
     } catch (error) {
       alert("Terjadi Kesalahan: " + error);
     }
   };
 
-  const handlePageChange = (newPage) => {
-    if (newPage < 0 || newPage > pages) {
-      return; // Jangan lakukan apa pun jika halaman baru di luar rentang yang valid
-    }
-    setCurrentPage(newPage);
-    getAll(newPage);
-  };
-
-  const Delete = async (id) => {
+  const handleDelete = async (id) => {
     Swal.fire({
       title: "Menghapus?",
       text: "Anda mengklik tombol!",
@@ -52,7 +46,10 @@ function Tag() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(api_category + id, authConfig);
+          await axios.delete(
+            `http://localhost:2001/e-kampoeng/api/category-berita-rt/${id}`,
+            authConfig
+          );
           Swal.fire({
             title: "Terhapus!",
             text: "Data telah dihapus.",
@@ -75,8 +72,31 @@ function Tag() {
   };
 
   useEffect(() => {
-    getAll(currentPage);
-  }, [currentPage]);
+    getAll();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(
+        "http://localhost:2001/e-kampoeng/api/category-berita-rt",
+        { category: newCategory },
+        authConfig
+      );
+      closeModal();
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Berita berhasil ditambahkan.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error("There was an error adding the news!", error);
+    }
+  };
 
   return (
     <div className="flex">
@@ -91,12 +111,17 @@ function Tag() {
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
                   Table Category Berita
                 </h1>
-                <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
-                  <a href="tambah-category-berita"> Tambah</a>
-                </button>
+                {role === "ROLE_RT" && (
+                  <button
+                    onClick={openModal}
+                    className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                  >
+                    Tambah
+                  </button>
+                )}
               </div>
               <hr className="border border-black" />
-              <div className="flex flex-col justify-between sm:flex-row items-center">
+              {/* <div className="flex flex-col justify-between sm:flex-row items-center">
                 <div className="flex items-center">
                   <p className="">Show</p>
                   <div className="relative inline-flex my-3 mx-2">
@@ -127,7 +152,7 @@ function Tag() {
                     placeholder="Search"
                   />
                 </div>
-              </div>
+              </div> */}
             </span>
 
             <div className="overflow-x-auto rounded-lg border border-gray-200">
@@ -146,16 +171,23 @@ function Tag() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {category.map((row, idx) => {
-                    return (
-                      <tr className="odd:bg-gray-50 text-left">
-                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                          {idx + 1}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {row.category}
-                        </td>
-                        <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
+                  {categories.map((row, idx) => (
+                    <tr key={row.id} className="odd:bg-gray-50 text-left">
+                      <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        {idx + 1}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                        {row.category}
+                      </td>
+                      <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
+                        <Link
+                          to={`/category-berita/berita/` + row.id}
+                          className="inline-block rounded bg-[#FFBF00] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                          title="BeritaBycategory"
+                        >
+                          Berita
+                        </Link>
+                        {role === "ROLE_RT" && (
                           <Link
                             to={`/edit-category-berita/` + row.id}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
@@ -172,8 +204,10 @@ function Tag() {
                               <path d="M23,8.979a1,1,0,0,0-1,1V15H18a3,3,0,0,0-3,3v4H5a3,3,0,0,1-3-3V5A3,3,0,0,1,5,2h9.042a1,1,0,0,0,0-2H5A5.006,5.006,0,0,0,0,5V19a5.006,5.006,0,0,0,5,5H16.343a4.968,4.968,0,0,0,3.536-1.464l2.656-2.658A4.968,4.968,0,0,0,24,16.343V9.979A1,1,0,0,0,23,8.979ZM18.465,21.122a2.975,2.975,0,0,1-1.465.8V18a1,1,0,0,1,1-1h3.925a3.016,3.016,0,0,1-.8,1.464Z" />
                             </svg>
                           </Link>
-                          <Link
-                            onClick={() => Delete(row.id)}
+                        )}
+                        {role === "ROLE_RT" && (
+                          <button
+                            onClick={() => handleDelete(row.id)}
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus"
                           >
@@ -188,92 +222,78 @@ function Tag() {
                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                               <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                             </svg>
-                          </Link>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            {/* Pagination */}
-            <ol className="flex justify-center gap-1 text-xs font-medium">
-              <li>
-                {/* Menangani halaman sebelumnya */}
-                <a
-                  href="#"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180 ${
-                    currentPage === 1
-                      ? "opacity-50 cursor-not-allowed bg-gray-200"
-                      : ""
-                  }`}
-                >
-                  <span className="sr-only">Prev Page</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-3 w-3"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-
-              {/* Menampilkan nomor halaman */}
-              {Array.from({ length: pages }, (_, i) => (
-                <li key={i}>
-                  <a
-                    href="#"
-                    onClick={() => handlePageChange(i)} // Tidak perlu menambahkan 1 karena kita sudah mulai dari 0
-                    className={`block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900 ${
-                      i === currentPage ? "bg-gray-500 text-white" : ""
-                    }`}
-                  >
-                    {i + 1}{" "}
-                    {/* Tambahkan 1 untuk menampilkan nomor halaman yang dimulai dari 1 */}
-                  </a>
-                </li>
-              ))}
-
-              {/* Menangani halaman berikutnya */}
-              <li>
-                <a
-                  href="#"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 ${
-                    currentPage >= pages
-                      ? "opacity-50 cursor-not-allowed bg-gray-200"
-                      : ""
-                  }`}
-                >
-                  <span className="sr-only">Next Page</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-3 w-3"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ol>
           </div>
         </div>
         <Footer />
       </div>
+      {/* Modal tambah Category Berita */}
+      {isModalOpen && (
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full sm:p-6">
+              <div className="sm:flex sm:items-start">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900 ubuntu">
+                    Tambah Category Berita
+                  </h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mt-2 sm:w-full">
+                      <label
+                        htmlFor="category"
+                        className="relative block rounded-md border border-black-200 shadow-sm mt-10"
+                      >
+                        <input
+                          type="text"
+                          id="category"
+                          className="mt-2 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
+                          placeholder="category"
+                          autoComplete="off"
+                          value={newCategory}
+                          onChange={(e) => setNewCategory(e.target.value)}
+                        />
+                        <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                          Judul Berita
+                        </span>
+                      </label>
+                    </div>
+
+                    <div className="mt-8 flex flex-row-reverse">
+                      <button
+                        type="submit"
+                        className="ml-3 inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363]"
+                      >
+                        Tambah
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-block rounded bg-gray-300 px-4 py-2 text-sm font-medium text-black transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363]"
+                        onClick={closeModal}
+                      >
+                        Batal
+                      </button>
+                    </div>
+                    {/* {error && <p className="mt-4 text-red-500">{error}</p>} */}
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-export default Tag;
+export default CategoryBerita;

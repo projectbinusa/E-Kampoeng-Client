@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 function Navbar({ toggleSidebar }) {
   const navigate = useNavigate();
+  const role = localStorage.getItem("role");
   // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // const toggleSidebar = () => {
@@ -143,10 +144,32 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
                 </a>
               </div>
             ) : (
-              <div className="sm:flex sm:gap-4">
+              <div className="flex gap-4 items-center">
+                {(role === "ROLE_WARGA" || role === "ROLE_RT") && (
+                  <a
+                    href="/profile"
+                    className="rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363] flex items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      width="16"
+                      height="16"
+                      className="mr-2"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.86 0-7 3.14-7 7 0 .552.447 1 1 1h12c.553 0 1-.448 1-1 0-3.86-3.14-7-7-7z"
+                      />
+                    </svg>
+                    Profile
+                  </a>
+                )}
+
                 <button
                   onClick={logout}
-                  className="block rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363]"
+                  className="rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363]"
                 >
                   Logout
                 </button>

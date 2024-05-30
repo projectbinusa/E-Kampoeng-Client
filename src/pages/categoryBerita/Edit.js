@@ -3,69 +3,57 @@ import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { authConfig } from "../../utils/authConfig";
 import Swal from "sweetalert2";
-import { api_category } from "../../utils/api";
 
-const authConfig = {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-};
 function Edit() {
-  const param = useParams();
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
+  const { id } = useParams();
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    axios
-      .get(api_category + param.id, authConfig)
-      .then((response) => {
-        const data = response.data.data;
-        setCategory(data.category);
-      })
-      .catch((error) => {
-        alert("Terjadi Kesalahan " + error);
-      });
-  }, [param.id]);
-
-  const Put = async (e) => {
-    try {
-      e.preventDefault();
-
-      // Pastikan param.id, jenis_surat, dan jenis_bantuan telah didefinisikan dan valid
-      if (!param.id || !category) {
-        console.error(
-          "param.id, category, tidak didefinisikan atau tidak valid."
+    const getCategoryBeritaById = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:2001/e-kampoeng/api/category-berita-rt/${id}`,
+          authConfig
         );
-        return;
+        const data = response.data;
+        setCategory(data.category);
+      } catch (error) {
+        console.error("There was an error fetching the data!", error);
       }
+    };
 
-      const req = {
-        category: category,
-      };
+    getCategoryBeritaById();
+  }, [id]);
 
+  const handleEditCategory = async (e) => {
+    e.preventDefault();
+    try {
       await axios.put(
-        api_category + param.id,
-
-        req,
+        `http://localhost:2001/e-kampoeng/api/category-berita-rt/${id}`,
+        { category },
         authConfig
       );
-
-      setShow(false);
       Swal.fire({
+        title: "Success!",
+        text: "Category has been updated successfully.",
         icon: "success",
-        title: "Berhasil Mengedit",
-        showConfirmButton: false,
-        timer: 1500,
+        confirmButtonText: "OK",
+      }).then(() => {
+        setTimeout(() => {
+          window.location.href = "/category-berita";
+        }, 1500);
       });
-      setTimeout(() => {
-        navigate("/category-berita");
-        window.location.reload();
-      }, 1500);
     } catch (error) {
-      console.error("Terjadi kesalahan:", error);
+      console.error("There was an error updating the category!", error);
+      Swal.fire({
+        title: "Error!",
+        text: "There was an error updating the category.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -75,17 +63,17 @@ function Edit() {
       <div className="block w-full">
         <section className="bg-gray-300 h-screen w-full">
           <Navbar />
-          <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
+          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div className="rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
                 Edit Category Berita
               </h1>
 
               <div>
-                <form onSubmit={Put}>
+                <form onSubmit={handleEditCategory}>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="Tag"
+                      htmlFor="Tag"
                       className="block text-sm font-medium text-black"
                     >
                       Category berita
@@ -104,7 +92,10 @@ function Edit() {
                   </div>
 
                   <div className="sm:flex sm:items-center sm:gap-4 mt-7">
-                    <button className="inline-block shrink-0 rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
+                    <button
+                      type="submit"
+                      className="inline-block shrink-0 rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
+                    >
                       Simpan
                     </button>
                   </div>

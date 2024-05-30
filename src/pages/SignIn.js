@@ -27,8 +27,10 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(`${api_login}`, data);
+      const userRole = response.data.userData.authorities[0].authority;
+
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("role", response.data.userData.role);
+      localStorage.setItem("role", userRole);
       navigate("/");
       console.log("success login");
 

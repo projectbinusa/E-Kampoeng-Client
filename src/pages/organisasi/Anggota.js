@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 function Anggota() {
   const { organisasiId } = useParams();
   const [wargaList, setWargaList] = useState([]);
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
     axios
@@ -96,9 +97,11 @@ function Anggota() {
                       <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                         Nomor Telpon
                       </th>
-                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
-                        Aksi
-                      </th>
+                      {role === "ROLE_RT" && (
+                        <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
+                          Aksi
+                        </th>
+                      )}
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -109,16 +112,18 @@ function Anggota() {
                         <td className="px-4 py-2">{warga.warga.alamat}</td>
                         <td className="px-4 py-2">{warga.warga.email}</td>
                         <td className="px-4 py-2">{warga.warga.no_telp}</td>
-                        <td className="px-4 py-2 text-center">
-                          <td className="whitespace-nowrap px-4 py-2 text-gray-800 text-center">
-                            <button
-                              onClick={() => kickWarga(warga.id)}
-                              className="tinline-block rounded bg-[#A91D3A] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                            >
-                              Keluarkan grup
-                            </button>
+                        {role === "ROLE_RT" && (
+                          <td className="px-4 py-2 text-center">
+                            <td className="whitespace-nowrap px-4 py-2 text-gray-800 text-center">
+                              <button
+                                onClick={() => kickWarga(warga.id)}
+                                className="tinline-block rounded bg-[#A91D3A] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                              >
+                                Keluarkan grup
+                              </button>
+                            </td>
                           </td>
-                        </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>

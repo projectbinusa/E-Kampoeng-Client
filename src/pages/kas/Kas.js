@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 function Kas() {
+  const role = localStorage.getItem("role");
   const [isModalGunakanKas, setModalGunakanKas] = useState(false);
   const [ModalTambahKas, setModalTambahKas] = useState(false);
   const [saldo, setSaldo] = useState(null);
@@ -123,12 +124,14 @@ function Kas() {
                 </h1>
                 <div className="relative inline-block text-left">
                   <div>
-                    <button
-                      onClick={openTambahKas}
-                      className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                    >
-                      Tambah Kas
-                    </button>
+                    {role === "ROLE_RT" && (
+                      <button
+                        onClick={openTambahKas}
+                        className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                      >
+                        Tambah Kas
+                      </button>
+                    )}
                     <button
                       type="button"
                       className="inline-block rounded bg-[#D10363] px-10 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
@@ -177,9 +180,11 @@ function Kas() {
                       <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                         Saldo
                       </th>
-                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
-                        Aksi
-                      </th>
+                      {role === "ROLE_RT" && (
+                        <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
+                          Aksi
+                        </th>
+                      )}
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -188,14 +193,16 @@ function Kas() {
                         <td className="text-center text-bold">
                           Rp.{saldo.jumlahSaldo}
                         </td>
-                        <td className="text-center">
-                          <button
-                            onClick={openModalGunakanKas}
-                            className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363]"
-                          >
-                            Gunakan
-                          </button>
-                        </td>
+                        {role === "ROLE_RT" && (
+                          <td className="text-center">
+                            <button
+                              onClick={openModalGunakanKas}
+                              className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363]"
+                            >
+                              Gunakan
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     )}
                   </tbody>

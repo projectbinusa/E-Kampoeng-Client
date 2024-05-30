@@ -5,9 +5,9 @@ import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import Sidebar from "../../component/Sidebar";
 import { authConfig } from "../../utils/authConfig";
-import { Link } from "react-router-dom";
 
 function Organisasi() {
+  const role = localStorage.getItem("role");
   const [isModalOpen, setModalOpen] = useState(false);
   const [isOpenAnggota, setModalAnggota] = useState(false);
   const [ModalEditOpen, setModalEditOpen] = useState(false);
@@ -266,20 +266,22 @@ function Organisasi() {
                 <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
                   Table Organisasi
                 </h1>
-                <div className="flex flex-col justify-between sm:flex-row items-center">
-                  <button
-                    onClick={openModal}
-                    className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                  >
-                    Tambah Organisasi
-                  </button>
-                  <button
-                    onClick={openModalAnggota}
-                    className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                  >
-                    Tambah Anggota
-                  </button>
-                </div>
+                {role === "ROLE_RT" && (
+                  <div className="flex flex-col justify-between sm:flex-row items-center">
+                    <button
+                      onClick={openModal}
+                      className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                    >
+                      Tambah Organisasi
+                    </button>
+                    <button
+                      onClick={openModalAnggota}
+                      className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                    >
+                      Tambah Anggota
+                    </button>
+                  </div>
+                )}
               </div>
               <hr className="border border-black" />
 
@@ -296,9 +298,11 @@ function Organisasi() {
                       <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                         Anggota
                       </th>
-                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
-                        Aksi
-                      </th>
+                      {role === "ROLE_RT" && (
+                        <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
+                          Aksi
+                        </th>
+                      )}
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -310,6 +314,7 @@ function Organisasi() {
                         <td className="whitespace-nowrap px-4 py-2 text-gray-800">
                           {data.nama_organisasi}
                         </td>
+
                         <td className="whitespace-nowrap px-4 py-2 text-gray-800 text-center">
                           <button
                             onClick={() => handleSelectOrganisasi(data.id)}
@@ -318,21 +323,22 @@ function Organisasi() {
                             Lihat Anggota
                           </button>
                         </td>
-
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-800 text-center">
-                          <button
-                            onClick={() => openModalEdit(data.id)}
-                            className="tinline-block rounded bg-[#2A629A] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => deleteOrganisasi(data.id)}
-                            className="tinline-block rounded bg-[#A91D3A] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
-                          >
-                            Delete
-                          </button>
-                        </td>
+                        {role === "ROLE_RT" && (
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-800 text-center">
+                            <button
+                              onClick={() => openModalEdit(data.id)}
+                              className="tinline-block rounded bg-[#2A629A] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => deleteOrganisasi(data.id)}
+                              className="tinline-block rounded bg-[#A91D3A] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>
