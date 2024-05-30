@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
-function Navbar() {
+function Navbar({ toggleSidebar }) {
   const navigate = useNavigate();
+  const role = localStorage.getItem("role");
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
   const token = localStorage.getItem("token");
   const logout = () => {
-    localStorage.clear();
-    navigate("/");
-  }
+    Swal.fire({
+      title: "Logout",
+      text: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        Swal.fire({
+          title: "Berhasil Logout",
+          text: "Anda berhasil keluar!",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          navigate("/");
+        });
+      }
+    });
+  };
 
   return (
-    <header className="bg-gray-100">
+    <header className="bg-gray-100 w-full">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <a className="flex flex-col items-center text-[#776b5d]" href="#">
+        <a className="flex flex-col items-center text-[#D10363]" href="#">
           <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +51,7 @@ function Navbar() {
           >
             <g
               transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)"
-              fill="#776b5d"
+              fill="#D10363"
               stroke="none"
             >
               <path
@@ -103,31 +130,56 @@ m-320 -60 l0 -55 -55 0 -55 0 0 55 0 55 55 0 55 0 0 -55z m70 -69 c6 -8 10
             {token === null ? (
               <div className="sm:flex sm:gap-4">
                 <a
-                  className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]"
+                  className="block rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363]"
                   href="/sign-in"
                 >
                   Login
                 </a>
 
                 <a
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#776b5d] transition-all duration-200 hover:bg-[#776b5d] hover:shadow-md hover:text-white active:bg-gray-100 border border-transparent active:border-[#776b5d] active:text-[#776b5d] sm:block"
+                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#D10363] transition-all duration-200 hover:bg-[#D10363] hover:shadow-md hover:text-white active:bg-gray-100 border border-transparent active:border-[#D10363] active:text-[#D10363] sm:block"
                   href="/sign-up"
                 >
                   Register
                 </a>
               </div>
             ) : (
-              <div className="sm:flex sm:gap-4">
+              <div className="flex gap-4 items-center">
+                {(role === "ROLE_WARGA" || role === "ROLE_RT") && (
+                  <a
+                    href="/profile"
+                    className="rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363] flex items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      width="16"
+                      height="16"
+                      className="mr-2"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.86 0-7 3.14-7 7 0 .552.447 1 1 1h12c.553 0 1-.448 1-1 0-3.86-3.14-7-7-7z"
+                      />
+                    </svg>
+                    Profile
+                  </a>
+                )}
+
                 <button
-                onClick={logout}
-                  className="block rounded-md bg-[#776b5d] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#776b5d]/75 active:bg-gray-100 border border-[#776b5d] active:text-[#776b5d]"
+                  onClick={logout}
+                  className="rounded-md bg-[#D10363] px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 shadow-md hover:bg-[#D10363]/75 active:bg-gray-100 border border-[#D10363] active:text-[#D10363]"
                 >
                   Logout
                 </button>
               </div>
             )}
 
-            <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+            <button
+              className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
+              onClick={toggleSidebar}
+            >
               <span className="sr-only">Toggle menu</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

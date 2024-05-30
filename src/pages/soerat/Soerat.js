@@ -1,201 +1,394 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "../../component/Navbar";
+import Footer from "../../component/Footer";
+import Sidebar from "../../component/Sidebar";
+import Swal from "sweetalert2";
+import { authConfig } from "../../utils/authConfig";
 
 function Soerat() {
-  const data = [
-    {
-      jenis_surat: "pengantar",
-      jenis_bantuan: "KIP",
-      create: "28-04-2023",
-    },
-    {
-      jenis_surat: "Nikah",
-      jenis_bantuan: "surat_domisili",
-      create: "28-04-2023",
-    },
-    {
-      jenis_surat: "bantuan",
-      jenis_bantuan: "KIS",
-      create: "28-04-2023",
-    },
-  ];
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalEditOpen, setModalEditOpen] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [newSoerat, setNewSoerat] = useState("");
+  const [editedSoerat, setEditedSoerat] = useState("");
+  const [editedSoeratId, setEditedSoeratId] = useState(null);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const closeModalEdit = () => {
+    setModalEditOpen(false);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:2001/e-kampoeng/api/e-soerat-rt/my-submissions",
+          authConfig
+        );
+        setData(response.data.data.content);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleTambahSoerat = async () => {
+    try {
+      await axios.post(
+        "http://localhost:2001/e-kampoeng/api/e-soerat-rt/ajukan",
+        { jenisSurat: newSoerat },
+        authConfig
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Berhasil",
+        text: "Soerat berhasil ditambahkan",
+      }).then(() => {
+        window.location.href = "/soerat";
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Terjadi kesalahan saat menambahkan soerat",
+      });
+    }
+  };
+
+  const handleEditSubmission = async () => {
+    try {
+      await axios.put(
+        `http://localhost:2001/e-kampoeng/api/e-soerat-rt/edit/${editedSoeratId}`,
+        { jenisSurat: editedSoerat },
+        authConfig
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Berhasil",
+        text: "Soerat berhasil diedit",
+      }).then(() => {
+        window.location.href = "/soerat";
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Terjadi kesalahan saat mengedit soerat",
+      });
+    }
+  };
+
+  const handleCancelSubmission = async (id) => {
+    // Menampilkan konfirmasi SweetAlert sebelum melanjutkan pembatalan
+    Swal.fire({
+      title: "Anda yakin ingin membatalkan pengajuan?",
+      text: "Tindakan ini tidak dapat dibatalkan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Ya, batalkan!",
+      cancelButtonText: "Tidak, kembali",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(
+            `http://localhost:2001/e-kampoeng/api/e-soerat-rt/batalkan/${id}`,
+            authConfig
+          );
+          // Tambahkan logika lain jika diperlukan, seperti memperbarui data setelah pembatalan
+          // Redirect ke halaman "/soerat"
+          window.location.href = "/soerat";
+        } catch (error) {
+          console.error("Error cancelling submission:", error);
+          // Handle error, mungkin menampilkan pesan kesalahan kepada pengguna
+          Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat membatalkan pengajuan.",
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK",
+          });
+        }
+      }
+    });
+  };
+
+  const openModalEdit = (soeratId, jenisSurat) => {
+    setEditedSoerat(jenisSurat);
+    setEditedSoeratId(soeratId);
+    setModalEditOpen(true);
+  };
+
   return (
     <div>
-      <Navbar />
+      <div className="flex">
+        <Sidebar />
+        <div className="block w-full">
+          <div className="bg-gray-300 h-full min-h-screen pb-5">
+            <Navbar />
+            <div className="bg-white m-5 p-5 rounded-xl space-y-5">
+              <div className="flex flex-col justify-between sm:flex-row items-center">
+                <h1 className="text-xl text-center font-bold ubuntu my-auto mb-2 sm:mb-0">
+                  Table soerat
+                </h1>
+                <button
+                  onClick={openModal}
+                  className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4"
+                >
+                  Tambah
+                </button>
+              </div>
+              <hr className="border border-black" />
 
-      <div className="w-full h-screen bg-gray-100">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="flex flex-col">
-            <div className="-my-2 py-2 mt-8 px-3 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-              <div className=" align-middle inline-block w-full shadow overflow-x-auto sm:rounded-lg border-b border-gray-200">
-                <table className="min-w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200 bg-white leading-4 tracking-wider text-base text-gray-700">
-                      {/* <th className="text-xl">Data Kepala Keluarga</th> */}
-
-                      <th className="px-5 py-2 text-left" colspan="2">
-                        <div className="relative inline-flex">
-                          <select className=" appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-3 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 font-normal">
-                            <option value="1">Show 1 Entries</option>
-                            <option value="10">Show 10 Entries</option>
-                            <option value="100">Show 100 Entries</option>
-                          </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg
-                              className="fill-current h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9 11l3-3 3 3m-3 3v-6" />
-                            </svg>
-                          </div>
-                        </div>
+              <div className="overflow-x-auto rounded-lg border border-gray-200">
+                <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                  <thead className="ltr:text-left rtl:text-right">
+                    <tr className="text-left">
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                        No
                       </th>
-
-                      <th className="px-5 py-2 text-left" colspan="3">
-                        <div className=" py-0 gap-2  flex float-right flex-wrap flex-grow justify-between">
-                          <div className="flex items-center py-2">
-                            <input
-                              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                              id="inline-searcg"
-                              type="text"
-                              placeholder="Search"
-                            />
-                          </div>
-
-                          <div className="flex items-center py-2">
-                            <a
-                              href="/tambahSoerat"
-                              className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:shadow-outline"
-                            >
-                              Tambah
-                            </a>
-                          </div>
-                        </div>
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                        Nama soerat
                       </th>
-                    </tr>
-                    <tr className="bg-gray-50 border-b border-gray-200 text-xs leading-4 text-gray-500 uppercase tracking-wider">
-                      <th className="px-6 py-3 text-center font-medium">No </th>
-                      <th className="px-6 py-3 text-center font-medium">
-                        Jenis Surat
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                        Waktu Pengajuan
                       </th>
-                      <th className="px-6 py-3 text-center font-medium">
-                        Jenis Bantuan
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                        Waktu DiSetujui
                       </th>
-                      <th className="px-6 py-3 text-center font-medium">
-                        Create At
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                        Status
                       </th>
-
-                      <th className="px-6 py-3 text-center font-medium">
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                        Pesan
+                      </th>
+                      <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800 text-center">
                         Aksi
                       </th>
                     </tr>
                   </thead>
-
-                  <tbody className="bg-white">
-                    {data.map((soerat, index) => (
-                      <tr key={index}>
-                        <td className="px-6 py-4 text-center whitespace-no-wrap border-b border-gray-200">
-                          {index + 1}
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm text-center  justify-center leading-5 text-gray-900">
-                            {soerat.jenis_surat}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm text-center  justify-center leading-5 text-gray-900">
-                            {soerat.jenis_bantuan}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm text-center  justify-center leading-5 text-gray-900">
-                            {soerat.create}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm leading-5 justify-center flex gap-3 text-gray-900">
-                            <a
-                              href="/editSoerat"
-                              className="inline-block  px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-400 hover:bg-blue-300 focus:outline-none focus:shadow-outline"
-                            >
-                              <i
-                                style={{ color: "white" }}
-                                className="fa-solid fa-pen-to-square"
-                              ></i>
-                            </a>
-
-                            <button className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-400 focus:outline-none focus:shadow-outline">
-                              <i
-                                style={{ color: "white" }}
-                                className="fa-solid fa-trash"
-                              ></i>
-                            </button>
-                          </div>
+                  <tbody className="divide-y divide-gray-200">
+                    {loading ? (
+                      <tr>
+                        <td colSpan="6" className="text-center py-4">
+                          Loading...
                         </td>
                       </tr>
-                    ))}
+                    ) : error ? (
+                      <tr>
+                        <td
+                          colSpan="6"
+                          className="text-center py-4 text-red-500"
+                        >
+                          {error}
+                        </td>
+                      </tr>
+                    ) : (
+                      data.map((soerat, index) => (
+                        <tr key={soerat.id}>
+                          <td className="whitespace-nowrap px-4 py-2">
+                            {index + 1}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2">
+                            {soerat.jenisSurat}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2">
+                            {soerat.waktuPengajuan}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2">
+                            {soerat.waktuDiSetujui}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2">
+                            {soerat.status}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2">
+                            {soerat.message}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2 text-center">
+                            <button
+                              onClick={() =>
+                                openModalEdit(soerat.id, soerat.jenisSurat)
+                              }
+                              className="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-blue-700"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => handleCancelSubmission(soerat.id)}
+                              className="inline-block rounded bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-red-700 ml-2"
+                            >
+                              Batalkan
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
-              {/* Pagination */}
-              <div className="flex justify-center float-right mt-8">
-                <nav className="relative z-0 inline-flex shadow-sm">
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    <span>Previous</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    1
-                  </a>
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    2
-                  </a>
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    3
-                  </a>
-                  <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-                    ...
-                  </span>
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    8
-                  </a>
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    9
-                  </a>
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    <span>Next</span>
-                  </a>
-                </nav>
-              </div>
+            </div>
+          </div>
+          <Footer />
+        </div>
+      </div>
 
-              {/* End of Pagination */}
+      {/* Modal tambah soerat */}
+      {isModalOpen && (
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full sm:p-6">
+              <div className="sm:flex sm:items-center flex-col">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left sm:w-full">
+                  <span className="space-y-3">
+                    <h1 className="text-xl text-left font-bold ubuntu my-auto">
+                      Tambah Soerat
+                    </h1>
+                    <hr className="border border-black" />
+                  </span>
+                  <div className="mt-4 mb-4 sm:w-full">
+                    <label
+                      htmlFor="jenisSurat"
+                      className="relative block overflow-hidden border-b border-gray-400 bg-transparent pt-3 focus-within:border-[#D10363]"
+                    >
+                      <select
+                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        id="jenisSurat"
+                        value={newSoerat}
+                        onChange={(e) => setNewSoerat(e.target.value)}
+                      >
+                        <option value="">Pilih Nama Soerat</option>
+                        <option value="KTP">Kartu Tanda Penduduk (KTP)</option>
+                        <option value="KIA">Kartu Identitas Anak (KIA)</option>
+                        <option value="KIS">Kartu Indonesia Sehat (KIS)</option>
+                        <option value="KIP">
+                          Kartu Indonesia Pintar (KIP)
+                        </option>
+                        <option value="Akta Kelahiran">Akta Kelahiran</option>
+                        <option value="Kartu Keluarga">Kartu Keluarga</option>
+                        <option value="BPJS">BPJS</option>
+                        <option value="Surat Nikah">Surat Nikah</option>
+                        <option value="Surat Kematian">Surat Kematian</option>
+                        <option value="Surat Pindah">Surat Pindah</option>
+                        <option value="Surat Izin Mengemudi (SIM)">
+                          Surat Izin Mengemudi (SIM)
+                        </option>
+                      </select>
+                      <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
+                        Nama soerat
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row justify-between">
+                <button
+                  onClick={closeModal}
+                  className="w-full sm:w-auto rounded-md border border-red-500 bg-red-500 px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-red-500 focus:outline-none active:text-white active:bg-red-400"
+                >
+                  Kembali
+                </button>
+                <button
+                  onClick={handleTambahSoerat}
+                  className="w-full sm:w-auto mt-4 sm:mt-0 rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white active:bg-[#776d5b]"
+                >
+                  Simpan
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {modalEditOpen && (
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full sm:p-6">
+              <div className="sm:flex sm:items-center flex-col">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left sm:w-full">
+                  <span className="space-y-3">
+                    <h1 className="text-xl text-left font-bold ubuntu my-auto">
+                      Edit Soerat
+                    </h1>
+                    <hr className="border border-black" />
+                  </span>
+                  <div className="mt-4 mb-4 sm:w-full">
+                    <label
+                      htmlFor="editedSoerat"
+                      className="relative block overflow-hidden border-b border-gray-400 bg-transparent pt-3 focus-within:border-[#D10363]"
+                    >
+                      <select
+                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        id="editedSoerat"
+                        value={editedSoerat}
+                        onChange={(e) => setEditedSoerat(e.target.value)}
+                      >
+                        <option value="">Pilih Nama Soerat</option>
+                        <option value="KTP">Kartu Tanda Penduduk (KTP)</option>
+                        <option value="KIA">Kartu Identitas Anak (KIA)</option>
+                        <option value="KIS">Kartu Indonesia Sehat (KIS)</option>
+                        <option value="KIP">
+                          Kartu Indonesia Pintar (KIP)
+                        </option>
+                        <option value="Akta Kelahiran">Akta Kelahiran</option>
+                        <option value="Kartu Keluarga">Kartu Keluarga</option>
+                        <option value="BPJS">BPJS</option>
+                        <option value="Surat Nikah">Surat Nikah</option>
+                        <option value="Surat Kematian">Surat Kematian</option>
+                        <option value="Surat Pindah">Surat Pindah</option>
+                        <option value="Surat Izin Mengemudi (SIM)">
+                          Surat Izin Mengemudi (SIM)
+                        </option>
+                      </select>
+                      <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
+                        Nama soerat
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row justify-between">
+                <button
+                  onClick={closeModalEdit}
+                  className="w-full sm:w-auto rounded-md border border-red-500 bg-red-500 px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-red-500 focus:outline-none active:text-white active:bg-red-400"
+                >
+                  Kembali
+                </button>
+                <button
+                  onClick={handleEditSubmission}
+                  className="w-full sm:w-auto mt-4 sm:mt-0 rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white active:bg-[#776d5b]"
+                >
+                  Simpan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

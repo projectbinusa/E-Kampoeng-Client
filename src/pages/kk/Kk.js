@@ -1,20 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
-import Footer from "../../component/Footer";
 import Sidebar from "../../component/Sidebar";
+import Footer from "../../component/Footer";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { api_kk } from "../../utils/api";
 
-function WargaPendatang() {
-  const data = [
-    {
-      nama_warga: "niken putri saparina",
-      status_penduduk: "Kontrak Keluarga",
-    },
-    {
-      nama_warga: "davina mutiara stani",
-      status_penduduk: "Kos",
-    },
-  ];
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
+function Kk() {
+  const [kk, setKK] = useState([]);
+  const [pages, setPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const size = 5;
+
+  const getAll = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2001/e-kampoeng/api/warga`,
+        authConfig
+      );
+      setPages(response.data.data.totalPages);
+      setKK(response.data.data);
+    } catch (error) {
+      alert("Terjadi Kesalahan: " + error);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 0 || newPage > pages) {
+      return; // Jangan lakukan apa pun jika halaman baru di luar rentang yang valid
+    }
+    setCurrentPage(newPage);
+    getAll(newPage);
+  };
+
+  const Delete = async (id) => {
+    Swal.fire({
+      title: "Menghapus?",
+      text: "Anda mengklik tombol!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#5F8D4E",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Hapus ini!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(api_kk + id, authConfig);
+          Swal.fire({
+            title: "Terhapus!",
+            text: "Data telah dihapus.",
+            icon: "success",
+            showConfirmButton: false,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } catch (error) {
+          console.error("Terjadi kesalahan:", error);
+          Swal.fire(
+            "Gagal!",
+            "Terjadi kesalahan saat menghapus data.",
+            "error"
+          );
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    getAll(currentPage);
+  }, [currentPage]);
   return (
     <div className="flex">
       <Sidebar />
@@ -26,10 +87,10 @@ function WargaPendatang() {
             <span className="space-y-3">
               <div className="flex md:flex-row md:justify-between flex-col items-center space-y-3 mx-5 page-header">
                 <h1 className="text-xl text-center font-semibold play">
-                  Data Warga Pendatang
+                  Data KK
                 </h1>
                 <button className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
-                  <a href="tambah-warga-pendatang"> Tambah</a>
+                  <a href="tambah-kk"> Tambah</a>
                 </button>
               </div>
               <hr className="border border-black" />
@@ -79,19 +140,21 @@ function WargaPendatang() {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200">
-                  {data.map((warga, idx) => {
+                  {kk.map((kk, idx) => {
                     return (
                       <tr className="odd:bg-gray-50 text-center" key={idx}>
                         <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                          {warga.nama_warga}
+                          {kk.nama}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                          {warga.status_penduduk}
+                          {kk.status_kependudukan === "penduduk_tetap"
+                            ? "Penduduk tetap"
+                            : kk.status_kependudukan}
                         </td>
 
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
-                            to={`/edit-warga-pendatang`}
+                            to={`/edit-kk`}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Edit"
                           >
@@ -129,11 +192,18 @@ function WargaPendatang() {
                 </tbody>
               </table>
             </div>
+            {/* Pagination */}
             <ol className="flex justify-center gap-1 text-xs font-medium">
               <li>
+                {/* Menangani halaman sebelumnya */}
                 <a
                   href="#"
-                  className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180 ${
+                    currentPage === 1
+                      ? "opacity-50 cursor-not-allowed bg-gray-200"
+                      : ""
+                  }`}
                 >
                   <span className="sr-only">Prev Page</span>
                   <svg
@@ -151,41 +221,32 @@ function WargaPendatang() {
                 </a>
               </li>
 
+              {/* Menampilkan nomor halaman */}
+              {Array.from({ length: pages }, (_, i) => (
+                <li key={i}>
+                  <a
+                    href="#"
+                    onClick={() => handlePageChange(i)} // Tidak perlu menambahkan 1 karena kita sudah mulai dari 0
+                    className={`block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900 ${
+                      i === currentPage ? "bg-gray-500 text-white" : ""
+                    }`}
+                  >
+                    {i + 1}{" "}
+                    {/* Tambahkan 1 untuk menampilkan nomor halaman yang dimulai dari 1 */}
+                  </a>
+                </li>
+              ))}
+
+              {/* Menangani halaman berikutnya */}
               <li>
                 <a
                   href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  1
-                </a>
-              </li>
-
-              <li className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900">
-                2
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  3
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block size-8 rounded border border-gray-500 bg-white text-center leading-8 text-gray-900"
-                >
-                  4
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 rtl:rotate-180"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className={`inline-flex size-8 items-center justify-center rounded border border-gray-500 bg-white text-gray-900 ${
+                    currentPage >= pages
+                      ? "opacity-50 cursor-not-allowed bg-gray-200"
+                      : ""
+                  }`}
                 >
                   <span className="sr-only">Next Page</span>
                   <svg
@@ -211,4 +272,4 @@ function WargaPendatang() {
   );
 }
 
-export default WargaPendatang;
+export default Kk;

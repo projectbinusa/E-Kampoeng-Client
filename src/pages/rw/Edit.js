@@ -3,18 +3,17 @@ import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 
-function Tambah() {
+function Edit() {
   return (
     <div className="flex">
       <Sidebar />
       <div className="block w-full">
-        <section className="bg-gray-300 h-screen">
+        <section className="bg-gray-300 h-screen w-full">
           <Navbar />
           <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
-                {" "}
-                Tambah Warga Pendatang
+                Edit Data RW
               </h1>
 
               <div>
@@ -24,15 +23,15 @@ function Tambah() {
                       for="Username"
                       className="block text-sm font-medium text-black"
                     >
-                      Nama Warga
+                      nama RT
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="nama"
-                      name="nama"
-                      placeholder="nama warga"
+                      id="rt"
+                      name="rt"
+                      placeholder="nama rt"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
@@ -41,15 +40,15 @@ function Tambah() {
                       for="Username"
                       className="block text-sm font-medium text-black"
                     >
-                      Status Penduduk
+                      Warga Id
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="status"
-                      name="status"
-                      placeholder="status penduduk"
+                      id="warga"
+                      name="warga"
+                      placeholder="nama warga"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
@@ -70,4 +69,4 @@ function Tambah() {
   );
 }
 
-export default Tambah;
+export default Edit;

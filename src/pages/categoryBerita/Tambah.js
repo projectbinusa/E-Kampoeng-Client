@@ -1,55 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { api_category } from "../../utils/api";
+
+const authConfig = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+};
 
 function Tambah() {
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const [category, setCategory] = useState("");
+
+  const Add = async (e) => {
+    e.preventDefault();
+    e.persist();
+
+    const req = {
+      category: category,
+    };
+    try {
+      await axios.post(api_category, req, authConfig);
+      setShow(false);
+      Swal.fire({
+        icon: "success",
+        title: "Sukses Menambahkan",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      setTimeout(() => {
+        navigate("/category-berita");
+        window.location.reload();
+      }, 2500);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex">
       <Sidebar />
       <div className="block w-full">
-        <section className="bg-gray-300 h-screen">
+        <section className="bg-gray-300 h-screen w-full">
           <Navbar />
           <div className=" mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className=" rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <h1 className="text-xl text-center font-semibold mb-4">
-                {" "}
-                Tambah Warga Pendatang
+                Tambah Category Berita
               </h1>
 
               <div>
-                <form>
+                <form onSubmit={Add}>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="Username"
+                      for="Category"
                       className="block text-sm font-medium text-black"
                     >
-                      Nama Warga
+                      Category Berita
                     </label>
 
                     <input
                       autoComplete="off"
                       type="text"
-                      id="nama"
-                      name="nama"
-                      placeholder="nama warga"
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3 mt-4">
-                    <label
-                      for="Username"
-                      className="block text-sm font-medium text-black"
-                    >
-                      Status Penduduk
-                    </label>
-
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      id="status"
-                      name="status"
-                      placeholder="status penduduk"
+                      id="tag"
+                      name="tag"
+                      onChange={(e) => setCategory(e.target.value)}
+                      value={category}
+                      placeholder="category berita"
                       className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
                     />
                   </div>
