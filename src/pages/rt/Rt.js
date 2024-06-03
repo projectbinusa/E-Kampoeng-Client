@@ -130,58 +130,61 @@ function Rt() {
                     </div>
                   </span>
 
-                  <div class="overflow-x-auto rounded-lg border border-gray-200">
-                    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                      <thead class="ltr:text-left rtl:text-right">
+                  <div className="overflow-x-auto rounded-lg border border-gray-200">
+                    <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                      <thead className="ltr:text-left rtl:text-right">
                         <tr>
                           {role === "admin" && (
-                            <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                            <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                               No RW
                             </th>
                           )}
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Nomor RT
                           </th>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Nama Warga
                           </th>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Create At
                           </th>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Update At
                           </th>
 
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Aksi
                           </th>
                         </tr>
                       </thead>
 
-                      <tbody class="divide-y divide-gray-200">
+                      <tbody className="divide-y divide-gray-200">
                         {data.map((rt, idx) => {
                           return (
-                            <tr class="odd:bg-gray-50 text-center" key={idx}>
+                            <tr
+                              className="odd:bg-gray-50 text-center"
+                              key={idx}
+                            >
                               {role === "admin" && (
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                   {rt.wilayahRT.wilayahRW.nomorRw}
                                 </td>
                               )}
 
-                              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                 {rt.wilayahRT.nomorRt}
                               </td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                 {rt.warga.nama}
                               </td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                 {rt.createdDate}
                               </td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                 {rt.updatedDate}
                               </td>
 
-                              <td class="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                                 <Link
                                   to={`/edit-rt`}
                                   className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
@@ -208,7 +211,7 @@ function Rt() {
                                     width="18"
                                     height="18"
                                     fill="inherit"
-                                    class="bi bi-trash"
+                                    className="bi bi-trash"
                                     viewBox="0 0 16 16"
                                   >
                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />

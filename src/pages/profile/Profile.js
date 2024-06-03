@@ -11,6 +11,7 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
+    Image: "",
     nama: "",
     email: "",
     alamat: "",
@@ -26,6 +27,7 @@ const Profile = () => {
         );
         setProfile(response.data);
         setFormData({
+          image: response.data.image,
           nama: response.data.nama,
           email: response.data.email,
           alamat: response.data.alamat,
@@ -74,6 +76,50 @@ const Profile = () => {
       });
     } catch (error) {
       console.error("Error updating profile:", error);
+    }
+  };
+
+  const handlePhotoUpload = async (e) => {
+    const file = e.target.files[0];
+    // Periksa ukuran file
+    if (file && file.size > 1024 * 1024) {
+      // Jika ukuran file melebihi 1 MB, tampilkan pesan kesalahan
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "File size exceeds the maximum limit (1 MB).",
+      });
+      return; // Berhenti dan tidak melanjutkan pengunggahan
+    }
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await axios.put(
+        "http://localhost:2001/e-kampoeng/api/foto-profile",
+        formData,
+        authConfig
+      );
+      // Jika pembaruan foto berhasil, perbarui foto profil
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        image: response.data.data.image,
+      }));
+      // Tampilkan pesan sukses
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Photo updated successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("Error updating profile photo:", error);
+      // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengunggah foto
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to update profile photo.",
+      });
     }
   };
 
@@ -165,13 +211,32 @@ const Profile = () => {
               <hr className="border border-black" />
             </span>
             <span className="flex flex-col justify-center items-center avatar">
-              <img
-                src="https://www.transparentpng.com/download/user/gray-user-profile-icon-png-fP8Q1P.png"
-                alt="user-avatar"
-                className="h-64 w-64"
-              />
-              <div className="flex flex-col items-center ">
-                <h1 className="text-3xl">{profile?.nama}</h1>
+              <div class="py-3 center mx-auto">
+                <div class="rounded-lg text-center">
+                  <div class="mb-4">
+                    <img
+                      class="size-32 rounded-full object-cover border-2 border-black h-30 w-30"
+                      src={profile?.image}
+                      alt="Avatar Upload"
+                    />
+                  </div>
+                  <label htmlFor="upload-photo" className="cursor-pointer mt-6">
+                    <span className="inline-block rounded bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ">
+                      Ubah Foto
+                    </span>
+                    <input
+                      id="upload-photo"
+                      type="file"
+                      className="hidden"
+                      onChange={handlePhotoUpload}
+                    />
+                  </label>
+                  <div className="flex flex-col items-center mt-3">
+                    <h1 className="text-3xl">
+                      <b>{profile?.nama}</b>
+                    </h1>
+                  </div>
+                </div>
               </div>
             </span>
 

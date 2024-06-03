@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../component/Sidebar";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { authConfig } from "../../utils/authConfig";
 
-const TambahWarga = () => {
-  const [nama, setNama] = useState("");
+const EditWarga = () => {
+  const { id } = useParams();
   const [tempatLahir, setTempatLahir] = useState("");
   const [tanggalLahir, setTanggalLahir] = useState("");
   const [jenisKelamin, setJenisKelamin] = useState("");
   const [agama, setAgama] = useState("");
-  const [nik, setNik] = useState("");
   const [noKk, setNoKk] = useState("");
   const [statusDalamKeluarga, setStatusDalamKeluarga] = useState("");
   const [statusKependudukan, setStatusKependudukan] = useState("");
@@ -23,9 +22,6 @@ const TambahWarga = () => {
   const [noPassport, setNoPassport] = useState("");
   const [namaAyah, setNamaAyah] = useState("");
   const [namaIbu, setNamaIbu] = useState("");
-  const [noTelp, setNoTelp] = useState("");
-  const [email, setEmail] = useState("");
-  const [alamat, setAlamat] = useState("");
   const [tanggalPerkawinan, setTanggalPerkawinan] = useState("");
   const [alamatSebelumnya, setAlamatSebelumnya] = useState("");
   const [noBpjs, setNoBpjs] = useState("");
@@ -37,86 +33,109 @@ const TambahWarga = () => {
   const [jenisKb, setJenisKb] = useState("");
   const [kesesuaianTempat, setKesesuaianTempat] = useState("");
   const [sumberAir, setSumberAir] = useState("");
-  const [wilayahRT, setWilayahRT] = useState([]);
-
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = {
-      nama,
-      tempat_lahir: tempatLahir,
-      tanggal_lahir: tanggalLahir,
-      jenis_kelamin: jenisKelamin,
-      agama,
-      nik,
-      no_kk: noKk,
-      status_dalam_keluarga: statusDalamKeluarga,
-      status_kependudukan: statusKependudukan,
-      no_anak: noAnak,
-      panjang_lahir: panjangLahir,
-      berat_lahir: beratLahir,
-      no_passport: noPassport,
-      nama_ayah: namaAyah,
-      nama_ibu: namaIbu,
-      no_telp: noTelp,
-      email,
-      alamat,
-      tanggal_perkawinan: tanggalPerkawinan,
-      alamat_sebelumnya: alamatSebelumnya,
-      no_bpjs: noBpjs,
-      pendidikan_tempuh: pendidikanTempuh,
-      pendidikan_terakhir: pendidikanTerakhir,
-      status_perkawinan: statusPerkawinan,
-      golongan_darah: golonganDarah,
-      jenis_asuransi: jenisAsuransi,
-      jenis_kb: jenisKb,
-      kesesuaian_tempat: kesesuaianTempat,
-      sumber_air: sumberAir,
-    };
+  const convertToISODate = (dateString) => {
+    const parts = dateString.split("-");
+    return `${parts[2]}-${parts[1]}-${parts[0]}`;
+  };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:2001/e-kampoeng/api/warga/rt/register-warga",
-        formData,
-        authConfig
-      );
-      Swal.fire({
-        icon: "success",
-        title: "Sukses Menambahkan",
-        text: response.data.message,
-        showConfirmButton: false,
-        timer: 2500,
-      });
-      setTimeout(() => {
-        navigate("/warga");
-        window.location.reload();
-      }, 2500);
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Gagal Menambahkan",
-        text: error.response
-          ? error.response.data.message
-          : "Terjadi kesalahan",
-      });
-    }
+  // Fungsi untuk mengonversi format tanggal dari yyyy-mm-dd ke dd-mm-yyyy
+  const convertToDisplayDate = (isoDateString) => {
+    const isoDate = new Date(isoDateString);
+    const day = isoDate.getDate().toString().padStart(2, "0");
+    const month = (isoDate.getMonth() + 1).toString().padStart(2, "0");
+    const year = isoDate.getFullYear();
+    return `${day}-${month}-${year}`;
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchWarga = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:2001/e-kampoeng/api/wilayah-rt?pageNumber=1&pageSize=1000",
+          `http://localhost:2001/e-kampoeng/api/warga/${id}`,
           authConfig
         );
-        setWilayahRT(response.data.data.content);
+        setTempatLahir(response.data.tempat_lahir);
+        setTanggalLahir(convertToDisplayDate(response.data.tanggal_lahir));
+        setJenisKelamin(response.data.jenis_kelamin);
+        setAgama(response.data.agama);
+        setNoKk(response.data.no_kk);
+        setStatusDalamKeluarga(response.data.status_dalam_keluarga);
+        setStatusKependudukan(response.data.status_kependudukan);
+        setNoAnak(response.data.no_anak);
+        setPanjangLahir(response.data.panjang_lahir);
+        setBeratLahir(response.data.berat_lahir);
+        setNoPassport(response.data.no_passport);
+        setNamaAyah(response.data.nama_ayah);
+        setNamaIbu(response.data.nama_ibu);
+        setTanggalPerkawinan(response.data.tanggal_perkawinan);
+        setAlamatSebelumnya(response.data.alamat_sebelumnya);
+        setNoBpjs(response.data.no_bpjs);
+        setPendidikanTempuh(response.data.pendidikan_tempuh);
+        setPendidikanTerakhir(response.data.pendidikan_terakhir);
+        setStatusPerkawinan(response.data.status_perkawinan);
+        setGolonganDarah(response.data.golongan_darah);
+        setJenisAsuransi(response.data.jenis_asuransi);
+        setJenisKb(response.data.jenis_kb);
+        setKesesuaianTempat(response.data.kesesuaian_tempat);
+        setSumberAir(response.data.sumber_air);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Terjadi kesalahan:", error);
       }
     };
-    fetchData();
-  }, []);
+
+    fetchWarga();
+  }, [id]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios.put(
+        `http://localhost:2001/e-kampoeng/api/warga/edit/${id}`,
+        {
+          tempatLahir,
+          tanggalLahir,
+          jenisKelamin,
+          agama,
+          noKk,
+          statusDalamKeluarga,
+          statusKependudukan,
+          noAnak,
+          panjangLahir,
+          beratLahir,
+          noPassport,
+          namaAyah,
+          namaIbu,
+          tanggalPerkawinan,
+          alamatSebelumnya,
+          noBpjs,
+          pendidikanTempuh,
+          pendidikanTerakhir,
+          statusPerkawinan,
+          golonganDarah,
+          jenisAsuransi,
+          jenisKb,
+          kesesuaianTempat,
+          sumberAir,
+        },
+        authConfig
+      );
+
+      Swal.fire({
+        title: "Sukses!",
+        text: "Wilayah RT berhasil diperbarui.",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate("/warga");
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+      Swal.fire("Gagal!", "Terjadi kesalahan saat memperbarui data.", "error");
+    }
+  };
 
   return (
     <div className="flex">
@@ -124,27 +143,11 @@ const TambahWarga = () => {
         <section className="bg-gray-300  w-full">
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <nav className="text-xl text-center font-semibold mb-8 sticky top-0 z-10 m-30 bg-[#D10363] px-4 py-2 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-[#D10363] ml-0 sm:ml-4">
-              Tambah Warga
+              Edit Warga
             </nav>
             <div className="rounded-lg bg-white p-8 shadow-xl lg:col-span-3 lg:p-7">
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  <div className="mb-4">
-                    <label
-                      htmlFor="nama"
-                      className="block text-sm font-medium text-black"
-                    >
-                      Nama
-                    </label>
-                    <input
-                      type="text"
-                      id="nama"
-                      value={nama}
-                      onChange={(e) => setNama(e.target.value)}
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
-
                   {/* Input untuk tempat lahir */}
                   <div className="mb-4">
                     <label
@@ -221,23 +224,6 @@ const TambahWarga = () => {
                       <option value="Buddha">Buddha</option>
                       <option value="Konghucu">Konghucu</option>
                     </select>
-                  </div>
-
-                  {/* Input untuk NIK */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="nik"
-                      className="block text-sm font-medium text-black"
-                    >
-                      NIK
-                    </label>
-                    <input
-                      type="text"
-                      id="nik"
-                      value={nik}
-                      onChange={(e) => setNik(e.target.value)}
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
                   </div>
 
                   {/* Input untuk Nomor KK */}
@@ -405,56 +391,6 @@ const TambahWarga = () => {
                     />
                   </div>
 
-                  {/* Input untuk Nomor Telepon */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="noTelp"
-                      className="block text-sm font-medium text-black"
-                    >
-                      Nomor Telepon
-                    </label>
-                    <input
-                      type="text"
-                      id="noTelp"
-                      value={noTelp}
-                      onChange={(e) => setNoTelp(e.target.value)}
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
-
-                  {/* Input untuk Email */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-black"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
-
-                  {/* Input untuk Alamat */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="alamat"
-                      className="block text-sm font-medium text-black"
-                    >
-                      Alamat
-                    </label>
-                    <input
-                      type="text"
-                      id="alamat"
-                      value={alamat}
-                      onChange={(e) => setAlamat(e.target.value)}
-                      className="mt-1 py-2 px-3 w-full rounded-md border border-gray-200 bg-white text-sm text-black shadow-md"
-                    />
-                  </div>
                   {/* Input untuk Tanggal Perkawinan */}
                   <div className="mb-4">
                     <label
@@ -701,19 +637,12 @@ const TambahWarga = () => {
                       <option value="Lainnya">Lainnya</option>
                     </select>
                   </div>
-
-                  {/* Input untuk Wilayah RT ID */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="wilayahRT"
-                      className="block text-sm font-medium text-black"
-                    >
-                      Wilayah RT
-                    </label>
-                  </div>
                 </div>
                 <div className="col-span-1 sm:col-span-2 flex justify-end mt-4">
-                  <button className="inline-block rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]">
+                  <button
+                    type="submit"
+                    className="inline-block rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white hover:rotate-2 hover:scale-110 active:bg-[#776d5b]"
+                  >
                     Simpan
                   </button>
                 </div>
@@ -726,4 +655,4 @@ const TambahWarga = () => {
   );
 };
 
-export default TambahWarga;
+export default EditWarga;

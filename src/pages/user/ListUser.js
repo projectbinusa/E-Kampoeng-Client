@@ -71,39 +71,42 @@ function ListUser() {
                     </div>
                   </span>
 
-                  <div class="overflow-x-auto rounded-lg border border-gray-200">
-                    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                      <thead class="ltr:text-left rtl:text-right">
+                  <div className="overflow-x-auto rounded-lg border border-gray-200">
+                    <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                      <thead className="ltr:text-left rtl:text-right">
                         <tr>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Username
                           </th>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Email
                           </th>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Create At
                           </th>
-                          <th class="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
+                          <th className="whitespace-nowrap px-4 py-2 font-bold text-gray-800">
                             Update At
                           </th>
                         </tr>
                       </thead>
 
-                      <tbody class="divide-y divide-gray-200">
+                      <tbody className="divide-y divide-gray-200">
                         {list.map((row, idx) => {
                           return (
-                            <tr class="odd:bg-gray-50 text-center" key={idx}>
-                              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                            <tr
+                              className="odd:bg-gray-50 text-center"
+                              key={idx}
+                            >
+                              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                 {row.username}
                               </td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                 {row.email}
                               </td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                 {row.createdDate}
                               </td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                 {row.updatedDate}
                               </td>
                             </tr>

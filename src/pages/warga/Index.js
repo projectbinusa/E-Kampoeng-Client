@@ -14,11 +14,12 @@ const authConfig = {
 const Index = () => {
   const role = localStorage.getItem("role");
   const [wargas, setWargas] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const getAllWarga = async () => {
+  const getAllWarga = async (page) => {
     try {
       const response = await axios.get(
-        "http://localhost:2001/e-kampoeng/api/warga/rt/all",
+        `http://localhost:2001/e-kampoeng/api/warga/rt/all?page=${page}&size=5`,
         authConfig
       );
       setWargas(response.data.data);
@@ -27,9 +28,25 @@ const Index = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(
+        `http://localhost:2001/e-kampoeng/api/warga/${id}`,
+        authConfig
+      );
+      getAllWarga();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getAllWarga();
-  }, []);
+    getAllWarga(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="flex">
@@ -84,7 +101,7 @@ const Index = () => {
                       >
                         <path
                           fillRule="evenodd"
-                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10l-3.293-3.293a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                           clipRule="evenodd"
                         />
                       </svg>
@@ -133,11 +150,11 @@ const Index = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {wargas.length > 0 ? (
-                    wargas.map((warga, idx) => (
+                  {wargas.content && wargas.content.length > 0 ? (
+                    wargas.content.map((warga, idx) => (
                       <tr className="odd:bg-gray-50 text-center" key={warga.id}>
                         <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                          {idx + 1}
+                          {currentPage * 5 + idx + 1}
                         </td>
                         <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                           {warga.nama}
@@ -159,6 +176,22 @@ const Index = () => {
                         </td>
                         <td className="whitespace-nowrap flex justify-center gap-3 px-4 py-2 text-gray-700">
                           <Link
+                            to={`/edit-warga/${warga.id}`}
+                            className="block rounded-md bg-[#F3CA52] border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-[#F3CA52] hover:border-[#F3CA52]"
+                            title="Edit"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              id="Outline"
+                              viewBox="0 0 24 24"
+                              width="18"
+                              height="18"
+                            >
+                              <path d="M18.656.93,6.464,13.122A4.966,4.966,0,0,0,5,16.657V18a1,1,0,0,0,1,1H7.343a4.966,4.966,0,0,0,3.535-1.464L23.07,5.344a3.125,3.125,0,0,0,0-4.414A3.194,3.194,0,0,0,18.656.93Zm3,3L9.464,16.122A3.02,3.02,0,0,1,7.343,17H7v-.343a3.02,3.02,0,0,1,.878-2.121L20.07,2.344a1.148,1.148,0,0,1,1.586,0A1.123,1.123,0,0,1,21.656,3.93Z" />
+                              <path d="M23,8.979a1,1,0,0,0-1,1V15H18a3,3,0,0,0-3,3v4H5a3,3,0,0,1-3-3V4h-.5a1,1,0,0,1-1-1V2a1,1,0,0,1,1-1H6a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1h3.5a1,1,0,0,1,1,1zM4.118,4 4,4.059V13a1,1,0,0,0,1 1h6a1,1,0,0,0,1-1V4.059L11.882,4zM2.5 3h11V2h-11z" />
+                            </svg>
+                          </Link>
+                          <Link
                             to={`/detail-warga/${warga.id}`}
                             className="block rounded-md bg-blue-400 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-blue-400 hover:border-blue-400"
                             title="Detail"
@@ -178,17 +211,24 @@ const Index = () => {
                           <button
                             className="block rounded-md bg-red-500 border border-transparent fill-white p-2 text-sm font-medium text-white transition-all duration-200 hover:shadow-md hover:bg-transparent hover:fill-red-500 hover:border-red-500"
                             title="Hapus"
+                            onClick={() => handleDelete(warga.id)}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="bi bi-trash"
                               width="18"
                               height="18"
-                              fill="inherit"
-                              className="bi bi-trash"
-                              viewBox="0 0 16 16"
                             >
-                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                              <path
+                                fillRule="evenodd"
+                                d="M5.5 6.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5V7h.5a1 1 0 0 1 0 2h-.5v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7H4a1 1 0 0 1 0-2h.5v-.5zM8 7v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-7H8z"
+                              />
+                              <path
+                                fillRule="evenodd"
+                                d="M8.5 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V4h1a1 1 0 0 1 0 2h-1v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6H7a1 1 0 0 1 0-2h1V3.5zM6 4v10a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V4H6z"
+                              />
                             </svg>
                           </button>
                         </td>
@@ -196,14 +236,35 @@ const Index = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={8} className="py-2 text-center">
-                        Tidak ada data
+                      <td
+                        colSpan="8"
+                        className="whitespace-nowrap px-4 py-2 text-gray-700 text-center"
+                      >
+                        No data available
                       </td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
+            {wargas.content && wargas.content.length > 0 && (
+              <div className="mt-5 flex justify-center">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className="mx-2 px-4 py-2 bg-[#D10363] text-white rounded-md hover:bg-[#AD0F5C] focus:outline-none"
+                  disabled={currentPage === 0}
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className="mx-2 px-4 py-2 bg-[#D10363] text-white rounded-md hover:bg-[#AD0F5C] focus:outline-none"
+                  disabled={currentPage === wargas.totalPages - 1}
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         </section>
         <Footer />

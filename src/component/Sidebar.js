@@ -45,7 +45,7 @@ const Sidebar = () => {
                     className="size-5 opacity-50"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    class="size-6"
+                    className="size-6"
                   >
                     <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
                     <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -82,7 +82,7 @@ const Sidebar = () => {
                       className="size-5 opacity-50"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      class="size-6"
+                      className="size-6"
                     >
                       <path
                         fill-rule="evenodd"
@@ -127,7 +127,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -171,7 +171,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -215,7 +215,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -259,7 +259,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -302,7 +302,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -351,7 +351,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 0 1-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004ZM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 0 1-.921.42Z" />
                         <path
@@ -397,7 +397,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -443,7 +443,7 @@ const Sidebar = () => {
                         className="size-5 opacity-50"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="size-6"
+                        className="size-6"
                       >
                         <path
                           fill-rule="evenodd"
@@ -488,7 +488,7 @@ const Sidebar = () => {
                 className="size-5 opacity-50"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                class="size-6"
+                className="size-6"
               >
                 <path
                   fill-rule="evenodd"
