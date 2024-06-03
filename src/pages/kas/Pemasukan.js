@@ -16,17 +16,28 @@ function Pemasukan() {
   const [editData, setEditData] = useState(null);
   const [error, setError] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 2;
 
   useEffect(() => {
+    fetchPemasukan(currentPage, pageSize);
+  }, [currentPage]);
+
+  const fetchPemasukan = (page, size) => {
     axios
-      .get("http://localhost:2001/api/e-kas/pemasukan?page=0", authConfig)
+      .get(
+        `http://localhost:2001/api/e-kas/pemasukan?page=${page}&size=${size}`,
+        authConfig
+      )
       .then((response) => {
         setPemasukan(response.data.content);
+        setTotalPages(response.data.totalPages);
       })
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  };
 
   const fetchPemasukanById = async (id) => {
     try {
@@ -40,7 +51,6 @@ function Pemasukan() {
       setModalOpen(true);
     } catch (error) {
       console.error("Error fetching organisasi by ID:", error);
-      // Show SweetAlert on error fetching data
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -51,26 +61,23 @@ function Pemasukan() {
 
   const putPemasukan = async () => {
     try {
-      const response = await axios.put(
+      await axios.put(
         `http://localhost:2001/api/e-kas/pemasukan/${editData.id}`,
         { nama, jumlahPemasukan },
         authConfig
       );
-      closeModal(); // Close modal after successful update
-      // Show SweetAlert on successful update
+      closeModal();
       Swal.fire({
         icon: "success",
         title: "Sukses!",
         text: "Pemasukan berhasil diperbarui.",
       }).then((result) => {
-        // Redirect to a specific page after successful update
         if (result.isConfirmed) {
-          window.location.href = "/e-kas/pemasukan"; // Change "/dashboard" with the desired page URL
+          window.location.href = "/e-kas/pemasukan";
         }
       });
     } catch (error) {
       console.error("Error updating pemasukan:", error);
-      // Show SweetAlert on error updating data
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -79,9 +86,8 @@ function Pemasukan() {
     }
   };
 
-  // Function to open edit modal with data
   const openModal = (id) => {
-    fetchPemasukanById(id); // Fetch organisasi data by ID before opening modal
+    fetchPemasukanById(id);
   };
 
   const closeModal = () => {
@@ -93,7 +99,6 @@ function Pemasukan() {
   };
 
   const handleCancelSubmission = async (id) => {
-    // Menampilkan konfirmasi SweetAlert sebelum melanjutkan pembatalan
     Swal.fire({
       title: "Anda yakin ingin membatalkan Pemasukan?",
       text: "Tindakan ini tidak dapat dibatalkan!",
@@ -110,12 +115,9 @@ function Pemasukan() {
             `http://localhost:2001/api/e-kas/pemasukan/${id}`,
             authConfig
           );
-          // Tambahkan logika lain jika diperlukan, seperti memperbarui data setelah pembatalan
-          // Redirect ke halaman "/soerat"
           window.location.href = "/e-kas/pemasukan";
         } catch (error) {
           console.error("Error cancelling submission:", error);
-          // Handle error, mungkin menampilkan pesan kesalahan kepada pengguna
           Swal.fire({
             title: "Error",
             text: "Terjadi kesalahan saat membatalkan pemasukan.",
@@ -126,6 +128,18 @@ function Pemasukan() {
         }
       }
     });
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -209,7 +223,7 @@ function Pemasukan() {
                       {pemasukan.map((pemasukan, index) => (
                         <tr key={pemasukan.id}>
                           <td className="whitespace-nowrap px-4 py-2 text-gray-800">
-                            {index + 1}
+                            {index + 1 + currentPage * pageSize}
                           </td>
                           <td className="whitespace-nowrap px-4 py-2 text-gray-800">
                             {pemasukan.nama}
@@ -255,79 +269,68 @@ function Pemasukan() {
                   </table>
                 </div>
               )}
+
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 0}
+                  className={`bg-[#D10363] text-white font-bold py-2 px-4 rounded-lg ${
+                    currentPage === 0 && "opacity-50 cursor-not-allowed"
+                  }`}
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages - 1}
+                  className={`bg-[#D10363] text-white font-bold py-2 px-4 rounded-lg ${
+                    currentPage === totalPages - 1 &&
+                    "opacity-50 cursor-not-allowed"
+                  }`}
+                >
+                  Next
+                </button>
+              </div>
             </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 transition-opacity">
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Edit Pemasukan</h2>
+            <div className="mb-4">
+              <label className="block text-gray-700">Nama Pemasukan:</label>
+              <input
+                type="text"
+                value={nama}
+                onChange={(e) => setNama(e.target.value)}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+              />
             </div>
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full sm:p-6">
-              <div className="sm:flex sm:items-center flex-col">
-                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left sm:w-full">
-                  <span className="space-y-3">
-                    <h1 className="text-xl text-left font-bold ubuntu my-auto">
-                      Ubah Pemasukan
-                    </h1>
-                    <hr className="border border-black" />
-                  </span>
-                  <div className="mt-4 mb-4 sm:w-full">
-                    <label
-                      htmlFor="pemasukan"
-                      className="relative block overflow-hidden border-b border-gray-400 bg-transparent pt-3 focus-within:border-[#D10363]"
-                    >
-                      <input
-                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                        type="text"
-                        id="pemasukan"
-                        placeholder="pemasukan"
-                        autoComplete="off"
-                        value={nama}
-                        onChange={(e) => setNama(e.target.value)}
-                      />
-                      <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
-                        Asal Pemasukan
-                      </span>
-                    </label>
-                    <label
-                      htmlFor="jumlah"
-                      className="relative block overflow-hidden border-b border-gray-400 bg-transparent pt-3 focus-within:border-[#D10363]"
-                    >
-                      <input
-                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                        type="number"
-                        id="jumlah"
-                        placeholder="jumlah"
-                        autoComplete="off"
-                        value={jumlahPemasukan}
-                        onChange={(e) => setJumlahPemasukan(e.target.value)}
-                      />
-                      <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
-                        Jumlah Pemasukan
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row justify-between">
-                <button
-                  onClick={closeModal}
-                  className="w-full sm:w-auto rounded-md border border-red-500 bg-red-500 px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-red-500 focus:outline-none active:text-white active:bg-red-400"
-                >
-                  Kembali
-                </button>
-                <button
-                  onClick={putPemasukan}
-                  className="w-full sm:w-auto mt-4 sm:mt-0 rounded-md border border-[#D10363] bg-[#D10363] px-6 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-[#D10363] focus:outline-none active:text-white active:bg-[#776d5b]"
-                >
-                  Simpan
-                </button>
-              </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Jumlah Pemasukan:</label>
+              <input
+                type="text"
+                value={jumlahPemasukan}
+                onChange={(e) => setJumlahPemasukan(e.target.value)}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+              />
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={closeModal}
+                className="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg mr-2"
+              >
+                Batal
+              </button>
+              <button
+                onClick={putPemasukan}
+                className="bg-[#D10363] text-white font-bold py-2 px-4 rounded-lg"
+              >
+                Simpan
+              </button>
             </div>
           </div>
         </div>

@@ -47,6 +47,7 @@ import DetailBerita from "./pages/berita/DetailBerita";
 import BeritaByCategory from "./pages/categoryBerita/BeritaByCategory";
 import SemuaBerita from "./pages/berita/SemuaBerita";
 import EditBerita from "./pages/berita/EditBerita";
+import EditWarga from "./pages/warga/EditWarga";
 
 function App() {
   const role = localStorage.getItem("role");
@@ -62,6 +63,7 @@ function App() {
           <Route path="/berita-terbaru" element={<Berita />} />
           <Route path="/edit-berita/:id" element={<EditBerita />} />
           <Route path="/warga" element={<Warga />} />
+          <Route path="/edit-warga/:id" element={<EditWarga />} />
           <Route path="/tambah-warga" element={<TambahWarga />} />
           <Route path="/detail-warga/:id" element={<DetailWarga />} />
           <Route path="/organisasi" element={<Organisasi />} />
